@@ -51,3 +51,8 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 
 ## Actualización (misma fecha)
 - Contador de cantidad por producto: badge negro circular arriba a la derecha de cada foto muestra cuántas unidades hay en el pedido; el botón también muestra "Agregar (N)".
+
+## Actualización
+- Botón "–" en cada producto para restar unidades al momento (aparece solo si hay unidades agregadas; al llegar a 0 desaparece junto con el badge).
+- Marquee actualizado: 3 cuotas sin interés / 10% Off Efectivo y transferencia / Envíos a todo el país / Off Course.
+- Título catálogo: "Todos nuestros productos". Se quitó "Cuero genuino — Temporada 2026" del hero.

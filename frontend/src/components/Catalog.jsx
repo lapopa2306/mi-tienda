@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { CATEGORIES, PRODUCTS } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import Reveal, { EASE } from "@/components/Reveal";
@@ -10,7 +10,7 @@ const slug = (s) => s.toLowerCase().replace(/\s+/g, "-");
 
 export default function Catalog() {
   const [active, setActive] = useState("Todo");
-  const { add, items } = useCart();
+  const { add, setQty, items } = useCart();
   const qtyOf = (id) => items.find((i) => i.id === id)?.qty || 0;
 
   const filtered = useMemo(
@@ -108,15 +108,31 @@ export default function Catalog() {
                       {qtyOf(p.id)}
                     </motion.span>
                   )}
-                  <button
-                    data-testid={`add-to-cart-${p.id}`}
-                    onClick={() => add(p)}
-                    aria-label={`Agregar ${p.name} al pedido`}
-                    className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-paper/90 px-4 py-2.5 text-sm text-ink opacity-100 backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper md:opacity-0 md:group-hover:opacity-100"
-                  >
-                    <Plus size={15} />
-                    {qtyOf(p.id) > 0 ? `Agregar (${qtyOf(p.id)})` : "Agregar"}
-                  </button>
+                  <div className="absolute bottom-4 right-4 flex items-center gap-2">
+                    {qtyOf(p.id) > 0 && (
+                      <button
+                        data-testid={`remove-from-cart-${p.id}`}
+                        onClick={() => setQty(p.id, qtyOf(p.id) - 1)}
+                        aria-label={`Quitar ${p.name} del pedido`}
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-paper/90 text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper"
+                      >
+                        <Minus size={15} />
+                      </button>
+                    )}
+                    <button
+                      data-testid={`add-to-cart-${p.id}`}
+                      onClick={() => add(p)}
+                      aria-label={`Agregar ${p.name} al pedido`}
+                      className={`group/add flex items-center gap-2 rounded-full bg-paper/90 px-4 py-2.5 text-sm text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper ${
+                        qtyOf(p.id) > 0
+                          ? ""
+                          : "md:opacity-0 md:group-hover:opacity-100"
+                      }`}
+                    >
+                      <Plus size={15} />
+                      {qtyOf(p.id) > 0 ? `Agregar (${qtyOf(p.id)})` : "Agregar"}
+                    </button>
+                  </div>
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
