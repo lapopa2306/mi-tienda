@@ -82,9 +82,19 @@ export default function Footer() {
                 href={WHATSAPP_HELLO}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-serif text-2xl font-light transition-colors duration-300 hover:text-blush"
+                data-testid="footer-whatsapp-number-1"
+                className="block font-serif text-2xl font-light transition-colors duration-300 hover:text-blush"
               >
                 {SITE.whatsappDisplay}
+              </a>
+              <a
+                href={`https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent("Hola Off Course! Quiero hacer una consulta.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="footer-whatsapp-number-2"
+                className="mt-2 block font-serif text-2xl font-light transition-colors duration-300 hover:text-blush"
+              >
+                {SITE.whatsapp2Display}
               </a>
             </div>
           </Reveal>

@@ -3,6 +3,8 @@ export const SITE = {
   tagline: "Marroquinería · Wilde, Buenos Aires",
   whatsapp: "5491156011898",
   whatsappDisplay: "+54 9 11 5601-1898",
+  whatsapp2: "5491149376760",
+  whatsapp2Display: "+54 9 11 4937-6760",
   instagram: "https://www.instagram.com/offcoursearg/",
   address: "Soreda 6180, Wilde",
   heroImage:
