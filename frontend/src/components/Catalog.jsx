@@ -5,16 +5,6 @@ import { CATEGORIES, PRODUCTS } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import Reveal, { EASE } from "@/components/Reveal";
 
-const SPANS = [
-  "md:col-span-5",
-  "md:col-span-7",
-  "md:col-span-4",
-  "md:col-span-4",
-  "md:col-span-4",
-  "md:col-span-7",
-  "md:col-span-5",
-];
-const ASPECTS = Array(7).fill("aspect-[3/4]");
 const fmt = (n) => n.toLocaleString("es-AR");
 const slug = (s) => s.toLowerCase().replace(/\s+/g, "-");
 
@@ -79,7 +69,7 @@ export default function Catalog() {
         <motion.div
           layout
           data-testid="product-grid"
-          className="mt-16 grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-12 lg:gap-x-12"
+          className="mt-16 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-12"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((p, i) => (
@@ -91,11 +81,9 @@ export default function Catalog() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.6, ease: EASE }}
-                className={`group ${SPANS[i % SPANS.length]}`}
+                className="group"
               >
-                <div
-                  className={`relative overflow-hidden bg-smoke ${ASPECTS[i % ASPECTS.length]}`}
-                >
+                <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
                   <img
                     src={p.image}
                     alt={p.name}
