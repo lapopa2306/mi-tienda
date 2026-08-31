@@ -122,6 +122,13 @@ export default function ProductModal({ product, onClose }) {
               >
                 3 cuotas sin interés de $ {fmt(Math.round(product.price / 3))}
               </p>
+              <p
+                data-testid="product-modal-cash-discount"
+                className="mt-1 font-mono text-xs uppercase tracking-[0.08em] text-ink/55"
+              >
+                10% off en efectivo o transferencia: ${" "}
+                {fmt(Math.round(product.price * 0.9))}
+              </p>
 
               {product.description && (
                 <p

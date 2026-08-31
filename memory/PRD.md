@@ -66,3 +66,6 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 
 ## Actualización — Cuotas
 - Aviso "3 cuotas de $X" bajo el precio en cada tarjeta del catálogo y "3 cuotas sin interés de $X" en el modal de detalle (color blush-deep #C4708E agregado a tailwind).
+
+## Actualización — 10% off efectivo/transferencia
+- Tarjetas: línea "$X efectivo / transf." (precio con 10% off) bajo las cuotas. Modal: "10% off en efectivo o transferencia: $X".

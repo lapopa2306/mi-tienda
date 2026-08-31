@@ -166,6 +166,12 @@ export default function Catalog() {
                     >
                       3 cuotas de $ {fmt(Math.round(p.price / 3))}
                     </p>
+                    <p
+                      data-testid={`cash-discount-${p.id}`}
+                      className="mt-0.5 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.08em] text-ink/55"
+                    >
+                      $ {fmt(Math.round(p.price * 0.9))} efectivo / transf.
+                    </p>
                   </div>
                 </div>
               </motion.article>
