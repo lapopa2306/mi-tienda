@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Plus, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { EASE } from "@/components/Reveal";
 
@@ -75,6 +75,34 @@ export default function ProductModal({ product, onClose }) {
                     className="h-full w-full object-cover"
                   />
                 </AnimatePresence>
+                {images.length > 1 && (
+                  <>
+                    <button
+                      data-testid="product-modal-prev"
+                      onClick={() =>
+                        setImgIdx((imgIdx - 1 + images.length) % images.length)
+                      }
+                      aria-label="Foto anterior"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-paper/90 p-2.5 text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper"
+                    >
+                      <ChevronLeft size={18} />
+                    </button>
+                    <button
+                      data-testid="product-modal-next"
+                      onClick={() => setImgIdx((imgIdx + 1) % images.length)}
+                      aria-label="Foto siguiente"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-paper/90 p-2.5 text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper"
+                    >
+                      <ChevronRight size={18} />
+                    </button>
+                    <span
+                      data-testid="product-modal-image-counter"
+                      className="absolute bottom-3 right-3 rounded-full bg-paper/90 px-3 py-1 font-mono text-[10px] text-ink backdrop-blur-md"
+                    >
+                      {imgIdx + 1} / {images.length}
+                    </span>
+                  </>
+                )}
               </div>
               {images.length > 1 && (
                 <div className="flex gap-2 p-3">
