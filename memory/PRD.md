@@ -30,6 +30,11 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 - Lenis smooth scroll, grain overlay, selección rosa, micro-interacciones.
 - Backend sin cambios (health check OK).
 
+## Actualización (31 ago 2026, v2)
+- Logo real de Off Course incorporado (procesado: recorte circular + fondo transparente, guardado en `/app/frontend/public/logo.png`) en nav y footer.
+- Medios de pago: "Mercado Pago" reemplazado por "tarjetas de débito y crédito".
+- Todas las fotos de producto en formato vertical (aspect-[3/4]) para grillas alineadas.
+
 ## Backlog priorizado
 - P0: Reemplazar productos de muestra por fotos y precios reales (editar `/app/frontend/src/data/products.js`).
 - P1: Página de detalle de producto (colores/variantes).

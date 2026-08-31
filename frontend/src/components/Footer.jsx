@@ -11,6 +11,12 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-screen-2xl px-6 py-24 sm:px-12 sm:py-32 lg:px-24 lg:py-40">
         <Reveal>
+          <img
+            src="/logo.png"
+            alt="Off Course — Marroquinería"
+            data-testid="footer-logo"
+            className="mb-10 h-20 w-20 rounded-full"
+          />
           <p className="mb-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-paper/50">
             <span className="h-2 w-2 rounded-full bg-blush" />
             04 — Contacto

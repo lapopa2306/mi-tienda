@@ -25,11 +25,18 @@ export default function Nav() {
               ? window.__lenis.scrollTo(0)
               : window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="font-serif text-2xl tracking-tight"
+          className="flex items-center gap-3"
         >
-          <span className="font-light">Off</span>{" "}
-          <span className="italic">Course</span>
-          <span className="text-blush">.</span>
+          <img
+            src="/logo.png"
+            alt="Off Course — Marroquinería"
+            className="h-11 w-11 rounded-full"
+          />
+          <span className="hidden font-serif text-2xl tracking-tight sm:block">
+            <span className="font-light">Off</span>{" "}
+            <span className="italic">Course</span>
+            <span className="text-blush">.</span>
+          </span>
         </a>
 
         <nav className="hidden items-center gap-10 md:flex">

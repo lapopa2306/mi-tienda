@@ -14,15 +14,7 @@ const SPANS = [
   "md:col-span-7",
   "md:col-span-5",
 ];
-const ASPECTS = [
-  "aspect-[3/4]",
-  "aspect-[4/3]",
-  "aspect-square",
-  "aspect-[3/4]",
-  "aspect-square",
-  "aspect-[4/3]",
-  "aspect-[3/4]",
-];
+const ASPECTS = Array(7).fill("aspect-[3/4]");
 const fmt = (n) => n.toLocaleString("es-AR");
 const slug = (s) => s.toLowerCase().replace(/\s+/g, "-");
 

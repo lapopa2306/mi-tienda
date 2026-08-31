@@ -15,7 +15,7 @@ const ITEMS = [
   {
     n: "03",
     title: "Medios de pago",
-    text: "Efectivo, transferencia y Mercado Pago. El pedido se confirma siempre por WhatsApp.",
+    text: "Efectivo, transferencia y tarjetas de débito y crédito. El pedido se confirma siempre por WhatsApp.",
   },
 ];
 
