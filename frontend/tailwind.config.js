@@ -16,6 +16,7 @@ module.exports = {
         paper: '#F9F8F6',
         ink: '#0A0A0A',
         blush: '#F4C5D6',
+        'blush-deep': '#C4708E',
         smoke: '#E5E5E5',
         ash: '#F0EFEF',
         background: 'hsl(var(--background))',

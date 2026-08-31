@@ -156,9 +156,17 @@ export default function Catalog() {
                       {p.category}
                     </p>
                   </div>
-                  <p className="whitespace-nowrap pt-1 font-mono text-sm text-ink/80">
-                    $ {fmt(p.price)}
-                  </p>
+                  <div className="text-right">
+                    <p className="whitespace-nowrap pt-1 font-mono text-sm text-ink/80">
+                      $ {fmt(p.price)}
+                    </p>
+                    <p
+                      data-testid={`installments-${p.id}`}
+                      className="mt-1 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.08em] text-blush-deep"
+                    >
+                      3 cuotas de $ {fmt(Math.round(p.price / 3))}
+                    </p>
+                  </div>
                 </div>
               </motion.article>
             ))}

@@ -63,3 +63,6 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 - Datos MOCK: descripciones y colores inventados en src/data/products.js — el usuario pasará los reales.
 - Footer: segundo WhatsApp +54 9 11 4937-6760. Sección Nosotros simplificada ("Somos Off Course"). Pasos de compra 1-4 en Cómo comprar.
 - Testing agent iteración 1: 17/17 casos OK (100%).
+
+## Actualización — Cuotas
+- Aviso "3 cuotas de $X" bajo el precio en cada tarjeta del catálogo y "3 cuotas sin interés de $X" en el modal de detalle (color blush-deep #C4708E agregado a tailwind).

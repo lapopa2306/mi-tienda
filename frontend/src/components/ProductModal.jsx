@@ -116,6 +116,12 @@ export default function ProductModal({ product, onClose }) {
               >
                 $ {fmt(product.price)}
               </p>
+              <p
+                data-testid="product-modal-installments"
+                className="mt-1 font-mono text-xs uppercase tracking-[0.08em] text-blush-deep"
+              >
+                3 cuotas sin interés de $ {fmt(Math.round(product.price / 3))}
+              </p>
 
               {product.description && (
                 <p
