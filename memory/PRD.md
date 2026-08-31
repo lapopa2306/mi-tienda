@@ -69,3 +69,7 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 
 ## Actualización — 10% off efectivo/transferencia
 - Tarjetas: línea "$X efectivo / transf." (precio con 10% off) bajo las cuotas. Modal: "10% off en efectivo o transferencia: $X".
+
+## Actualización — Primer producto REAL
+- Eliminados los 2 neceseres de ejemplo. Agregado real: "Neceser Peluche" $12.000, color Fucsia (#e0218a), desc "Mide 11x20.", foto del usuario en /public/products/neceser-peluche-fucsia.jpg (comprimida a 187KB).
+- Flujo para próximos productos reales: guardar foto en /app/frontend/public/products/ y agregar entrada en src/data/products.js.

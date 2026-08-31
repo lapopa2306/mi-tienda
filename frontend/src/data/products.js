@@ -125,34 +125,19 @@ export const PRODUCTS = [
     ),
   },
   {
-    id: "neceser-de-viaje",
-    name: "Neceser de Viaje",
+    id: "neceser-peluche",
+    name: "Neceser Peluche",
     category: "Neceser",
-    price: 22000,
-    image: IMG.neceser1,
-    description:
-      "Espacioso y con interior impermeable. Perfecto para llevar todo lo tuyo en viajes y escapadas.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.neceser1, IMG.neceser2],
-      [IMG.neceser2, IMG.neceser1]
-    ),
-  },
-  {
-    id: "neceser-chico",
-    name: "Neceser Chico",
-    category: "Neceser",
-    price: 16000,
-    image: IMG.neceser2,
-    description:
-      "El tamaño justo para la cartera o la mochila. Cierre doble y forro fácil de limpiar.",
-    colors: colors(
-      "Crema",
-      "Suela",
-      [IMG.neceser2, IMG.neceser1],
-      [IMG.neceser1, IMG.neceser2]
-    ),
+    price: 12000,
+    image: "/products/neceser-peluche-fucsia.jpg",
+    description: "Mide 11x20.",
+    colors: [
+      {
+        name: "Fucsia",
+        hex: "#e0218a",
+        images: ["/products/neceser-peluche-fucsia.jpg"],
+      },
+    ],
   },
   {
     id: "llavero-trenzado",
