@@ -1,0 +1,151 @@
+{
+  "theme": "light",
+  "brand_name": "Off Course",
+  "app_type": "E-commerce Catalog / Landing Page Hybrid",
+  "aesthetics": [
+    "High-fashion editorial lookbook",
+    "Awwwards Site-of-the-Day level",
+    "Minimalist Argentine leather goods e-shop",
+    "Warm off-white paper and true black ink",
+    "Generous white space, asymmetric layouts",
+    "Premium motion"
+  ],
+  "colors": {
+    "background": "#F9F8F6",
+    "foreground": "#0A0A0A",
+    "primary": "#0A0A0A",
+    "primary_foreground": "#F9F8F6",
+    "secondary": "#E5E5E5",
+    "secondary_foreground": "#0A0A0A",
+    "accent": "#F4C5D6",
+    "accent_foreground": "#0A0A0A",
+    "muted": "#F0EFEF",
+    "muted_foreground": "#555555",
+    "border": "#E5E5E5"
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Cormorant Garamond, serif",
+      "body": "Outfit, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter leading-none font-light",
+      "h2": "text-4xl sm:text-5xl tracking-tight leading-none font-light",
+      "h3": "text-2xl sm:text-3xl tracking-tight font-light",
+      "body": "text-base sm:text-lg leading-relaxed font-light",
+      "overline": "text-xs tracking-[0.2em] uppercase font-mono"
+    },
+    "instructions": "Use Cormorant Garamond for all headings with tracking-tighter and light weights. Use Outfit for body text and JetBrains Mono for accents like numbers (01, 02) or small labels. Avoid Inter/Roboto."
+  },
+  "spacing_and_layout": {
+    "container": "max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-24",
+    "section_padding": "py-24 sm:py-32 lg:py-40",
+    "grid": "grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12",
+    "rules": [
+      "Generous white space: Use p-12, p-16, py-32.",
+      "Asymmetry: Left-align layouts, offset images, do not perfectly center everything.",
+      "Clipped frames: Wrap product images in containers with overflow-hidden and distinct aspect ratios (e.g. aspect-[3/4] or aspect-[4/5]).",
+      "No generic card grids: Use list-like asymmetric grids for products."
+    ]
+  },
+  "motion_and_interactions": {
+    "libraries": [
+      "framer-motion",
+      "lucide-react",
+      "react-fast-marquee"
+    ],
+    "patterns": [
+      "Kinetic Hero: Masked line-by-line reveal using framer-motion (overflow: hidden, text moving up from translateY(100%)).",
+      "Parallax Hero: Subtle image scaling and translation on scroll.",
+      "Scroll Reveals: Fade in and slight translate-y on sections as they enter viewport.",
+      "Lenis: Implement smooth momentum scrolling.",
+      "Editorial Marquee: Very slow, smooth drift with serif font, text-4xl or larger, low contrast or outline style.",
+      "Hover states: Subtle image zoom inside clipped frames, text color shifts."
+    ]
+  },
+  "components": [
+    {
+      "name": "Navigation",
+      "rules": "Fixed top nav, glassmorphism (backdrop-blur-xl, bg-background/80) or solid background. Logo on left, cart drawer trigger on right."
+    },
+    {
+      "name": "Cart Drawer",
+      "rules": "Slide-in from right. Displays added items, quantities, and a large primary CTA button that links to WhatsApp (+5491156011898) with a pre-filled order message."
+    },
+    {
+      "name": "Hero Section",
+      "rules": "Massive typography (H1). Masked text reveals. Parallax leather product/model image (e.g., aspect-[3/4] placed asymmetrically)."
+    },
+    {
+      "name": "Manifesto (Nosotros)",
+      "rules": "Numbered chapters (01, 02, 03) in mono font. Large serif text describing the brand. Lots of negative space."
+    },
+    {
+      "name": "Product Filters",
+      "rules": "Horizontal scrollable or flex-wrap list of 12 categories. Active state styled with a 1px border and pastel pink (#F4C5D6) subtle background or dot."
+    },
+    {
+      "name": "Footer",
+      "rules": "Massive spacing (py-32). Address (Soreda 6180, Wilde), Instagram link, WhatsApp link. Dark or light theme, high contrast typography."
+    }
+  ],
+  "media": {
+    "images": {
+      "hero_model": "https://images.pexels.com/photos/11320685/pexels-photo-11320685.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "model_2": "https://images.unsplash.com/photo-1645636667214-c4875ef3d59c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwzfHxsZWF0aGVyJTIwcGhvdG9zaG9vdCUyMG1vZGVsfGVufDB8fHx8MTc4ODE4ODQ3NHww&ixlib=rb-4.1.0&q=85",
+      "wallet_men": "https://images.unsplash.com/photo-1628483211662-9bcc692c46dc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwzfHxsZWF0aGVyJTIwd2FsbGV0JTIwbWVufGVufDB8fHx8MTc4ODE4ODQ2MHww&ixlib=rb-4.1.0&q=85",
+      "wallet_black": "https://images.unsplash.com/photo-1579014134953-1580d7f123f3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODh8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwd2FsbGV0JTIwbWVufGVufDB8fHx8MTc4ODE4ODQ2MHww&ixlib=rb-4.1.0&q=85",
+      "handbag": "https://images.unsplash.com/photo-1691480150204-66dd1eb77391?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MTN8MHwxfHNlYXJjaHw0fHxsZWF0aGVyJTIwYmFnJTIwZmFzaGlvbnxlbnwwfHx8fDE3ODgxODg0NjR8MA&ixlib=rb-4.1.0&q=85",
+      "luxury_bags": "https://images.pexels.com/photos/9327162/pexels-photo-9327162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "backpack_brown": "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwyfHxsZWF0aGVyJTIwYmFja3BhY2t8ZW58MHx8fHwxNzg4MTg4NDY4fDA&ixlib=rb-4.1.0&q=85",
+      "backpack_black": "https://images.unsplash.com/photo-1680039211156-66c721b87625?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTJ8MHwxfHNlYXJjaHwzfHxsZWF0aGVyJTIwYmFja3BhY2t8ZW58MHx8fHwxNzg4MTg4NDY4fDA&ixlib=rb-4.1.0&q=85",
+      "keychain": "https://images.unsplash.com/photo-1676276550349-580c49631496?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODR8MHwxfHNlYXJjaHwzfHxsZWF0aGVyJTIwa2V5Y2hhaW58ZW58MHx8fHwxNzg4MTg4NDc5fDA&ixlib=rb-4.1.0&q=85"
+    }
+  },
+  "content": {
+    "language": "es-AR",
+    "whatsapp_number": "5491156011898",
+    "address": "Soreda 6180, Wilde",
+    "instagram": "https://www.instagram.com/offcoursearg/",
+    "categories": [
+      "Billetera de hombre",
+      "Billetera de mujer",
+      "Neceser",
+      "Llaveros y accesorios",
+      "Mochilas",
+      "Riñoneras",
+      "Bandoleras",
+      "Portacelulares",
+      "Bolsos",
+      "Cartucheras",
+      "Morrales",
+      "Infantil"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Use React and Tailwind CSS.",
+    "Do not use generic UI cards for products; design a custom editorial layout with borderless clipped frames (aspect-ratio).",
+    "Implement the WhatsApp cart logic: Build a string from cart items and open window.open(`https://wa.me/5491156011898?text=${encodedMessage}`).",
+    "Add Lenis for smooth scrolling in a useEffect at the root layout.",
+    "Add Framer Motion for scroll reveals (whileInView) and kinetic hero (initial/animate on mount).",
+    "Install and use 'react-fast-marquee' for the slow editorial marquee.",
+    "Use Google Fonts for Cormorant Garamond, Outfit, and JetBrains Mono.",
+    "Add 'data-testid' to all interactive elements for robust testing."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not converge toward generic 'AI slop' aesthetics.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition. Eg: transition: all. Always add transitions for specific interactive elements like button, input excluding transforms.",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Use provided image URLs. NEVER use placeholder text."
+  ]
+}
