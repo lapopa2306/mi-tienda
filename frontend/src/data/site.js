@@ -7,9 +7,8 @@ export const SITE = {
   whatsapp2Display: "+54 9 11 4937-6760",
   instagram: "https://www.instagram.com/offcoursearg/",
   address: "Soreda 6180, Wilde",
-  heroImage:
-    "https://images.pexels.com/photos/11320685/pexels-photo-11320685.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  heroAlt: "Modelo con cartera de cuero Off Course",
+  heroImage: "/products/hero-mochila.jpg",
+  heroAlt: "Mochila negra Off Course",
   manifestoImage:
     "https://images.pexels.com/photos/9327162/pexels-photo-9327162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   manifestoAlt: "Carteras de cuero en exhibición",

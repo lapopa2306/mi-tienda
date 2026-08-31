@@ -259,16 +259,16 @@ export const PRODUCTS = [
     name: "Bandolera Triple",
     category: "Bandoleras",
     price: 34000,
-    image: "/products/bandolera-triple-1.jpg",
+    image: "/products/bandolera-triple-3.jpg",
     description: "Mide 15x19, fabricada en PU.",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
+          "/products/bandolera-triple-3.jpg",
           "/products/bandolera-triple-1.jpg",
           "/products/bandolera-triple-2.jpg",
-          "/products/bandolera-triple-3.jpg",
         ],
       },
     ],
