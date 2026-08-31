@@ -36,7 +36,7 @@ export default function Catalog() {
                 01 — Catálogo
               </p>
               <h2 className="font-serif text-4xl font-light leading-none tracking-tight sm:text-6xl">
-                Todas las <span className="italic">piezas</span>
+                Todos nuestros <span className="italic">productos</span>
               </h2>
             </div>
             <p
