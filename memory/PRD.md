@@ -48,3 +48,6 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 ## Actualización (31 Jun 2026)
 - Medios de pago: texto actualizado a "Efectivo, transferencia, tarjetas de débito y crédito."
 - Grilla de catálogo unificada: todas las tarjetas de producto ahora tienen el mismo tamaño (3 columnas, aspecto 3:4), se eliminó el layout asimétrico.
+
+## Actualización (misma fecha)
+- Contador de cantidad por producto: badge negro circular arriba a la derecha de cada foto muestra cuántas unidades hay en el pedido; el botón también muestra "Agregar (N)".
