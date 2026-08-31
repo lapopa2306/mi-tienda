@@ -19,6 +19,25 @@ const ITEMS = [
   },
 ];
 
+const STEPS = [
+  {
+    n: "1",
+    text: "Sumá al carrito los productos que más te gusten.",
+  },
+  {
+    n: "2",
+    text: "Hacé click en Pedido y elegí la opción enviar pedido por WhatsApp.",
+  },
+  {
+    n: "3",
+    text: "Arreglá con nosotros el medio de pago y el punto de retiro/envío.",
+  },
+  {
+    n: "4",
+    text: "Recibí y disfrutá de tu pedido.",
+  },
+];
+
 export default function InfoStrip() {
   return (
     <section id="envios" data-testid="info-section" className="py-24 sm:py-32">
@@ -29,6 +48,23 @@ export default function InfoStrip() {
             03 — Cómo comprar
           </p>
         </Reveal>
+        <div className="mb-8 grid grid-cols-1 gap-8 py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <Reveal key={s.n} delay={i * 0.08}>
+              <div
+                data-testid={`buy-step-${s.n}`}
+                className="flex h-full flex-col gap-4 border-t border-ink/10 pt-6"
+              >
+                <span className="font-serif text-5xl font-light italic text-blush">
+                  {s.n}
+                </span>
+                <p className="text-base font-light leading-relaxed text-ink/70">
+                  {s.text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
         <div>
           {ITEMS.map((item, i) => (
             <Reveal key={item.n} delay={i * 0.08}>
