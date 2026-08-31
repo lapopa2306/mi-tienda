@@ -130,14 +130,6 @@ export default function Hero() {
               className="h-full w-full scale-[1.15] object-cover"
             />
           </motion.div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.3 }}
-            className="mt-4 text-right font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50"
-          >
-            Cuero genuino — Temporada 2026
-          </motion.p>
         </div>
       </div>
 
