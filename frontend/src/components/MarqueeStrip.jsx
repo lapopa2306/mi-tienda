@@ -4,7 +4,6 @@ import { Asterisk } from "lucide-react";
 const ITEMS = [
   "3 cuotas sin interés",
   "10% Off Efectivo y transferencia",
-  "Diseño argentino",
   "Envíos a todo el país",
   "Off Course",
 ];
