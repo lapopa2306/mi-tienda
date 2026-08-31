@@ -140,7 +140,31 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "llavero-trenzado",
+    id: "neceser-pu-amayra",
+    name: "Neceser PU Amayra",
+    category: "Neceser",
+    price: 12000,
+    image: "/products/neceser-pu-amayra-1.jpg",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/neceser-pu-amayra-1.jpg",
+          "/products/neceser-pu-amayra-2.jpg",
+        ],
+      },
+    ],
+  },
+  {
+    id: "neceser-triple-trendy",
+    name: "Neceser Triple Trendy",
+    category: "Neceser",
+    price: 26400,
+    image: "/products/neceser-triple-trendy.jpg",
+    description: "Set de 3 neceseres, ideal para viaje.",
+  },
+  {
     name: "Llavero Trenzado",
     category: "Llaveros y accesorios",
     price: 6500,

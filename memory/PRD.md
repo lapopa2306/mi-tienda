@@ -73,3 +73,7 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 ## Actualización — Primer producto REAL
 - Eliminados los 2 neceseres de ejemplo. Agregado real: "Neceser Peluche" $12.000, color Fucsia (#e0218a), desc "Mide 11x20.", foto del usuario en /public/products/neceser-peluche-fucsia.jpg (comprimida a 187KB).
 - Flujo para próximos productos reales: guardar foto en /app/frontend/public/products/ y agregar entrada en src/data/products.js.
+
+## Actualización — Neceseres reales
+- Neceser: 3 productos REALES: Neceser Peluche ($12.000, Fucsia), Neceser PU Amayra ($12.000, Negro, 2 fotos, sin descripción), Neceser Triple Trendy ($26.400, sin color, "Set de 3 neceseres, ideal para viaje.").
+- Fotos en /public/products/. Resto del catálogo sigue MOCK.
