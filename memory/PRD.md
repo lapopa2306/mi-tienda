@@ -77,3 +77,8 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 ## Actualización — Neceseres reales
 - Neceser: 3 productos REALES: Neceser Peluche ($12.000, Fucsia), Neceser PU Amayra ($12.000, Negro, 2 fotos, sin descripción), Neceser Triple Trendy ($26.400, sin color, "Set de 3 neceseres, ideal para viaje.").
 - Fotos en /public/products/. Resto del catálogo sigue MOCK.
+
+## Actualización — Bandoleras y Bolsos reales
+- Bandoleras: solo "Bandolera Triple" ($34.000, Negro, 3 fotos, "Mide 15x19, fabricada en PU.").
+- Bolsos: solo "Bolso Deportivo" ($35.000, Negro, 2 fotos, "Mide 27x50, tela engomada, compartimento para zapatillas.").
+- Categorías con productos REALES: Neceser, Bandoleras, Bolsos. Resto MOCK.

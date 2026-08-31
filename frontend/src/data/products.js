@@ -255,35 +255,23 @@ export const PRODUCTS = [
     ),
   },
   {
-    id: "bandolera-mini",
-    name: "Bandolera Mini",
+    id: "bandolera-triple",
+    name: "Bandolera Triple",
     category: "Bandoleras",
-    price: 38000,
-    image: IMG.bandolera1,
-    tag: "Nuevo",
-    description:
-      "Chiquita pero rendidora: celular, billetera y llaves. Tira regulable y cierre metálico.",
-    colors: colors(
-      "Crema",
-      "Negro",
-      [IMG.bandolera1, IMG.bandolera2],
-      [IMG.bandolera2, IMG.bandolera1]
-    ),
-  },
-  {
-    id: "bandolera-suela",
-    name: "Bandolera Grande",
-    category: "Bandoleras",
-    price: 42000,
-    image: IMG.bandolera2,
-    description:
-      "Más espacio sin perder estilo. Compartimento principal amplio y bolsillo frontal con cierre.",
-    colors: colors(
-      "Suela",
-      "Crema",
-      [IMG.bandolera2, IMG.bandolera1],
-      [IMG.bandolera1, IMG.bandolera2]
-    ),
+    price: 34000,
+    image: "/products/bandolera-triple-1.jpg",
+    description: "Mide 15x19, fabricada en PU.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/bandolera-triple-1.jpg",
+          "/products/bandolera-triple-2.jpg",
+          "/products/bandolera-triple-3.jpg",
+        ],
+      },
+    ],
   },
   {
     id: "portacelular-con-tira",
@@ -316,34 +304,23 @@ export const PRODUCTS = [
     ),
   },
   {
-    id: "bolso-shopper",
-    name: "Bolso Shopper",
+    id: "bolso-deportivo",
+    name: "Bolso Deportivo",
     category: "Bolsos",
-    price: 68000,
-    image: IMG.bolso1,
+    price: 35000,
+    image: "/products/bolso-deportivo-1.jpg",
     description:
-      "El bolso que va con todo: trabajo, facu o finde. Manijas reforzadas y bolsillo interno con cierre.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.bolso1, IMG.bolso2],
-      [IMG.bolso2, IMG.bolso1]
-    ),
-  },
-  {
-    id: "bolso-de-mano",
-    name: "Bolso de Mano",
-    category: "Bolsos",
-    price: 58000,
-    image: IMG.bolso2,
-    description:
-      "Elegante y estructurado, con cierre superior y base firme. Incluye tira larga desmontable.",
-    colors: colors(
-      "Crema",
-      "Rosa",
-      [IMG.bolso2, IMG.bolso1],
-      [IMG.bolso1, IMG.bolso2]
-    ),
+      "Mide 27x50, fabricado en tela engomada, cuenta con compartimento para zapatillas.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/bolso-deportivo-1.jpg",
+          "/products/bolso-deportivo-2.jpg",
+        ],
+      },
+    ],
   },
   {
     id: "cartuchera-classic",
