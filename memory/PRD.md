@@ -56,3 +56,10 @@ Local de venta de marroquinería "Off Course" (Instagram: @offcoursearg). Págin
 - Botón "–" en cada producto para restar unidades al momento (aparece solo si hay unidades agregadas; al llegar a 0 desaparece junto con el badge).
 - Marquee actualizado: 3 cuotas sin interés / 10% Off Efectivo y transferencia / Envíos a todo el país / Off Course.
 - Título catálogo: "Todos nuestros productos". Se quitó "Cuero genuino — Temporada 2026" del hero.
+
+## Actualización — Detalle de producto con colores
+- Modal de detalle al tocar foto/nombre: descripción, precio, miniaturas, selector de color (las fotos cambian según color).
+- Carrito por variante: mismo producto en distintos colores = líneas separadas (key id__Color). WhatsApp incluye color entre paréntesis.
+- Datos MOCK: descripciones y colores inventados en src/data/products.js — el usuario pasará los reales.
+- Footer: segundo WhatsApp +54 9 11 4937-6760. Sección Nosotros simplificada ("Somos Off Course"). Pasos de compra 1-4 en Cómo comprar.
+- Testing agent iteración 1: 17/17 casos OK (100%).

@@ -8,7 +8,8 @@ const fmt = (n) => n.toLocaleString("es-AR");
 export function CartProvider({ children }) {
   const [items, setItems] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem("oc-cart")) || [];
+      const saved = JSON.parse(localStorage.getItem("oc-cart")) || [];
+      return saved.map((i) => (i.key ? i : { ...i, key: i.id, color: null }));
     } catch {
       return [];
     }
@@ -19,24 +20,54 @@ export function CartProvider({ children }) {
     localStorage.setItem("oc-cart", JSON.stringify(items));
   }, [items]);
 
-  const add = (p) => {
+  const add = (p, colorName) => {
+    const color = p.colors
+      ? p.colors.find((c) => c.name === colorName) || p.colors[0]
+      : null;
+    const key = color ? `${p.id}__${color.name}` : p.id;
     setItems((prev) => {
-      const found = prev.find((i) => i.id === p.id);
+      const found = prev.find((i) => i.key === key);
       return found
-        ? prev.map((i) => (i.id === p.id ? { ...i, qty: i.qty + 1 } : i))
-        : [...prev, { ...p, qty: 1 }];
+        ? prev.map((i) => (i.key === key ? { ...i, qty: i.qty + 1 } : i))
+        : [
+            ...prev,
+            {
+              key,
+              id: p.id,
+              name: p.name,
+              category: p.category,
+              price: p.price,
+              image: color?.images?.[0] || p.image,
+              color: color?.name || null,
+              qty: 1,
+            },
+          ];
     });
-    toast.success("Agregado a tu pedido", { description: p.name });
+    toast.success("Agregado a tu pedido", {
+      description: color ? `${p.name} — ${color.name}` : p.name,
+    });
   };
 
-  const setQty = (id, qty) =>
+  const setQty = (key, qty) =>
     setItems((prev) =>
       qty <= 0
-        ? prev.filter((i) => i.id !== id)
-        : prev.map((i) => (i.id === id ? { ...i, qty } : i))
+        ? prev.filter((i) => i.key !== key)
+        : prev.map((i) => (i.key === key ? { ...i, qty } : i))
     );
 
-  const remove = (id) => setItems((prev) => prev.filter((i) => i.id !== id));
+  const decrement = (productId) => {
+    setItems((prev) => {
+      const match = [...prev].reverse().find((i) => i.id === productId);
+      if (!match) return prev;
+      return match.qty <= 1
+        ? prev.filter((i) => i.key !== match.key)
+        : prev.map((i) =>
+            i.key === match.key ? { ...i, qty: i.qty - 1 } : i
+          );
+    });
+  };
+
+  const remove = (key) => setItems((prev) => prev.filter((i) => i.key !== key));
   const clear = () => setItems([]);
 
   const count = items.reduce((a, i) => a + i.qty, 0);
@@ -44,7 +75,8 @@ export function CartProvider({ children }) {
 
   const waUrl = useMemo(() => {
     const lines = items.map(
-      (i) => `• ${i.qty} × ${i.name} — $${fmt(i.price * i.qty)}`
+      (i) =>
+        `• ${i.qty} × ${i.name}${i.color ? ` (${i.color})` : ""} — $${fmt(i.price * i.qty)}`
     );
     const msg = [
       "Hola Off Course! Quiero hacer este pedido:",
@@ -60,6 +92,7 @@ export function CartProvider({ children }) {
     items,
     add,
     setQty,
+    decrement,
     remove,
     clear,
     open,

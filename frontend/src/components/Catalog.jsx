@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus } from "lucide-react";
 import { CATEGORIES, PRODUCTS } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import ProductModal from "@/components/ProductModal";
 import Reveal, { EASE } from "@/components/Reveal";
 
 const fmt = (n) => n.toLocaleString("es-AR");
@@ -10,8 +11,10 @@ const slug = (s) => s.toLowerCase().replace(/\s+/g, "-");
 
 export default function Catalog() {
   const [active, setActive] = useState("Todo");
-  const { add, setQty, items } = useCart();
-  const qtyOf = (id) => items.find((i) => i.id === id)?.qty || 0;
+  const [selected, setSelected] = useState(null);
+  const { add, decrement, items } = useCart();
+  const qtyOf = (id) =>
+    items.filter((i) => i.id === id).reduce((a, i) => a + i.qty, 0);
 
   const filtered = useMemo(
     () =>
@@ -84,7 +87,11 @@ export default function Catalog() {
                 transition={{ duration: 0.6, ease: EASE }}
                 className="group"
               >
-                <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
+                <div
+                  data-testid={`product-image-${p.id}`}
+                  onClick={() => setSelected(p)}
+                  className="relative aspect-[3/4] cursor-pointer overflow-hidden bg-smoke"
+                >
                   <img
                     src={p.image}
                     alt={p.name}
@@ -108,11 +115,14 @@ export default function Catalog() {
                       {qtyOf(p.id)}
                     </motion.span>
                   )}
-                  <div className="absolute bottom-4 right-4 flex items-center gap-2">
+                  <div
+                    className="absolute bottom-4 right-4 flex items-center gap-2"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {qtyOf(p.id) > 0 && (
                       <button
                         data-testid={`remove-from-cart-${p.id}`}
-                        onClick={() => setQty(p.id, qtyOf(p.id) - 1)}
+                        onClick={() => decrement(p.id)}
                         aria-label={`Quitar ${p.name} del pedido`}
                         className="flex h-10 w-10 items-center justify-center rounded-full bg-paper/90 text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper"
                       >
@@ -136,7 +146,10 @@ export default function Catalog() {
                 </div>
                 <div className="mt-5 flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="font-serif text-xl font-light leading-tight sm:text-2xl">
+                    <h3
+                      onClick={() => setSelected(p)}
+                      className="cursor-pointer font-serif text-xl font-light leading-tight transition-colors duration-300 hover:text-ink/60 sm:text-2xl"
+                    >
                       {p.name}
                     </h3>
                     <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45">
@@ -152,6 +165,7 @@ export default function Catalog() {
           </AnimatePresence>
         </motion.div>
       </div>
+      <ProductModal product={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

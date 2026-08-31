@@ -76,7 +76,7 @@ export default function CartDrawer() {
                 <div className="flex-1 overflow-y-auto px-8 py-6">
                   <ul className="space-y-8">
                     {items.map((i) => (
-                      <li key={i.id} data-testid={`cart-item-${i.id}`} className="flex gap-5">
+                      <li key={i.key} data-testid={`cart-item-${i.key}`} className="flex gap-5">
                         <div className="aspect-[3/4] w-20 shrink-0 overflow-hidden bg-smoke">
                           <img
                             src={i.image}
@@ -92,11 +92,12 @@ export default function CartDrawer() {
                               </h3>
                               <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
                                 {i.category}
+                                {i.color ? ` · ${i.color}` : ""}
                               </p>
                             </div>
                             <button
-                              data-testid={`remove-item-${i.id}`}
-                              onClick={() => remove(i.id)}
+                              data-testid={`remove-item-${i.key}`}
+                              onClick={() => remove(i.key)}
                               aria-label={`Quitar ${i.name}`}
                               className="text-ink/40 transition-colors duration-300 hover:text-ink"
                             >
@@ -106,8 +107,8 @@ export default function CartDrawer() {
                           <div className="mt-auto flex items-center justify-between pt-3">
                             <div className="flex items-center gap-3 rounded-full border border-ink/15 px-3 py-1.5">
                               <button
-                                data-testid={`qty-decrease-${i.id}`}
-                                onClick={() => setQty(i.id, i.qty - 1)}
+                                data-testid={`qty-decrease-${i.key}`}
+                                onClick={() => setQty(i.key, i.qty - 1)}
                                 aria-label="Restar unidad"
                                 className="text-ink/60 transition-colors duration-200 hover:text-ink"
                               >
@@ -117,8 +118,8 @@ export default function CartDrawer() {
                                 {i.qty}
                               </span>
                               <button
-                                data-testid={`qty-increase-${i.id}`}
-                                onClick={() => setQty(i.id, i.qty + 1)}
+                                data-testid={`qty-increase-${i.key}`}
+                                onClick={() => setQty(i.key, i.qty + 1)}
                                 aria-label="Sumar unidad"
                                 className="text-ink/60 transition-colors duration-200 hover:text-ink"
                               >
