@@ -140,6 +140,34 @@ async def create_product(payload: ProductCreate, x_admin_password: Optional[str]
     return product
 
 
+@api_router.put("/products/{product_id}", response_model=Product)
+async def update_product(product_id: str, payload: ProductCreate, x_admin_password: Optional[str] = Header(default=None)):
+    check_admin(x_admin_password)
+
+    existing = await db.products.find_one({"id": product_id}, {"_id": 0})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+
+    first_image = (
+        payload.colors[0].images[0]
+        if payload.colors and payload.colors[0].images
+        else ""
+    )
+
+    update_fields = {
+        "name": payload.name.strip(),
+        "category": payload.category,
+        "price": payload.price,
+        "image": first_image,
+        "description": payload.description,
+        "colors": [c.model_dump() for c in payload.colors],
+    }
+
+    await db.products.update_one({"id": product_id}, {"$set": update_fields})
+    updated = await db.products.find_one({"id": product_id}, {"_id": 0})
+    return updated
+
+
 @api_router.delete("/products/{product_id}")
 async def delete_product(product_id: str, x_admin_password: Optional[str] = Header(default=None)):
     check_admin(x_admin_password)
