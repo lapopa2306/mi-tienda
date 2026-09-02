@@ -63,66 +63,90 @@ const colors = (a, b, imgsA, imgsB) => [
 // Productos, precios, descripciones y colores de MUESTRA — reemplazar por el catálogo real.
 export const PRODUCTS = [
   {
-    id: "billetera-clasica-negra",
-    name: "Billetera Clásica",
-    category: "Billetera de hombre",
+    id: "billetera-maxi-trendy",
+    name: "Maxi Billetera Trendy",
+    category: "Billetera de mujer",
+    price: 20000,
+    image: "/products/billetera-maxi-trendy-roja-1.png",
+    colors: [
+      {
+        name: "Roja",
+        hex: "#e2143a",
+        images: [
+          "/products/billetera-maxi-trendy-roja-1.png",
+          "/products/billetera-maxi-trendy-roja-2.png",
+          "/products/billetera-maxi-trendy-roja-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "billetera-doble-trendy",
+    name: "Billetera Doble Trendy",
+    category: "Billetera de mujer",
+    price: 20000,
+    image: "/products/billetera-doble-trendy-marron-1.png",
+    colors: [
+      {
+        name: "Marrón",
+        hex: HEX.Suela,
+        images: [
+          "/products/billetera-doble-trendy-marron-1.png",
+          "/products/billetera-doble-trendy-marron-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "billetera-cierre-doble-trendy",
+    name: "Billetera Cierre Doble Trendy",
+    category: "Billetera de mujer",
+    price: 20000,
+    image: "/products/billetera-cierre-doble-trendy-negra-1.png",
+    colors: [
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: [
+          "/products/billetera-cierre-doble-trendy-negra-1.png",
+          "/products/billetera-cierre-doble-trendy-negra-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "billetera-simple-ona-saenz",
+    name: "Billetera Simple Ona Saenz",
+    category: "Billetera de mujer",
+    price: 20000,
+    image: "/products/billetera-simple-ona-saenz-negra-1.png",
+    colors: [
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: [
+          "/products/billetera-simple-ona-saenz-negra-1.png",
+          "/products/billetera-simple-ona-saenz-negra-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-oreiro",
+    name: "Billetera Chica Oreiro",
+    category: "Billetera de mujer",
     price: 24000,
-    image: IMG.wallet1,
-    tag: "Best seller",
-    description:
-      "La billetera de todos los días: compacta, con espacio para tarjetas, billetes y DNI. Costuras reforzadas y cierre seguro.",
-    colors: colors(
-      "Negro",
-      "Suela",
-      [IMG.wallet1, IMG.wallet2],
-      [IMG.wallet2, IMG.traba]
-    ),
-  },
-  {
-    id: "billetera-slim-suela",
-    name: "Billetera Slim",
-    category: "Billetera de hombre",
-    price: 21000,
-    image: IMG.wallet2,
-    description:
-      "Finita y liviana, ideal para el bolsillo delantero. Entran hasta 6 tarjetas y billetes doblados.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.wallet2, IMG.traba],
-      [IMG.wallet1, IMG.wallet2]
-    ),
-  },
-  {
-    id: "billetera-grande-rosa",
-    name: "Billetera Grande",
-    category: "Billetera de mujer",
-    price: 28000,
-    image: IMG.walletW1,
-    tag: "Nuevo",
-    description:
-      "Amplia y organizada: monedero con cierre, divisiones para tarjetas y espacio para el celular chico.",
-    colors: colors(
-      "Rosa",
-      "Crema",
-      [IMG.walletW1, IMG.walletW2],
-      [IMG.walletW2, IMG.walletW1]
-    ),
-  },
-  {
-    id: "billetera-monedero-nude",
-    name: "Billetera Monedero",
-    category: "Billetera de mujer",
-    price: 26000,
-    image: IMG.walletW2,
-    description:
-      "Dos en uno: billetera y monedero con cierre metálico. Tamaño ideal para carteras chicas.",
-    colors: colors(
-      "Crema",
-      "Rosa",
-      [IMG.walletW2, IMG.walletW1],
-      [IMG.walletW1, IMG.walletW2]
-    ),
+    image: "/products/billetera-chica-oreiro-marron-1.png",
+    colors: [
+      {
+        name: "Marrón",
+        hex: HEX.Suela,
+        images: [
+          "/products/billetera-chica-oreiro-marron-1.png",
+          "/products/billetera-chica-oreiro-marron-2.png",
+        ],
+      },
+    ],
   },
   {
     id: "neceser-peluche",
@@ -157,6 +181,110 @@ export const PRODUCTS = [
     ],
   },
   {
+    id: "neceser-animal-print",
+    name: "Neceser Animal Print",
+    category: "Neceser",
+    price: 12000,
+    image: "/products/neceser-animal-print-rosa.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/neceser-animal-print-rosa.png"],
+      },
+      {
+        name: "Verde",
+        hex: "#a8b89a",
+        images: ["/products/neceser-animal-print-verde.png"],
+      },
+      {
+        name: "Crema",
+        hex: HEX.Crema,
+        images: ["/products/neceser-animal-print-crema.png"],
+      },
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: ["/products/neceser-animal-print-negro.png"],
+      },
+    ],
+  },
+  {
+    id: "neceser-pratys",
+    name: "Neceser Pratys",
+    category: "Neceser",
+    price: 12000,
+    image: "/products/neceser-pratys-rosa.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/neceser-pratys-rosa.png"],
+      },
+      {
+        name: "Rojo",
+        hex: "#c81d3f",
+        images: ["/products/neceser-pratys-rojo.png"],
+      },
+      {
+        name: "Verde",
+        hex: "#a8b89a",
+        images: ["/products/neceser-pratys-verde.png"],
+      },
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: ["/products/neceser-pratys-negro.png"],
+      },
+      {
+        name: "Crema",
+        hex: HEX.Crema,
+        images: ["/products/neceser-pratys-crema.png"],
+      },
+    ],
+  },
+  {
+    id: "neceser-oreiro",
+    name: "Neceser Oreiro",
+    category: "Neceser",
+    price: 19000,
+    image: "/products/neceser-oreiro-negro-1.png",
+    description: "Fabricado en PU.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/neceser-oreiro-negro-1.png",
+          "/products/neceser-oreiro-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "neceser-triple-amayra",
+    name: "Neceser Triple Amayra",
+    category: "Neceser",
+    price: 18000,
+    image: "/products/neceser-triple-amayra-negro-1.png",
+    description: "Set de 3 neceseres, ideal para viaje.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/neceser-triple-amayra-negro-1.png",
+          "/products/neceser-triple-amayra-negro-2.png",
+        ],
+      },
+      {
+        name: "Verde agua",
+        hex: "#c3d6cf",
+        images: ["/products/neceser-triple-amayra-verde-agua.png"],
+      },
+    ],
+  },
+  {
     id: "neceser-triple-trendy",
     name: "Neceser Triple Trendy",
     category: "Neceser",
@@ -165,94 +293,412 @@ export const PRODUCTS = [
     description: "Set de 3 neceseres, ideal para viaje.",
   },
   {
-    name: "Llavero Trenzado",
-    category: "Llaveros y accesorios",
-    price: 6500,
-    image: IMG.llavero,
-    description:
-      "Trenzado a mano con argolla metálica reforzada. Un detalle que dura años.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.llavero, IMG.traba],
-      [IMG.traba, IMG.llavero]
-    ),
-  },
-  {
-    id: "traba-de-cuero",
-    name: "Traba de Cuero",
-    category: "Llaveros y accesorios",
-    price: 8000,
-    image: IMG.traba,
-    description:
-      "Traba multiuso para llaves o mochila. Herrajes en acabado dorado envejecido.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.traba, IMG.llavero],
-      [IMG.llavero, IMG.traba]
-    ),
-  },
-  {
-    id: "mochila-urbana-negra",
-    name: "Mochila Urbana",
-    category: "Mochilas",
-    price: 78000,
-    image: IMG.mochila1,
-    tag: "Best seller",
-    description:
-      "Para el día a día: entra la notebook de 15”, tiene bolsillo interno con cierre y tiras acolchadas regulables.",
-    colors: colors(
-      "Negro",
-      "Suela",
-      [IMG.mochila1, IMG.mochila2],
-      [IMG.mochila2, IMG.mochila1]
-    ),
-  },
-  {
-    id: "mochila-suela",
-    name: "Mochila Suela",
-    category: "Mochilas",
-    price: 72000,
-    image: IMG.mochila2,
-    description:
-      "Estilo clásico con tapa y cierre magnético. Amplia, cómoda y cada vez más linda con el uso.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.mochila2, IMG.mochila1],
-      [IMG.mochila1, IMG.mochila2]
-    ),
-  },
-  {
-    id: "rinonera-negra",
-    name: "Riñonera Clásica",
+    id: "rinonera-maxi",
+    name: "Riño Maxi",
     category: "Riñoneras",
+    price: 17000,
+    image: "/products/rinonera-maxi-negro-1.png",
+    description:
+      "Fabricada en cordura, cuenta con 2 compartimentos. Mide 18x33.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/rinonera-maxi-negro-1.png",
+          "/products/rinonera-maxi-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "rinonera-oreiro",
+    name: "Riño Oreiro",
+    category: "Riñoneras",
+    price: 43000,
+    image: "/products/rinonera-oreiro-suela.png",
+    description: "Fabricada en PU.",
+    colors: [
+      {
+        name: "Suela",
+        hex: HEX.Suela,
+        images: ["/products/rinonera-oreiro-suela.png"],
+      },
+    ],
+  },
+  {
+    id: "rinonera-trendy-flecha",
+    name: "Riño Trendy Flecha",
+    category: "Riñoneras",
+    price: 35000,
+    image: "/products/rinonera-trendy-flecha-crema.png",
+    description: "Fabricada en PU liso.",
+    colors: [
+      {
+        name: "Crema",
+        hex: HEX.Crema,
+        images: ["/products/rinonera-trendy-flecha-crema.png"],
+      },
+    ],
+  },
+  {
+    id: "rinonera-engomada",
+    name: "Riño Engomada",
+    category: "Riñoneras",
+    price: 14000,
+    image: "/products/rinonera-engomada-negro.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: ["/products/rinonera-engomada-negro.png"],
+      },
+    ],
+  },
+  {
+    id: "rinonera-cordon",
+    name: "Riño Cordón",
+    category: "Riñoneras",
+    price: 14000,
+    image: "/products/rinonera-cordon-negro.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: ["/products/rinonera-cordon-negro.png"],
+      },
+    ],
+  },
+  {
+    id: "rinonera-engomada-rayas",
+    name: "Riño Engomada Rayas",
+    category: "Riñoneras",
+    price: 14000,
+    image: "/products/rinonera-engomada-rayas-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/rinonera-engomada-rayas-negro-1.png",
+          "/products/rinonera-engomada-rayas-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "morral-cruzado-amy",
+    name: "Morral Cruzado Amy",
+    category: "Morrales",
+    price: 20000,
+    image: "/products/morral-cruzado-amy-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/morral-cruzado-amy-negro-1.png",
+          "/products/morral-cruzado-amy-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "morral-cruzado",
+    name: "Morral Cruzado",
+    category: "Morrales",
+    price: 20000,
+    image: "/products/morral-cruzado-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/morral-cruzado-negro-1.png",
+          "/products/morral-cruzado-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "morral-independiente",
+    name: "Morral Independiente",
+    category: "Morrales",
+    price: 38000,
+    image: "/products/morral-independiente-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/morral-independiente-1.png",
+          "/products/morral-independiente-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "morral-boca-juniors",
+    name: "Morral Boca Juniors",
+    category: "Morrales",
+    price: 38000,
+    image: "/products/morral-boca-juniors-1.png",
+    colors: [
+      {
+        name: "Azul y amarillo",
+        hex: "#1f4aa8",
+        images: [
+          "/products/morral-boca-juniors-1.png",
+          "/products/morral-boca-juniors-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "morral-racing-club",
+    name: "Morral Racing Club",
+    category: "Morrales",
+    price: 38000,
+    image: "/products/morral-racing-club-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/morral-racing-club-1.png",
+          "/products/morral-racing-club-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "morral-river-plate",
+    name: "Morral River Plate",
+    category: "Morrales",
+    price: 38000,
+    image: "/products/morral-river-plate-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/morral-river-plate-1.png",
+          "/products/morral-river-plate-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "portacelular-bcy",
+    name: "Portacelular BCY",
+    category: "Portacelulares",
+    price: 27000,
+    image: "/products/portacelular-bcy-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/portacelular-bcy-negro-1.png",
+          "/products/portacelular-bcy-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "portacelular-oreiro",
+    name: "Portacelular Oreiro",
+    category: "Portacelulares",
     price: 32000,
-    image: IMG.rinonera1,
-    description:
-      "Cómoda y segura, con doble compartimento y tira regulable. Se usa en la cintura o cruzada.",
-    colors: colors(
-      "Negro",
-      "Oliva",
-      [IMG.rinonera1, IMG.rinonera2],
-      [IMG.rinonera2, IMG.rinonera1]
-    ),
+    image: "/products/portacelular-oreiro-rojo-1.png",
+    colors: [
+      {
+        name: "Rojo",
+        hex: "#e2143a",
+        images: [
+          "/products/portacelular-oreiro-rojo-1.png",
+          "/products/portacelular-oreiro-rojo-2.png",
+        ],
+      },
+    ],
   },
   {
-    id: "rinonera-rosa",
-    name: "Riñonera Urbana",
-    category: "Riñoneras",
-    price: 30000,
-    image: IMG.rinonera2,
-    description:
-      "Liviana y canchera, ideal para salidas. Bolsillo trasero oculto para lo más importante.",
-    colors: colors(
-      "Oliva",
-      "Negro",
-      [IMG.rinonera2, IMG.rinonera1],
-      [IMG.rinonera1, IMG.rinonera2]
-    ),
+    id: "mochila-urbana-hombre",
+    name: "Mochila Urbana Hombre",
+    category: "Mochilas",
+    price: 46000,
+    image: "/products/mochila-urbana-hombre-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/mochila-urbana-hombre-negro-1.png",
+          "/products/mochila-urbana-hombre-negro-2.png",
+          "/products/mochila-urbana-hombre-negro-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-pu-trendy",
+    name: "Mochila PU Trendy",
+    category: "Mochilas",
+    price: 58000,
+    image: "/products/mochila-pu-trendy-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/mochila-pu-trendy-negro-1.png",
+          "/products/mochila-pu-trendy-negro-2.png",
+          "/products/mochila-pu-trendy-negro-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-bolso",
+    name: "Mochila Bolso",
+    category: "Mochilas",
+    price: 44000,
+    image: "/products/mochila-bolso-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/mochila-bolso-negro-1.png",
+          "/products/mochila-bolso-negro-2.png",
+          "/products/mochila-bolso-negro-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-urbana-travel-tech",
+    name: "Mochila Urbana Travel Tech",
+    category: "Mochilas",
+    price: 49000,
+    image: "/products/mochila-urbana-travel-tech-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/mochila-urbana-travel-tech-negro-1.png",
+          "/products/mochila-urbana-travel-tech-negro-2.png",
+          "/products/mochila-urbana-travel-tech-negro-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-deportiva-trendy",
+    name: "Mochila Deportiva Trendy",
+    category: "Mochilas",
+    price: 44000,
+    image: "/products/mochila-deportiva-trendy-azul-1.png",
+    colors: [
+      {
+        name: "Azul",
+        hex: HEX.Azul,
+        images: [
+          "/products/mochila-deportiva-trendy-azul-1.png",
+          "/products/mochila-deportiva-trendy-azul-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-everlast",
+    name: "Mochila Everlast",
+    category: "Mochilas",
+    price: 50000,
+    image: "/products/mochila-everlast-gris-1.png",
+    description: "Fabricada en PU.",
+    colors: [
+      {
+        name: "Gris",
+        hex: HEX.Gris,
+        images: [
+          "/products/mochila-everlast-gris-1.png",
+          "/products/mochila-everlast-gris-2.png",
+          "/products/mochila-everlast-gris-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-a",
+    name: "Mochila A.",
+    category: "Mochilas",
+    price: 42000,
+    image: "/products/mochila-a-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/mochila-a-negro-1.png",
+          "/products/mochila-a-negro-2.png",
+          "/products/mochila-a-negro-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "portacelular-oreiro-tachas",
+    name: "Portacelular Oreiro Tachas",
+    category: "Portacelulares",
+    price: 38000,
+    image: "/products/portacelular-oreiro-tachas-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/portacelular-oreiro-tachas-negro-1.png",
+          "/products/portacelular-oreiro-tachas-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "portacelular-pu",
+    name: "Portacelular PU",
+    category: "Portacelulares",
+    price: 38000,
+    image: "/products/portacelular-pu-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/portacelular-pu-negro-1.png",
+          "/products/portacelular-pu-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "bandolera-bcy",
+    name: "Bandolera BCY",
+    category: "Bandoleras",
+    price: 19000,
+    image: "/products/bandolera-bcy-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/bandolera-bcy-negro-1.png",
+          "/products/bandolera-bcy-negro-2.png",
+          "/products/bandolera-bcy-negro-3.png",
+        ],
+      },
+    ],
   },
   {
     id: "bandolera-triple",
@@ -274,36 +720,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "portacelular-con-tira",
-    name: "Portacelular con Tira",
-    category: "Portacelulares",
-    price: 18000,
-    image: IMG.porta1,
-    description:
-      "Llevá el celu cruzado y las manos libres. Entra cualquier modelo y tiene bolsillo para tarjetas.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.porta1, IMG.porta2],
-      [IMG.porta2, IMG.porta1]
-    ),
-  },
-  {
-    id: "portacelular-mini",
-    name: "Portacelular Mini",
-    category: "Portacelulares",
-    price: 15000,
-    image: IMG.porta2,
-    description:
-      "Versión compacta, justa para el celular. Ideal para salir liviano.",
-    colors: colors(
-      "Negro",
-      "Suela",
-      [IMG.porta2, IMG.porta1],
-      [IMG.porta1, IMG.porta2]
-    ),
-  },
-  {
     id: "bolso-deportivo",
     name: "Bolso Deportivo",
     category: "Bolsos",
@@ -323,93 +739,640 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "cartuchera-classic",
-    name: "Cartuchera Classic",
-    category: "Cartucheras",
-    price: 12000,
-    image: IMG.cartuchera1,
-    description:
-      "Simple y resistente, con cierre metálico. Para lápices, maquillaje o cables.",
-    colors: colors(
-      "Suela",
-      "Negro",
-      [IMG.cartuchera1, IMG.cartuchera2],
-      [IMG.cartuchera2, IMG.cartuchera1]
-    ),
-  },
-  {
-    id: "cartuchera-doble",
-    name: "Cartuchera Doble",
-    category: "Cartucheras",
-    price: 14000,
-    image: IMG.cartuchera2,
-    description:
-      "Dos compartimentos independientes para tener todo ordenado y a mano.",
-    colors: colors(
-      "Negro",
-      "Rosa",
-      [IMG.cartuchera2, IMG.cartuchera1],
-      [IMG.cartuchera1, IMG.cartuchera2]
-    ),
-  },
-  {
-    id: "morral-playero",
-    name: "Morral Playero",
-    category: "Morrales",
-    price: 45000,
-    image: IMG.morral1,
-    description:
-      "Amplio y descontracturado, ideal para el verano. Cierra con solapa y hebilla regulable.",
-    colors: colors(
-      "Crema",
-      "Suela",
-      [IMG.morral1, IMG.morral2],
-      [IMG.morral2, IMG.morral1]
-    ),
-  },
-  {
-    id: "morral-urbano",
-    name: "Morral Urbano",
-    category: "Morrales",
-    price: 48000,
-    image: IMG.morral2,
-    description:
-      "Para moverte por la ciudad: entra tablet o notebook chica, con bolsillos internos organizadores.",
-    colors: colors(
-      "Negro",
-      "Oliva",
-      [IMG.morral2, IMG.morral1],
-      [IMG.morral1, IMG.morral2]
-    ),
-  },
-  {
-    id: "mochila-infantil",
-    name: "Mochila Infantil",
-    category: "Infantil",
+    id: "bolso-de-viaje",
+    name: "Bolso de Viaje",
+    category: "Bolsos",
     price: 35000,
-    image: IMG.infantil1,
-    description:
-      "Tamaño ideal para el jardín o la escuela. Liviana, resistente y fácil de limpiar.",
-    colors: colors(
-      "Rosa",
-      "Azul",
-      [IMG.infantil1, IMG.infantil2],
-      [IMG.infantil2, IMG.infantil1]
-    ),
+    image: "/products/bolso-viaje-1.jpg",
+    description: "Mide 26x38.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/bolso-viaje-1.jpg",
+          "/products/bolso-viaje-2.jpg",
+          "/products/bolso-viaje-3.jpg",
+          "/products/bolso-viaje-4.jpg",
+        ],
+      },
+    ],
   },
   {
-    id: "cartuchera-infantil",
-    name: "Cartuchera Infantil",
+    id: "cartuchera-river-plate",
+    name: "Cartuchera River Plate",
+    category: "Cartucheras",
+    price: 20000,
+    image: "/products/cartuchera-river-plate-1.png",
+    colors: [
+      {
+        name: "Negro y Rojo",
+        hex: HEX.Negro,
+        images: [
+          "/products/cartuchera-river-plate-1.png",
+          "/products/cartuchera-river-plate-2.png",
+          "/products/cartuchera-river-plate-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-independiente",
+    name: "Cartuchera Independiente",
+    category: "Cartucheras",
+    price: 20000,
+    image: "/products/cartuchera-independiente.png",
+    colors: [
+      {
+        name: "Rojo",
+        hex: "#c81d3f",
+        images: ["/products/cartuchera-independiente.png"],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-boca-juniors",
+    name: "Cartuchera Boca Juniors",
+    category: "Cartucheras",
+    price: 20000,
+    image: "/products/cartuchera-boca-juniors.png",
+    colors: [
+      {
+        name: "Azul y Amarillo",
+        hex: HEX.Azul,
+        images: ["/products/cartuchera-boca-juniors.png"],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-racing-club",
+    name: "Cartuchera Racing Club",
+    category: "Cartucheras",
+    price: 20000,
+    image: "/products/cartuchera-racing-1.png",
+    colors: [
+      {
+        name: "Azul y Celeste",
+        hex: HEX.Azul,
+        images: [
+          "/products/cartuchera-racing-1.png",
+          "/products/cartuchera-racing-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-rigida-autos",
+    name: "Cartuchera Rígida",
     category: "Infantil",
-    price: 9000,
-    image: IMG.infantil2,
-    description:
-      "Divertida y duradera, con cierre doble para que la abran fácil los más chicos.",
-    colors: colors(
-      "Azul",
-      "Rosa",
-      [IMG.infantil2, IMG.infantil1],
-      [IMG.infantil1, IMG.infantil2]
-    ),
+    price: 14000,
+    image: "/products/cartuchera-rigida-autos-1.png",
+    colors: [
+      {
+        name: "Rojo y Azul",
+        hex: "#c81d3f",
+        images: ["/products/cartuchera-rigida-autos-1.png"],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-spiderman-triple",
+    name: "Cartuchera Spider-Man Triple",
+    category: "Infantil",
+    price: 26000,
+    image: "/products/cartuchera-spiderman-triple-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/cartuchera-spiderman-triple-1.png",
+          "/products/cartuchera-spiderman-triple-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-spiderman",
+    name: "Cartuchera Spider-Man",
+    category: "Infantil",
+    price: 29000,
+    image: "/products/cartuchera-spiderman-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/cartuchera-spiderman-1.png",
+          "/products/cartuchera-spiderman-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochi-labubu",
+    name: "Mochi Labubu",
+    category: "Infantil",
+    price: 33000,
+    image: "/products/mochi-labubu-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/mochi-labubu-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochi-play",
+    name: "Mochi Play",
+    category: "Infantil",
+    price: 33000,
+    image: "/products/mochi-play-1.png",
+    colors: [
+      {
+        name: "Azul",
+        hex: HEX.Azul,
+        images: ["/products/mochi-play-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochi-rainbow",
+    name: "Mochi Rainbow",
+    category: "Infantil",
+    price: 33000,
+    image: "/products/mochi-rainbow-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/mochi-rainbow-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochi-galaxia",
+    name: "Mochi Galaxia",
+    category: "Infantil",
+    price: 33000,
+    image: "/products/mochi-galaxia-1.png",
+    colors: [
+      {
+        name: "Azul",
+        hex: HEX.Azul,
+        images: ["/products/mochi-galaxia-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochi-gameover",
+    name: "Mochi Game Over",
+    category: "Infantil",
+    price: 26000,
+    image: "/products/mochi-gameover-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: ["/products/mochi-gameover-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochi-helado",
+    name: "Mochi Helado",
+    category: "Infantil",
+    price: 26000,
+    image: "/products/mochi-helado-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/mochi-helado-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochi-gatito",
+    name: "Mochi Gatito",
+    category: "Infantil",
+    price: 30000,
+    image: "/products/mochi-gatito-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/mochi-gatito-1.png"],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-triple",
+    name: "Cartuchera Triple",
+    category: "Infantil",
+    price: 24000,
+    image: "/products/cartuchera-triple-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: [
+          "/products/cartuchera-triple-1.png",
+          "/products/cartuchera-triple-2.png",
+          "/products/cartuchera-triple-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-bandolera-chimola",
+    name: "Cartuchera Bandolera Chimola",
+    category: "Infantil",
+    price: 37000,
+    image: "/products/cartuchera-bandolera-chimola-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: [
+          "/products/cartuchera-bandolera-chimola-1.png",
+          "/products/cartuchera-bandolera-chimola-2.png",
+          "/products/cartuchera-bandolera-chimola-3.png",
+          "/products/cartuchera-bandolera-chimola-4.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "cartuchera-pony-rigida",
+    name: "Cartuchera Pony Rígida",
+    category: "Infantil",
+    price: 22000,
+    image: "/products/cartuchera-pony-rigida-1.png",
+    colors: [
+      {
+        name: "Verde",
+        hex: "#5fc9b8",
+        images: [
+          "/products/cartuchera-pony-rigida-1.png",
+          "/products/cartuchera-pony-rigida-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "lunchera-trendy",
+    name: "Lunchera Trendy",
+    category: "Infantil",
+    price: 32000,
+    image: "/products/lunchera-trendy-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: [
+          "/products/lunchera-trendy-1.png",
+          "/products/lunchera-trendy-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-jardin-minnie",
+    name: "Mochila Jardín Minnie",
+    category: "Infantil",
+    price: 38000,
+    image: "/products/mochila-jardin-minnie-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: ["/products/mochila-jardin-minnie-1.png"],
+      },
+    ],
+  },
+  {
+    id: "mochila-boca-juniors",
+    name: "Mochila Boca Juniors",
+    category: "Infantil",
+    price: 44000,
+    image: "/products/mochila-boca-juniors-1.png",
+    colors: [
+      {
+        name: "Azul y Amarillo",
+        hex: HEX.Azul,
+        images: [
+          "/products/mochila-boca-juniors-1.png",
+          "/products/mochila-boca-juniors-2.png",
+          "/products/mochila-boca-juniors-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "mochila-racing-club",
+    name: "Mochila Racing Club",
+    category: "Infantil",
+    price: 44000,
+    image: "/products/mochila-racing-club-1.png",
+    colors: [
+      {
+        name: "Azul y Celeste",
+        hex: HEX.Azul,
+        images: [
+          "/products/mochila-racing-club-1.png",
+          "/products/mochila-racing-club-2.png",
+          "/products/mochila-racing-club-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-trendy-celeste",
+    name: "Billetera Chica Trendy",
+    category: "Billetera de mujer",
+    price: 12000,
+    image: "/products/billetera-chica-trendy-celeste-1.png",
+    colors: [
+      {
+        name: "Celeste",
+        hex: "#7fd1cf",
+        images: ["/products/billetera-chica-trendy-celeste-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-trendy-cuadros",
+    name: "Billetera Chica Trendy Cuadros",
+    category: "Billetera de mujer",
+    price: 12000,
+    image: "/products/billetera-chica-trendy-cuadros-verde-1.png",
+    colors: [
+      {
+        name: "Verde Oscuro",
+        hex: HEX.Oliva,
+        images: ["/products/billetera-chica-trendy-cuadros-verde-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-leblu",
+    name: "Billetera Chica Leblu",
+    category: "Billetera de mujer",
+    price: 12000,
+    image: "/products/billetera-chica-leblu-marron-1.png",
+    colors: [
+      {
+        name: "Marrón",
+        hex: HEX.Suela,
+        images: ["/products/billetera-chica-leblu-marron-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-trendy-parche",
+    name: "Billetera Chica Trendy Parche",
+    category: "Billetera de mujer",
+    price: 12000,
+    image: "/products/billetera-chica-trendy-parche-suela-1.png",
+    colors: [
+      {
+        name: "Suela",
+        hex: HEX.Suela,
+        images: ["/products/billetera-chica-trendy-parche-suela-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-trendy-love",
+    name: "Billetera Chica Trendy Love",
+    category: "Billetera de mujer",
+    price: 12000,
+    image: "/products/billetera-chica-trendy-love-suela-1.png",
+    colors: [
+      {
+        name: "Suela",
+        hex: HEX.Suela,
+        images: ["/products/billetera-chica-trendy-love-suela-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-trendy-canelon",
+    name: "Billetera Chica Trendy Canelón",
+    category: "Billetera de mujer",
+    price: 12000,
+    image: "/products/billetera-chica-trendy-canelon-negra-1.png",
+    colors: [
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: ["/products/billetera-chica-trendy-canelon-negra-1.png"],
+      },
+      {
+        name: "Suela",
+        hex: HEX.Suela,
+        images: ["/products/billetera-chica-trendy-canelon-suela-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-amayra",
+    name: "Billetera Chica Amayra",
+    category: "Billetera de mujer",
+    price: 14000,
+    image: "/products/billetera-chica-amayra-marron-1.png",
+    colors: [
+      {
+        name: "Marrón",
+        hex: HEX.Suela,
+        images: ["/products/billetera-chica-amayra-marron-1.png"],
+      },
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: ["/products/billetera-chica-amayra-negra-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-cuadrada-amayra",
+    name: "Billetera Cuadrada Amayra",
+    category: "Billetera de mujer",
+    price: 14000,
+    image: "/products/billetera-cuadrada-amayra-negra-1.png",
+    colors: [
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: ["/products/billetera-cuadrada-amayra-negra-1.png"],
+      },
+      {
+        name: "Marrón",
+        hex: HEX.Suela,
+        images: ["/products/billetera-cuadrada-amayra-marron-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-boton-amayra",
+    name: "Billetera Botón Amayra",
+    category: "Billetera de mujer",
+    price: 17000,
+    image: "/products/billetera-boton-amayra-gris-1.png",
+    colors: [
+      {
+        name: "Gris Oscuro",
+        hex: HEX.Gris,
+        images: ["/products/billetera-boton-amayra-gris-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-chica-mango",
+    name: "Billetera Chica Mango",
+    category: "Billetera de mujer",
+    price: 16000,
+    image: "/products/billetera-chica-mango-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/billetera-chica-mango-negro-1.png",
+          "/products/billetera-chica-mango-negro-2.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "tarjetero",
+    name: "Tarjetero",
+    category: "Billetera de mujer",
+    price: 1200,
+    image: "/products/tarjetero-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: ["/products/tarjetero-negro-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-simple-punteada",
+    name: "Billetera Simple Punteada",
+    category: "Billetera de mujer",
+    price: 17000,
+    image: "/products/billetera-simple-punteada-suela-1.png",
+    colors: [
+      {
+        name: "Suela",
+        hex: HEX.Suela,
+        images: ["/products/billetera-simple-punteada-suela-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-simple-cuadrada",
+    name: "Billetera Simple Cuadrada",
+    category: "Billetera de mujer",
+    price: 17000,
+    image: "/products/billetera-simple-cuadrada-marron-1.png",
+    colors: [
+      {
+        name: "Marrón",
+        hex: HEX.Suela,
+        images: ["/products/billetera-simple-cuadrada-marron-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-simple-bolsillo",
+    name: "Billetera Simple Bolsillo",
+    category: "Billetera de mujer",
+    price: 17000,
+    image: "/products/billetera-simple-bolsillo-negra-1.png",
+    colors: [
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: ["/products/billetera-simple-bolsillo-negra-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-simple-gama",
+    name: "Billetera Simple Gama",
+    category: "Billetera de mujer",
+    price: 17000,
+    image: "/products/billetera-simple-gama-negra-1.png",
+    colors: [
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: ["/products/billetera-simple-gama-negra-1.png"],
+      },
+    ],
+  },
+  {
+    id: "billetera-simple-bcy",
+    name: "Billetera Simple BCY",
+    category: "Billetera de mujer",
+    price: 17000,
+    image: "/products/billetera-simple-bcy-rosa-1.png",
+    colors: [
+      {
+        name: "Rosa",
+        hex: HEX.Rosa,
+        images: [
+          "/products/billetera-simple-bcy-rosa-1.png",
+          "/products/billetera-simple-bcy-rosa-2.png",
+        ],
+      },
+      {
+        name: "Crema",
+        hex: HEX.Crema,
+        images: ["/products/billetera-simple-bcy-crema-1.png"],
+      },
+    ],
+  },
+  {
+    id: "bolso-yoga",
+    name: "Bolso Yoga",
+    category: "Bolsos",
+    price: 30000,
+    image: "/products/bolso-yoga-negro-1.png",
+    description: "Viene con compartimento para zapatillas.",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/bolso-yoga-negro-1.png",
+          "/products/bolso-yoga-negro-2.png",
+          "/products/bolso-yoga-negro-3.png",
+        ],
+      },
+    ],
+  },
+  {
+    id: "bolso-totem",
+    name: "Bolso Totem",
+    category: "Bolsos",
+    price: 27000,
+    image: "/products/bolso-totem-negro-1.png",
+    colors: [
+      {
+        name: "Negro",
+        hex: HEX.Negro,
+        images: [
+          "/products/bolso-totem-negro-1.png",
+          "/products/bolso-totem-negro-2.png",
+          "/products/bolso-totem-negro-3.png",
+        ],
+      },
+    ],
   },
 ];

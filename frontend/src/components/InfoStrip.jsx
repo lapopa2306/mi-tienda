@@ -3,20 +3,20 @@ import { SITE } from "@/data/site";
 
 const ITEMS = [
   {
-    n: "01",
-    title: "Envíos",
-    text: "Hacemos envíos a todo el país por correo. También puntos de entrega en zona sur.",
-  },
+  n: "01",
+  title: "Envíos",
+  text: "Hacemos envíos a todo el país por Correo Argentino y Via Cargo.",
+},
   {
     n: "02",
     title: "Retiro en el local",
     text: `Pasá a ver todo en persona: ${SITE.address}. Te esperamos para que elijas tranquila/o.`,
   },
   {
-    n: "03",
-    title: "Medios de pago",
-    text: "Efectivo, transferencia, tarjetas de débito y crédito.",
-  },
+  n: "03",
+  title: "Medios de pago",
+  text: "Efectivo, transferencia, tarjetas de débito y 3 cuotas sin interés con cualquier tarjeta de crédito.",
+},
 ];
 
 const STEPS = [

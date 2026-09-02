@@ -3,10 +3,12 @@
 # IDE and editors
 .idea/
 .vscode/
+.emergent/
 
 # Dependencies
 node_modules/
 /node_modules
+backend/uploads/
 /.pnp
 .pnp.js
 .yarn/install-state.gz
@@ -32,6 +34,8 @@ dist
 
 # Environment files (comprehensive coverage)
 
+*.env
+*.env.*
 *token.json*
 *credentials.json*
 
@@ -75,6 +79,7 @@ agenthub/agents/youtube/db
 
 # Build caches
 .cache/
+ziS76MHm
 
 memory/test_credentials.md
 

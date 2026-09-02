@@ -9,9 +9,8 @@ export const SITE = {
   address: "Soreda 6180, Wilde",
   heroImage: "/products/hero-mochila.jpg",
   heroAlt: "Mochila negra Off Course",
-  manifestoImage:
-    "https://images.pexels.com/photos/9327162/pexels-photo-9327162.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  manifestoAlt: "Carteras de cuero en exhibición",
+  manifestoImage: "/site/nosotros-mochila-amayra.png",
+  manifestoAlt: "Mochila Amayra en exhibición",
   secondaryImage:
     "https://images.unsplash.com/photo-1645636667214-c4875ef3d59c?q=80&w=1200&auto=format&fit=crop",
 };

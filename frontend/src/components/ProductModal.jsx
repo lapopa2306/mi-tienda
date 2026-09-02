@@ -45,6 +45,7 @@ export default function ProductModal({ product, onClose }) {
           />
           <motion.div
             data-testid="product-modal"
+            data-lenis-prevent
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
@@ -61,7 +62,7 @@ export default function ProductModal({ product, onClose }) {
             </button>
 
             <div className="w-full shrink-0 sm:w-1/2">
-              <div className="relative aspect-[3/4] overflow-hidden bg-smoke">
+              <div className="relative aspect-square overflow-hidden bg-smoke sm:aspect-[3/4]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={mainImage}
@@ -213,3 +214,4 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
+

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import { scrollToHash } from "@/lib/scroll";
 
 const LINKS = [
@@ -12,6 +13,8 @@ const LINKS = [
 
 export default function Nav() {
   const { count, setOpen } = useCart();
+  const { count: favCount, showOnlyFavorites, setShowOnlyFavorites } =
+    useWishlist();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
@@ -54,29 +57,66 @@ export default function Nav() {
           ))}
         </nav>
 
-        <button
-          data-testid="cart-open-button"
-          onClick={() => setOpen(true)}
-          className="relative flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-colors duration-300 hover:bg-ink/85"
-        >
-          <ShoppingBag size={15} strokeWidth={1.5} />
-          <span className="hidden sm:inline">Pedido</span>
-          <AnimatePresence mode="popLayout">
-            {count > 0 && (
-              <motion.span
-                key={count}
-                data-testid="cart-count-badge"
-                initial={{ scale: 0.4, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.4, opacity: 0 }}
-                className="absolute -right-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full bg-blush font-mono text-[11px] text-ink"
-              >
-                {count}
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            data-testid="nav-favorites-button"
+            onClick={(e) => {
+              if (showOnlyFavorites) {
+                setShowOnlyFavorites(false);
+              } else {
+                setShowOnlyFavorites(true);
+                scrollToHash(e, "#catalogo");
+              }
+            }}
+            aria-label={showOnlyFavorites ? "Ver todo el catálogo" : "Ver favoritos"}
+            className="relative flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-300 hover:bg-ink/5"
+          >
+            <Heart
+              size={17}
+              strokeWidth={1.5}
+              className={showOnlyFavorites ? "fill-blush-deep text-blush-deep" : ""}
+            />
+            <AnimatePresence mode="popLayout">
+              {favCount > 0 && (
+                <motion.span
+                  key={favCount}
+                  data-testid="favorites-count-badge"
+                  initial={{ scale: 0.4, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.4, opacity: 0 }}
+                  className="absolute -right-0.5 -top-0.5 grid h-5 w-5 place-items-center rounded-full bg-blush font-mono text-[11px] text-ink"
+                >
+                  {favCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+
+          <button
+            data-testid="cart-open-button"
+            onClick={() => setOpen(true)}
+            className="relative flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm text-paper transition-colors duration-300 hover:bg-ink/85"
+          >
+            <ShoppingBag size={15} strokeWidth={1.5} />
+            <span className="hidden sm:inline">Pedido</span>
+            <AnimatePresence mode="popLayout">
+              {count > 0 && (
+                <motion.span
+                  key={count}
+                  data-testid="cart-count-badge"
+                  initial={{ scale: 0.4, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.4, opacity: 0 }}
+                  className="absolute -right-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full bg-blush font-mono text-[11px] text-ink"
+                >
+                  {count}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
       </div>
     </header>
   );
 }
+

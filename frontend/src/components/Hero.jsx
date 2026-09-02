@@ -80,9 +80,9 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.85, ease: EASE }}
             className="mt-10 max-w-md text-base font-light leading-relaxed text-ink/70 sm:text-lg"
           >
-            Billeteras, mochilas, bolsos y accesorios de cuero, hechos para
-            acompañarte todos los días. Armá tu pedido y coordinamos por
-            WhatsApp.
+            Billeteras, mochilas, bolsos y accesorios, hechos para
+acompañarte todos los días. Armá tu pedido y coordinamos por
+WhatsApp.
           </motion.p>
 
           <motion.div

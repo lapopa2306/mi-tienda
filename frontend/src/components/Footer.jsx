@@ -55,6 +55,15 @@ export default function Footer() {
               <p className="mt-1 text-sm font-light text-paper/60">
                 Avellaneda, Buenos Aires
               </p>
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(SITE.address + ", Avellaneda, Buenos Aires")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="footer-directions-link"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm text-blush transition-colors duration-300 hover:text-paper"
+              >
+                Cómo llegar <ArrowUpRight size={14} />
+              </a>
             </div>
           </Reveal>
           <Reveal delay={0.08}>
@@ -100,6 +109,24 @@ export default function Footer() {
           </Reveal>
         </div>
 
+        <Reveal delay={0.1} className="mt-16">
+          <div
+            data-testid="footer-map"
+            className="overflow-hidden rounded-2xl border border-paper/15"
+          >
+            <iframe
+              title="Ubicación Off Course en el mapa"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.address + ", Avellaneda, Buenos Aires")}&output=embed`}
+              width="100%"
+              height="320"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="grayscale-[20%]"
+            />
+          </div>
+        </Reveal>
+
         <div className="mt-24 flex flex-wrap items-center justify-between gap-4 border-t border-paper/15 pt-8">
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-paper/40">
             © 2026 Off Course — Marroquinería
@@ -112,3 +139,4 @@ export default function Footer() {
     </footer>
   );
 }
+

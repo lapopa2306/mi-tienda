@@ -85,7 +85,7 @@ export function CartProvider({ children }) {
       "",
       `Total estimado: $${fmt(total)}`,
     ].join("\n");
-    return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`;
+    return `https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent(msg)}`;
   }, [items, total]);
 
   const value = {
@@ -108,3 +108,4 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
+
