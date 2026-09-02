@@ -1,4 +1,4 @@
-const U = (id) =>
+ const U = (id) =>
   `https://images.unsplash.com/${id}?q=80&w=1200&auto=format&fit=crop`;
 const P = (id) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
@@ -145,21 +145,6 @@ export const PRODUCTS = [
           "/products/billetera-chica-oreiro-marron-1.png",
           "/products/billetera-chica-oreiro-marron-2.png",
         ],
-      },
-    ],
-  },
-  {
-    id: "neceser-peluche",
-    name: "Neceser Peluche",
-    category: "Neceser",
-    price: 12000,
-    image: "/products/neceser-peluche-fucsia.jpg",
-    description: "Mide 11x20.",
-    colors: [
-      {
-        name: "Fucsia",
-        hex: "#e0218a",
-        images: ["/products/neceser-peluche-fucsia.jpg"],
       },
     ],
   },
@@ -1335,6 +1320,11 @@ export const PRODUCTS = [
         name: "Crema",
         hex: HEX.Crema,
         images: ["/products/billetera-simple-bcy-crema-1.png"],
+      },
+      {
+        name: "Negra",
+        hex: HEX.Negro,
+        images: ["/products/billetera-simple-bcy-negra-1.png"],
       },
     ],
   },
