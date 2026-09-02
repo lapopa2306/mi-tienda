@@ -11,13 +11,25 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { CATEGORIES } from "@/data/products";
-import { Plus, Trash2, ImagePlus, Loader2, ChevronLeft, ChevronRight, X } from "lucide-react";
+import {
+  Plus,
+  Trash2,
+  ImagePlus,
+  Loader2,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  Pencil,
+} from "lucide-react";
 import { toast } from "sonner";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-const emptyColor = () => ({ name: "", hex: "#211e1c", files: [] });
+const uid = () =>
+  window.crypto?.randomUUID ? window.crypto.randomUUID() : `${Date.now()}-${Math.random()}`;
+
+const emptyColor = () => ({ name: "", hex: "#211e1c", images: [] });
 
 function getPassword() {
   return sessionStorage.getItem("admin_pass") || "";
@@ -82,6 +94,7 @@ export default function AdminPanel() {
 }
 
 function ProductForm({ onAuthFail }) {
+  const [editingId, setEditingId] = useState(null);
   const [name, setName] = useState("");
   const [category, setCategory] = useState(CATEGORIES[0]);
   const [price, setPrice] = useState("");
@@ -114,36 +127,72 @@ function ProductForm({ onAuthFail }) {
   const addColor = () => setColors((cs) => [...cs, emptyColor()]);
   const removeColor = (idx) =>
     setColors((cs) => (cs.length > 1 ? cs.filter((_, i) => i !== idx) : cs));
-  const handleFiles = (idx, fileList) =>
-    updateColor(idx, { files: Array.from(fileList || []) });
-  const moveFile = (colorIdx, fileIdx, dir) => {
+
+  // Agrega fotos nuevas a las que ya tenía ese color (no las reemplaza)
+  const handleFiles = (idx, fileList) => {
+    const newItems = Array.from(fileList || []).map((file) => ({
+      id: uid(),
+      kind: "new",
+      file,
+    }));
+    if (newItems.length === 0) return;
+    setColors((cs) =>
+      cs.map((c, i) => (i === idx ? { ...c, images: [...c.images, ...newItems] } : c)),
+    );
+  };
+
+  const moveImage = (colorIdx, imgIdx, dir) => {
     setColors((cs) =>
       cs.map((c, i) => {
         if (i !== colorIdx) return c;
-        const target = fileIdx + dir;
-        if (target < 0 || target >= c.files.length) return c;
-        const files = [...c.files];
-        [files[fileIdx], files[target]] = [files[target], files[fileIdx]];
-        return { ...c, files };
+        const target = imgIdx + dir;
+        if (target < 0 || target >= c.images.length) return c;
+        const images = [...c.images];
+        [images[imgIdx], images[target]] = [images[target], images[imgIdx]];
+        return { ...c, images };
       }),
     );
   };
-  const removeFile = (colorIdx, fileIdx) => {
+
+  const removeImage = (colorIdx, imgIdx) => {
     setColors((cs) =>
       cs.map((c, i) =>
         i === colorIdx
-          ? { ...c, files: c.files.filter((_, fi) => fi !== fileIdx) }
+          ? { ...c, images: c.images.filter((_, fi) => fi !== imgIdx) }
           : c,
       ),
     );
   };
 
   const reset = () => {
+    setEditingId(null);
     setName("");
     setCategory(CATEGORIES[0]);
     setPrice("");
     setDescription("");
     setColors([emptyColor()]);
+  };
+
+  const startEdit = (p) => {
+    setEditingId(p.id);
+    setName(p.name || "");
+    setCategory(p.category || CATEGORIES[0]);
+    setPrice(p.price != null ? String(p.price) : "");
+    setDescription(p.description || "");
+    setColors(
+      p.colors && p.colors.length
+        ? p.colors.map((c) => ({
+            name: c.name || "",
+            hex: c.hex || "#211e1c",
+            images: (c.images || []).map((url) => ({
+              id: uid(),
+              kind: "existing",
+              url,
+            })),
+          }))
+        : [emptyColor()],
+    );
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleAuthError = (err) => {
@@ -156,23 +205,27 @@ function ProductForm({ onAuthFail }) {
     return false;
   };
 
-  const publish = async () => {
+  const save = async () => {
     if (!name.trim()) return toast.error("Poné un nombre para el producto");
     if (!price || Number(price) <= 0) return toast.error("Poné un precio válido");
     if (colors.some((c) => !c.name.trim()))
       return toast.error("Cada color necesita un nombre");
-    if (colors.every((c) => c.files.length === 0))
+    if (colors.every((c) => c.images.length === 0))
       return toast.error("Subí al menos una foto");
 
     setPublishing(true);
     try {
-      // 1. Subimos todas las fotos de cada color
+      // 1. Subimos las fotos nuevas y respetamos las que ya estaban
       const colorsPayload = [];
       for (const c of colors) {
         const urls = [];
-        for (const file of c.files) {
+        for (const item of c.images) {
+          if (item.kind === "existing") {
+            urls.push(item.url);
+            continue;
+          }
           const form = new FormData();
-          form.append("file", file);
+          form.append("file", item.file);
           const { data } = await axios.post(`${API}/upload`, form, {
             headers: { ...authHeaders, "Content-Type": "multipart/form-data" },
           });
@@ -181,24 +234,32 @@ function ProductForm({ onAuthFail }) {
         colorsPayload.push({ name: c.name.trim(), hex: c.hex, images: urls });
       }
 
-      // 2. Creamos el producto ya con las URLs de las fotos subidas
-      await axios.post(
-        `${API}/products`,
-        {
-          name: name.trim(),
-          category,
-          price: Number(price),
-          description: description.trim() || null,
-          colors: colorsPayload,
-        },
-        { headers: authHeaders },
-      );
+      const payload = {
+        name: name.trim(),
+        category,
+        price: Number(price),
+        description: description.trim() || null,
+        colors: colorsPayload,
+      };
 
-      toast.success("Producto publicado. Ya está visible en la página.");
+      // 2. Creamos o actualizamos el producto según corresponda
+      if (editingId) {
+        await axios.put(`${API}/products/${editingId}`, payload, {
+          headers: authHeaders,
+        });
+        toast.success("Producto actualizado.");
+      } else {
+        await axios.post(`${API}/products`, payload, { headers: authHeaders });
+        toast.success("Producto publicado. Ya está visible en la página.");
+      }
+
       reset();
       loadProducts();
     } catch (err) {
-      if (!handleAuthError(err)) toast.error("No se pudo publicar el producto");
+      if (!handleAuthError(err))
+        toast.error(
+          editingId ? "No se pudo actualizar el producto" : "No se pudo publicar el producto",
+        );
     } finally {
       setPublishing(false);
     }
@@ -210,6 +271,7 @@ function ProductForm({ onAuthFail }) {
       await axios.delete(`${API}/products/${id}`, { headers: authHeaders });
       toast.success("Producto eliminado");
       setProducts((ps) => ps.filter((p) => p.id !== id));
+      if (editingId === id) reset();
     } catch (err) {
       if (!handleAuthError(err)) toast.error("No se pudo eliminar");
     }
@@ -219,10 +281,13 @@ function ProductForm({ onAuthFail }) {
     <div className="min-h-screen bg-paper text-ink px-4 py-10">
       <div className="max-w-3xl mx-auto space-y-8">
         <div>
-          <h1 className="text-2xl font-semibold">Cargar producto nuevo</h1>
+          <h1 className="text-2xl font-semibold">
+            {editingId ? "Editar producto" : "Cargar producto nuevo"}
+          </h1>
           <p className="text-sm text-ink/60 mt-1">
-            Completá los datos y las fotos, tocá "Publicar" y el producto aparece
-            en la página al instante. No hace falta tocar ningún código.
+            {editingId
+              ? "Modificá los datos o las fotos y tocá \"Guardar cambios\"."
+              : "Completá los datos y las fotos, tocá \"Publicar\" y el producto aparece en la página al instante. No hace falta tocar ningún código."}
           </p>
         </div>
 
@@ -324,23 +389,30 @@ function ProductForm({ onAuthFail }) {
                   </label>
                   <label className="flex items-center gap-2 border border-dashed border-ink/25 rounded-lg px-3 py-2 cursor-pointer text-sm text-ink/60 hover:border-ink/40 transition-colors">
                     <ImagePlus className="h-4 w-4" />
-                    {c.files.length
-                      ? `${c.files.length} foto(s) seleccionada(s)`
+                    {c.images.length
+                      ? `${c.images.length} foto(s) — tocá para agregar más`
                       : "Elegir fotos"}
                     <input
                       type="file"
                       accept="image/*"
                       multiple
                       className="hidden"
-                      onChange={(e) => handleFiles(idx, e.target.files)}
+                      onChange={(e) => {
+                        handleFiles(idx, e.target.files);
+                        e.target.value = "";
+                      }}
                     />
                   </label>
-                  {c.files.length > 0 && (
+                  {c.images.length > 0 && (
                     <div className="flex gap-2 flex-wrap pt-1">
-                      {c.files.map((f, i) => (
-                        <div key={i} className="relative group/thumb">
+                      {c.images.map((img, i) => (
+                        <div key={img.id} className="relative group/thumb">
                           <img
-                            src={URL.createObjectURL(f)}
+                            src={
+                              img.kind === "existing"
+                                ? img.url
+                                : URL.createObjectURL(img.file)
+                            }
                             alt=""
                             className="h-16 w-16 object-cover rounded-md border border-ink/10"
                           />
@@ -351,7 +423,7 @@ function ProductForm({ onAuthFail }) {
                           )}
                           <button
                             type="button"
-                            onClick={() => removeFile(idx, i)}
+                            onClick={() => removeImage(idx, i)}
                             aria-label="Quitar foto"
                             className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-ink text-paper opacity-0 group-hover/thumb:opacity-100 transition-opacity"
                           >
@@ -361,7 +433,7 @@ function ProductForm({ onAuthFail }) {
                             <button
                               type="button"
                               disabled={i === 0}
-                              onClick={() => moveFile(idx, i, -1)}
+                              onClick={() => moveImage(idx, i, -1)}
                               aria-label="Mover a la izquierda"
                               className="flex h-5 w-5 items-center justify-center rounded-full bg-paper/90 text-ink disabled:opacity-30"
                             >
@@ -369,8 +441,8 @@ function ProductForm({ onAuthFail }) {
                             </button>
                             <button
                               type="button"
-                              disabled={i === c.files.length - 1}
-                              onClick={() => moveFile(idx, i, 1)}
+                              disabled={i === c.images.length - 1}
+                              onClick={() => moveImage(idx, i, 1)}
                               aria-label="Mover a la derecha"
                               className="flex h-5 w-5 items-center justify-center rounded-full bg-paper/90 text-ink disabled:opacity-30"
                             >
@@ -387,17 +459,20 @@ function ProductForm({ onAuthFail }) {
           </div>
 
           <div className="flex gap-3 pt-2">
-            <Button type="button" onClick={publish} disabled={publishing}>
+            <Button type="button" onClick={save} disabled={publishing}>
               {publishing ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" /> Publicando...
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  {editingId ? "Guardando..." : "Publicando..."}
                 </>
+              ) : editingId ? (
+                "Guardar cambios"
               ) : (
                 "Publicar producto"
               )}
             </Button>
             <Button type="button" variant="outline" onClick={reset} disabled={publishing}>
-              Limpiar
+              {editingId ? "Cancelar edición" : "Limpiar"}
             </Button>
           </div>
         </div>
@@ -416,7 +491,12 @@ function ProductForm({ onAuthFail }) {
           ) : (
             <ul className="divide-y divide-ink/10">
               {products.map((p) => (
-                <li key={p.id} className="flex items-center gap-3 py-3">
+                <li
+                  key={p.id}
+                  className={`flex items-center gap-3 py-3 ${
+                    editingId === p.id ? "bg-ink/[0.03] -mx-2 px-2 rounded-lg" : ""
+                  }`}
+                >
                   {p.image && (
                     <img
                       src={p.image}
@@ -434,7 +514,17 @@ function ProductForm({ onAuthFail }) {
                     type="button"
                     variant="ghost"
                     size="icon"
+                    onClick={() => startEdit(p)}
+                    aria-label="Editar producto"
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
                     onClick={() => removeProduct(p.id)}
+                    aria-label="Eliminar producto"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
@@ -447,4 +537,5 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
 
