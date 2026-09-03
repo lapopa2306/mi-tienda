@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, Menu, ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { scrollToHash } from "@/lib/scroll";
@@ -15,6 +16,7 @@ export default function Nav() {
   const { count, setOpen } = useCart();
   const { count: favCount, showOnlyFavorites, setShowOnlyFavorites } =
     useWishlist();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
@@ -114,9 +116,53 @@ export default function Nav() {
               )}
             </AnimatePresence>
           </button>
+
+          <button
+            data-testid="nav-mobile-menu-button"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-ink transition-colors duration-300 hover:bg-ink/5 md:hidden"
+          >
+            {mobileOpen ? (
+              <X size={18} strokeWidth={1.5} />
+            ) : (
+              <Menu size={18} strokeWidth={1.5} />
+            )}
+          </button>
         </div>
       </div>
+
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-t border-ink/5 bg-paper/95 backdrop-blur-xl md:hidden"
+          >
+            <div className="flex flex-col gap-1 px-6 py-4">
+              {LINKS.map((l) => (
+                <a
+                  key={l.hash}
+                  href={l.hash}
+                  data-testid={`${l.testid}-mobile`}
+                  onClick={(e) => {
+                    scrollToHash(e, l.hash);
+                    setMobileOpen(false);
+                  }}
+                  className="py-3 font-mono text-[12px] uppercase tracking-[0.22em] text-ink/70 transition-colors duration-300 hover:text-ink"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
+
+
 
