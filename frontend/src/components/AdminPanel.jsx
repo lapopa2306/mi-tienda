@@ -10,7 +10,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { CATEGORIES } from "@/data/products";
+import { CATEGORIES, PRODUCTS } from "@/data/products";
 import {
   Plus,
   Trash2,
@@ -212,6 +212,17 @@ function ProductForm({ onAuthFail }) {
       return toast.error("Cada color necesita un nombre");
     if (colors.every((c) => c.images.length === 0))
       return toast.error("Subí al menos una foto");
+
+    const normalized = name.trim().toLowerCase();
+    const isDuplicate = [...products, ...PRODUCTS].some(
+      (p) => p.id !== editingId && p.name.trim().toLowerCase() === normalized,
+    );
+    if (isDuplicate) {
+      const confirmed = window.confirm(
+        `Ya existe un producto con este nombre ("${name.trim()}"). ¿Querés publicarlo igual?`,
+      );
+      if (!confirmed) return;
+    }
 
     setPublishing(true);
     try {
@@ -537,5 +548,7 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
+
 
 
