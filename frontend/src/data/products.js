@@ -67,15 +67,15 @@ export const PRODUCTS = [
     name: "Maxi Billetera Trendy",
     category: "Billetera de mujer",
     price: 20000,
-    image: "/products/billetera-maxi-trendy-roja-1.png",
+    image: "/products/billetera-maxi-trendy-roja-1.webp",
     colors: [
       {
         name: "Roja",
         hex: "#e2143a",
         images: [
-          "/products/billetera-maxi-trendy-roja-1.png",
-          "/products/billetera-maxi-trendy-roja-2.png",
-          "/products/billetera-maxi-trendy-roja-3.png",
+          "/products/billetera-maxi-trendy-roja-1.webp",
+          "/products/billetera-maxi-trendy-roja-2.webp",
+          "/products/billetera-maxi-trendy-roja-3.webp",
         ],
       },
     ],
@@ -85,14 +85,14 @@ export const PRODUCTS = [
     name: "Billetera Doble Trendy",
     category: "Billetera de mujer",
     price: 20000,
-    image: "/products/billetera-doble-trendy-marron-1.png",
+    image: "/products/billetera-doble-trendy-marron-1.webp",
     colors: [
       {
         name: "Marrón",
         hex: HEX.Suela,
         images: [
-          "/products/billetera-doble-trendy-marron-1.png",
-          "/products/billetera-doble-trendy-marron-2.png",
+          "/products/billetera-doble-trendy-marron-1.webp",
+          "/products/billetera-doble-trendy-marron-2.webp",
         ],
       },
     ],
@@ -102,14 +102,14 @@ export const PRODUCTS = [
     name: "Billetera Cierre Doble Trendy",
     category: "Billetera de mujer",
     price: 20000,
-    image: "/products/billetera-cierre-doble-trendy-negra-1.png",
+    image: "/products/billetera-cierre-doble-trendy-negra-1.webp",
     colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
         images: [
-          "/products/billetera-cierre-doble-trendy-negra-1.png",
-          "/products/billetera-cierre-doble-trendy-negra-2.png",
+          "/products/billetera-cierre-doble-trendy-negra-1.webp",
+          "/products/billetera-cierre-doble-trendy-negra-2.webp",
         ],
       },
     ],
@@ -119,14 +119,14 @@ export const PRODUCTS = [
     name: "Billetera Simple Ona Saenz",
     category: "Billetera de mujer",
     price: 20000,
-    image: "/products/billetera-simple-ona-saenz-negra-1.png",
+    image: "/products/billetera-simple-ona-saenz-negra-1.webp",
     colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
         images: [
-          "/products/billetera-simple-ona-saenz-negra-1.png",
-          "/products/billetera-simple-ona-saenz-negra-2.png",
+          "/products/billetera-simple-ona-saenz-negra-1.webp",
+          "/products/billetera-simple-ona-saenz-negra-2.webp",
         ],
       },
     ],
@@ -136,14 +136,14 @@ export const PRODUCTS = [
     name: "Billetera Chica Oreiro",
     category: "Billetera de mujer",
     price: 24000,
-    image: "/products/billetera-chica-oreiro-marron-1.png",
+    image: "/products/billetera-chica-oreiro-marron-1.webp",
     colors: [
       {
         name: "Marrón",
         hex: HEX.Suela,
         images: [
-          "/products/billetera-chica-oreiro-marron-1.png",
-          "/products/billetera-chica-oreiro-marron-2.png",
+          "/products/billetera-chica-oreiro-marron-1.webp",
+          "/products/billetera-chica-oreiro-marron-2.webp",
         ],
       },
     ],
@@ -153,14 +153,14 @@ export const PRODUCTS = [
     name: "Neceser PU Amayra",
     category: "Neceser",
     price: 12000,
-    image: "/products/neceser-pu-amayra-1.jpg",
+    image: "/products/neceser-pu-amayra-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/neceser-pu-amayra-1.jpg",
-          "/products/neceser-pu-amayra-2.jpg",
+          "/products/neceser-pu-amayra-1.webp",
+          "/products/neceser-pu-amayra-2.webp",
         ],
       },
     ],
@@ -170,27 +170,27 @@ export const PRODUCTS = [
     name: "Neceser Animal Print",
     category: "Neceser",
     price: 12000,
-    image: "/products/neceser-animal-print-rosa.png",
+    image: "/products/neceser-animal-print-rosa.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/neceser-animal-print-rosa.png"],
+        images: ["/products/neceser-animal-print-rosa.webp"],
       },
       {
         name: "Verde",
         hex: "#a8b89a",
-        images: ["/products/neceser-animal-print-verde.png"],
+        images: ["/products/neceser-animal-print-verde.webp"],
       },
       {
         name: "Crema",
         hex: HEX.Crema,
-        images: ["/products/neceser-animal-print-crema.png"],
+        images: ["/products/neceser-animal-print-crema.webp"],
       },
       {
         name: "Negro",
         hex: HEX.Negro,
-        images: ["/products/neceser-animal-print-negro.png"],
+        images: ["/products/neceser-animal-print-negro.webp"],
       },
     ],
   },
@@ -199,32 +199,32 @@ export const PRODUCTS = [
     name: "Neceser Pratys",
     category: "Neceser",
     price: 12000,
-    image: "/products/neceser-pratys-rosa.png",
+    image: "/products/neceser-pratys-rosa.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/neceser-pratys-rosa.png"],
+        images: ["/products/neceser-pratys-rosa.webp"],
       },
       {
         name: "Rojo",
         hex: "#c81d3f",
-        images: ["/products/neceser-pratys-rojo.png"],
+        images: ["/products/neceser-pratys-rojo.webp"],
       },
       {
         name: "Verde",
         hex: "#a8b89a",
-        images: ["/products/neceser-pratys-verde.png"],
+        images: ["/products/neceser-pratys-verde.webp"],
       },
       {
         name: "Negro",
         hex: HEX.Negro,
-        images: ["/products/neceser-pratys-negro.png"],
+        images: ["/products/neceser-pratys-negro.webp"],
       },
       {
         name: "Crema",
         hex: HEX.Crema,
-        images: ["/products/neceser-pratys-crema.png"],
+        images: ["/products/neceser-pratys-crema.webp"],
       },
     ],
   },
@@ -233,15 +233,15 @@ export const PRODUCTS = [
     name: "Neceser Oreiro",
     category: "Neceser",
     price: 19000,
-    image: "/products/neceser-oreiro-negro-1.png",
+    image: "/products/neceser-oreiro-negro-1.webp",
     description: "Fabricado en PU.",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/neceser-oreiro-negro-1.png",
-          "/products/neceser-oreiro-negro-2.png",
+          "/products/neceser-oreiro-negro-1.webp",
+          "/products/neceser-oreiro-negro-2.webp",
         ],
       },
     ],
@@ -251,21 +251,21 @@ export const PRODUCTS = [
     name: "Neceser Triple Amayra",
     category: "Neceser",
     price: 18000,
-    image: "/products/neceser-triple-amayra-negro-1.png",
+    image: "/products/neceser-triple-amayra-negro-1.webp",
     description: "Set de 3 neceseres, ideal para viaje.",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/neceser-triple-amayra-negro-1.png",
-          "/products/neceser-triple-amayra-negro-2.png",
+          "/products/neceser-triple-amayra-negro-1.webp",
+          "/products/neceser-triple-amayra-negro-2.webp",
         ],
       },
       {
         name: "Verde agua",
         hex: "#c3d6cf",
-        images: ["/products/neceser-triple-amayra-verde-agua.png"],
+        images: ["/products/neceser-triple-amayra-verde-agua.webp"],
       },
     ],
   },
@@ -274,7 +274,7 @@ export const PRODUCTS = [
     name: "Neceser Triple Trendy",
     category: "Neceser",
     price: 26400,
-    image: "/products/neceser-triple-trendy.jpg",
+    image: "/products/neceser-triple-trendy.webp",
     description: "Set de 3 neceseres, ideal para viaje.",
   },
   {
@@ -282,7 +282,7 @@ export const PRODUCTS = [
     name: "Riño Maxi",
     category: "Riñoneras",
     price: 17000,
-    image: "/products/rinonera-maxi-negro-1.png",
+    image: "/products/rinonera-maxi-negro-1.webp",
     description:
       "Fabricada en cordura, cuenta con 2 compartimentos. Mide 18x33.",
     colors: [
@@ -290,8 +290,8 @@ export const PRODUCTS = [
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/rinonera-maxi-negro-1.png",
-          "/products/rinonera-maxi-negro-2.png",
+          "/products/rinonera-maxi-negro-1.webp",
+          "/products/rinonera-maxi-negro-2.webp",
         ],
       },
     ],
@@ -301,13 +301,13 @@ export const PRODUCTS = [
     name: "Riño Oreiro",
     category: "Riñoneras",
     price: 43000,
-    image: "/products/rinonera-oreiro-suela.png",
+    image: "/products/rinonera-oreiro-suela.webp",
     description: "Fabricada en PU.",
     colors: [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/rinonera-oreiro-suela.png"],
+        images: ["/products/rinonera-oreiro-suela.webp"],
       },
     ],
   },
@@ -316,13 +316,13 @@ export const PRODUCTS = [
     name: "Riño Trendy Flecha",
     category: "Riñoneras",
     price: 35000,
-    image: "/products/rinonera-trendy-flecha-crema.png",
+    image: "/products/rinonera-trendy-flecha-crema.webp",
     description: "Fabricada en PU liso.",
     colors: [
       {
         name: "Crema",
         hex: HEX.Crema,
-        images: ["/products/rinonera-trendy-flecha-crema.png"],
+        images: ["/products/rinonera-trendy-flecha-crema.webp"],
       },
     ],
   },
@@ -331,12 +331,12 @@ export const PRODUCTS = [
     name: "Riño Engomada",
     category: "Riñoneras",
     price: 14000,
-    image: "/products/rinonera-engomada-negro.png",
+    image: "/products/rinonera-engomada-negro.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
-        images: ["/products/rinonera-engomada-negro.png"],
+        images: ["/products/rinonera-engomada-negro.webp"],
       },
     ],
   },
@@ -345,12 +345,12 @@ export const PRODUCTS = [
     name: "Riño Cordón",
     category: "Riñoneras",
     price: 14000,
-    image: "/products/rinonera-cordon-negro.png",
+    image: "/products/rinonera-cordon-negro.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
-        images: ["/products/rinonera-cordon-negro.png"],
+        images: ["/products/rinonera-cordon-negro.webp"],
       },
     ],
   },
@@ -359,14 +359,14 @@ export const PRODUCTS = [
     name: "Riño Engomada Rayas",
     category: "Riñoneras",
     price: 14000,
-    image: "/products/rinonera-engomada-rayas-negro-1.png",
+    image: "/products/rinonera-engomada-rayas-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/rinonera-engomada-rayas-negro-1.png",
-          "/products/rinonera-engomada-rayas-negro-2.png",
+          "/products/rinonera-engomada-rayas-negro-1.webp",
+          "/products/rinonera-engomada-rayas-negro-2.webp",
         ],
       },
     ],
@@ -376,14 +376,14 @@ export const PRODUCTS = [
     name: "Morral Cruzado Amy",
     category: "Morrales",
     price: 20000,
-    image: "/products/morral-cruzado-amy-negro-1.png",
+    image: "/products/morral-cruzado-amy-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/morral-cruzado-amy-negro-1.png",
-          "/products/morral-cruzado-amy-negro-2.png",
+          "/products/morral-cruzado-amy-negro-1.webp",
+          "/products/morral-cruzado-amy-negro-2.webp",
         ],
       },
     ],
@@ -393,14 +393,14 @@ export const PRODUCTS = [
     name: "Morral Cruzado",
     category: "Morrales",
     price: 20000,
-    image: "/products/morral-cruzado-negro-1.png",
+    image: "/products/morral-cruzado-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/morral-cruzado-negro-1.png",
-          "/products/morral-cruzado-negro-2.png",
+          "/products/morral-cruzado-negro-1.webp",
+          "/products/morral-cruzado-negro-2.webp",
         ],
       },
     ],
@@ -410,14 +410,14 @@ export const PRODUCTS = [
     name: "Morral Independiente",
     category: "Morrales",
     price: 38000,
-    image: "/products/morral-independiente-1.png",
+    image: "/products/morral-independiente-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/morral-independiente-1.png",
-          "/products/morral-independiente-2.png",
+          "/products/morral-independiente-1.webp",
+          "/products/morral-independiente-2.webp",
         ],
       },
     ],
@@ -427,14 +427,14 @@ export const PRODUCTS = [
     name: "Morral Boca Juniors",
     category: "Morrales",
     price: 38000,
-    image: "/products/morral-boca-juniors-1.png",
+    image: "/products/morral-boca-juniors-1.webp",
     colors: [
       {
         name: "Azul y amarillo",
         hex: "#1f4aa8",
         images: [
-          "/products/morral-boca-juniors-1.png",
-          "/products/morral-boca-juniors-2.png",
+          "/products/morral-boca-juniors-1.webp",
+          "/products/morral-boca-juniors-2.webp",
         ],
       },
     ],
@@ -444,14 +444,14 @@ export const PRODUCTS = [
     name: "Morral Racing Club",
     category: "Morrales",
     price: 38000,
-    image: "/products/morral-racing-club-1.png",
+    image: "/products/morral-racing-club-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/morral-racing-club-1.png",
-          "/products/morral-racing-club-2.png",
+          "/products/morral-racing-club-1.webp",
+          "/products/morral-racing-club-2.webp",
         ],
       },
     ],
@@ -461,14 +461,14 @@ export const PRODUCTS = [
     name: "Morral River Plate",
     category: "Morrales",
     price: 38000,
-    image: "/products/morral-river-plate-1.png",
+    image: "/products/morral-river-plate-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/morral-river-plate-1.png",
-          "/products/morral-river-plate-2.png",
+          "/products/morral-river-plate-1.webp",
+          "/products/morral-river-plate-2.webp",
         ],
       },
     ],
@@ -478,14 +478,14 @@ export const PRODUCTS = [
     name: "Portacelular BCY",
     category: "Portacelulares",
     price: 27000,
-    image: "/products/portacelular-bcy-negro-1.png",
+    image: "/products/portacelular-bcy-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/portacelular-bcy-negro-1.png",
-          "/products/portacelular-bcy-negro-2.png",
+          "/products/portacelular-bcy-negro-1.webp",
+          "/products/portacelular-bcy-negro-2.webp",
         ],
       },
     ],
@@ -495,14 +495,14 @@ export const PRODUCTS = [
     name: "Portacelular Oreiro",
     category: "Portacelulares",
     price: 32000,
-    image: "/products/portacelular-oreiro-rojo-1.png",
+    image: "/products/portacelular-oreiro-rojo-1.webp",
     colors: [
       {
         name: "Rojo",
         hex: "#e2143a",
         images: [
-          "/products/portacelular-oreiro-rojo-1.png",
-          "/products/portacelular-oreiro-rojo-2.png",
+          "/products/portacelular-oreiro-rojo-1.webp",
+          "/products/portacelular-oreiro-rojo-2.webp",
         ],
       },
     ],
@@ -512,15 +512,15 @@ export const PRODUCTS = [
     name: "Mochila Urbana Hombre",
     category: "Mochilas",
     price: 46000,
-    image: "/products/mochila-urbana-hombre-negro-1.png",
+    image: "/products/mochila-urbana-hombre-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/mochila-urbana-hombre-negro-1.png",
-          "/products/mochila-urbana-hombre-negro-2.png",
-          "/products/mochila-urbana-hombre-negro-3.png",
+          "/products/mochila-urbana-hombre-negro-1.webp",
+          "/products/mochila-urbana-hombre-negro-2.webp",
+          "/products/mochila-urbana-hombre-negro-3.webp",
         ],
       },
     ],
@@ -530,15 +530,15 @@ export const PRODUCTS = [
     name: "Mochila PU Trendy",
     category: "Mochilas",
     price: 58000,
-    image: "/products/mochila-pu-trendy-negro-1.png",
+    image: "/products/mochila-pu-trendy-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/mochila-pu-trendy-negro-1.png",
-          "/products/mochila-pu-trendy-negro-2.png",
-          "/products/mochila-pu-trendy-negro-3.png",
+          "/products/mochila-pu-trendy-negro-1.webp",
+          "/products/mochila-pu-trendy-negro-2.webp",
+          "/products/mochila-pu-trendy-negro-3.webp",
         ],
       },
     ],
@@ -548,15 +548,15 @@ export const PRODUCTS = [
     name: "Mochila Bolso",
     category: "Mochilas",
     price: 44000,
-    image: "/products/mochila-bolso-negro-1.png",
+    image: "/products/mochila-bolso-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/mochila-bolso-negro-1.png",
-          "/products/mochila-bolso-negro-2.png",
-          "/products/mochila-bolso-negro-3.png",
+          "/products/mochila-bolso-negro-1.webp",
+          "/products/mochila-bolso-negro-2.webp",
+          "/products/mochila-bolso-negro-3.webp",
         ],
       },
     ],
@@ -566,15 +566,15 @@ export const PRODUCTS = [
     name: "Mochila Urbana Travel Tech",
     category: "Mochilas",
     price: 49000,
-    image: "/products/mochila-urbana-travel-tech-negro-1.png",
+    image: "/products/mochila-urbana-travel-tech-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/mochila-urbana-travel-tech-negro-1.png",
-          "/products/mochila-urbana-travel-tech-negro-2.png",
-          "/products/mochila-urbana-travel-tech-negro-3.png",
+          "/products/mochila-urbana-travel-tech-negro-1.webp",
+          "/products/mochila-urbana-travel-tech-negro-2.webp",
+          "/products/mochila-urbana-travel-tech-negro-3.webp",
         ],
       },
     ],
@@ -584,14 +584,14 @@ export const PRODUCTS = [
     name: "Mochila Deportiva Trendy",
     category: "Mochilas",
     price: 44000,
-    image: "/products/mochila-deportiva-trendy-azul-1.png",
+    image: "/products/mochila-deportiva-trendy-azul-1.webp",
     colors: [
       {
         name: "Azul",
         hex: HEX.Azul,
         images: [
-          "/products/mochila-deportiva-trendy-azul-1.png",
-          "/products/mochila-deportiva-trendy-azul-2.png",
+          "/products/mochila-deportiva-trendy-azul-1.webp",
+          "/products/mochila-deportiva-trendy-azul-2.webp",
         ],
       },
     ],
@@ -601,16 +601,16 @@ export const PRODUCTS = [
     name: "Mochila Everlast",
     category: "Mochilas",
     price: 50000,
-    image: "/products/mochila-everlast-gris-1.png",
+    image: "/products/mochila-everlast-gris-1.webp",
     description: "Fabricada en PU.",
     colors: [
       {
         name: "Gris",
         hex: HEX.Gris,
         images: [
-          "/products/mochila-everlast-gris-1.png",
-          "/products/mochila-everlast-gris-2.png",
-          "/products/mochila-everlast-gris-3.png",
+          "/products/mochila-everlast-gris-1.webp",
+          "/products/mochila-everlast-gris-2.webp",
+          "/products/mochila-everlast-gris-3.webp",
         ],
       },
     ],
@@ -620,14 +620,14 @@ export const PRODUCTS = [
     name: "Portacelular Oreiro Tachas",
     category: "Portacelulares",
     price: 38000,
-    image: "/products/portacelular-oreiro-tachas-negro-1.png",
+    image: "/products/portacelular-oreiro-tachas-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/portacelular-oreiro-tachas-negro-1.png",
-          "/products/portacelular-oreiro-tachas-negro-2.png",
+          "/products/portacelular-oreiro-tachas-negro-1.webp",
+          "/products/portacelular-oreiro-tachas-negro-2.webp",
         ],
       },
     ],
@@ -637,14 +637,14 @@ export const PRODUCTS = [
     name: "Portacelular PU",
     category: "Portacelulares",
     price: 38000,
-    image: "/products/portacelular-pu-negro-1.png",
+    image: "/products/portacelular-pu-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/portacelular-pu-negro-1.png",
-          "/products/portacelular-pu-negro-2.png",
+          "/products/portacelular-pu-negro-1.webp",
+          "/products/portacelular-pu-negro-2.webp",
         ],
       },
     ],
@@ -654,15 +654,15 @@ export const PRODUCTS = [
     name: "Bandolera BCY",
     category: "Bandoleras",
     price: 19000,
-    image: "/products/bandolera-bcy-negro-1.png",
+    image: "/products/bandolera-bcy-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/bandolera-bcy-negro-1.png",
-          "/products/bandolera-bcy-negro-2.png",
-          "/products/bandolera-bcy-negro-3.png",
+          "/products/bandolera-bcy-negro-1.webp",
+          "/products/bandolera-bcy-negro-2.webp",
+          "/products/bandolera-bcy-negro-3.webp",
         ],
       },
     ],
@@ -672,16 +672,16 @@ export const PRODUCTS = [
     name: "Bandolera Triple",
     category: "Bandoleras",
     price: 34000,
-    image: "/products/bandolera-triple-3.jpg",
+    image: "/products/bandolera-triple-3.webp",
     description: "Mide 15x19, fabricada en PU.",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/bandolera-triple-3.jpg",
-          "/products/bandolera-triple-1.jpg",
-          "/products/bandolera-triple-2.jpg",
+          "/products/bandolera-triple-3.webp",
+          "/products/bandolera-triple-1.webp",
+          "/products/bandolera-triple-2.webp",
         ],
       },
     ],
@@ -691,7 +691,7 @@ export const PRODUCTS = [
     name: "Bolso Deportivo",
     category: "Bolsos",
     price: 35000,
-    image: "/products/bolso-deportivo-1.jpg",
+    image: "/products/bolso-deportivo-1.webp",
     description:
       "Mide 27x50, fabricado en tela engomada, cuenta con compartimento para zapatillas.",
     colors: [
@@ -699,8 +699,8 @@ export const PRODUCTS = [
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/bolso-deportivo-1.jpg",
-          "/products/bolso-deportivo-2.jpg",
+          "/products/bolso-deportivo-1.webp",
+          "/products/bolso-deportivo-2.webp",
         ],
       },
     ],
@@ -710,17 +710,17 @@ export const PRODUCTS = [
     name: "Bolso de Viaje",
     category: "Bolsos",
     price: 35000,
-    image: "/products/bolso-viaje-1.jpg",
+    image: "/products/bolso-viaje-1.webp",
     description: "Mide 26x38.",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/bolso-viaje-1.jpg",
-          "/products/bolso-viaje-2.jpg",
-          "/products/bolso-viaje-3.jpg",
-          "/products/bolso-viaje-4.jpg",
+          "/products/bolso-viaje-1.webp",
+          "/products/bolso-viaje-2.webp",
+          "/products/bolso-viaje-3.webp",
+          "/products/bolso-viaje-4.webp",
         ],
       },
     ],
@@ -730,15 +730,15 @@ export const PRODUCTS = [
     name: "Cartuchera River Plate",
     category: "Cartucheras",
     price: 20000,
-    image: "/products/cartuchera-river-plate-1.png",
+    image: "/products/cartuchera-river-plate-1.webp",
     colors: [
       {
         name: "Negro y Rojo",
         hex: HEX.Negro,
         images: [
-          "/products/cartuchera-river-plate-1.png",
-          "/products/cartuchera-river-plate-2.png",
-          "/products/cartuchera-river-plate-3.png",
+          "/products/cartuchera-river-plate-1.webp",
+          "/products/cartuchera-river-plate-2.webp",
+          "/products/cartuchera-river-plate-3.webp",
         ],
       },
     ],
@@ -748,12 +748,12 @@ export const PRODUCTS = [
     name: "Cartuchera Independiente",
     category: "Cartucheras",
     price: 20000,
-    image: "/products/cartuchera-independiente.png",
+    image: "/products/cartuchera-independiente.webp",
     colors: [
       {
         name: "Rojo",
         hex: "#c81d3f",
-        images: ["/products/cartuchera-independiente.png"],
+        images: ["/products/cartuchera-independiente.webp"],
       },
     ],
   },
@@ -762,12 +762,12 @@ export const PRODUCTS = [
     name: "Cartuchera Boca Juniors",
     category: "Cartucheras",
     price: 20000,
-    image: "/products/cartuchera-boca-juniors.png",
+    image: "/products/cartuchera-boca-juniors.webp",
     colors: [
       {
         name: "Azul y Amarillo",
         hex: HEX.Azul,
-        images: ["/products/cartuchera-boca-juniors.png"],
+        images: ["/products/cartuchera-boca-juniors.webp"],
       },
     ],
   },
@@ -776,14 +776,14 @@ export const PRODUCTS = [
     name: "Cartuchera Racing Club",
     category: "Cartucheras",
     price: 20000,
-    image: "/products/cartuchera-racing-1.png",
+    image: "/products/cartuchera-racing-1.webp",
     colors: [
       {
         name: "Azul y Celeste",
         hex: HEX.Azul,
         images: [
-          "/products/cartuchera-racing-1.png",
-          "/products/cartuchera-racing-2.png",
+          "/products/cartuchera-racing-1.webp",
+          "/products/cartuchera-racing-2.webp",
         ],
       },
     ],
@@ -793,12 +793,12 @@ export const PRODUCTS = [
     name: "Cartuchera Rígida",
     category: "Infantil",
     price: 14000,
-    image: "/products/cartuchera-rigida-autos-1.png",
+    image: "/products/cartuchera-rigida-autos-1.webp",
     colors: [
       {
         name: "Rojo y Azul",
         hex: "#c81d3f",
-        images: ["/products/cartuchera-rigida-autos-1.png"],
+        images: ["/products/cartuchera-rigida-autos-1.webp"],
       },
     ],
   },
@@ -807,14 +807,14 @@ export const PRODUCTS = [
     name: "Cartuchera Spider-Man Triple",
     category: "Infantil",
     price: 26000,
-    image: "/products/cartuchera-spiderman-triple-1.png",
+    image: "/products/cartuchera-spiderman-triple-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/cartuchera-spiderman-triple-1.png",
-          "/products/cartuchera-spiderman-triple-2.png",
+          "/products/cartuchera-spiderman-triple-1.webp",
+          "/products/cartuchera-spiderman-triple-2.webp",
         ],
       },
     ],
@@ -824,14 +824,14 @@ export const PRODUCTS = [
     name: "Cartuchera Spider-Man",
     category: "Infantil",
     price: 29000,
-    image: "/products/cartuchera-spiderman-1.png",
+    image: "/products/cartuchera-spiderman-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/cartuchera-spiderman-1.png",
-          "/products/cartuchera-spiderman-2.png",
+          "/products/cartuchera-spiderman-1.webp",
+          "/products/cartuchera-spiderman-2.webp",
         ],
       },
     ],
@@ -841,12 +841,12 @@ export const PRODUCTS = [
     name: "Mochi Labubu",
     category: "Infantil",
     price: 33000,
-    image: "/products/mochi-labubu-1.png",
+    image: "/products/mochi-labubu-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/mochi-labubu-1.png"],
+        images: ["/products/mochi-labubu-1.webp"],
       },
     ],
   },
@@ -855,12 +855,12 @@ export const PRODUCTS = [
     name: "Mochi Play",
     category: "Infantil",
     price: 33000,
-    image: "/products/mochi-play-1.png",
+    image: "/products/mochi-play-1.webp",
     colors: [
       {
         name: "Azul",
         hex: HEX.Azul,
-        images: ["/products/mochi-play-1.png"],
+        images: ["/products/mochi-play-1.webp"],
       },
     ],
   },
@@ -869,12 +869,12 @@ export const PRODUCTS = [
     name: "Mochi Rainbow",
     category: "Infantil",
     price: 33000,
-    image: "/products/mochi-rainbow-1.png",
+    image: "/products/mochi-rainbow-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/mochi-rainbow-1.png"],
+        images: ["/products/mochi-rainbow-1.webp"],
       },
     ],
   },
@@ -883,12 +883,12 @@ export const PRODUCTS = [
     name: "Mochi Galaxia",
     category: "Infantil",
     price: 33000,
-    image: "/products/mochi-galaxia-1.png",
+    image: "/products/mochi-galaxia-1.webp",
     colors: [
       {
         name: "Azul",
         hex: HEX.Azul,
-        images: ["/products/mochi-galaxia-1.png"],
+        images: ["/products/mochi-galaxia-1.webp"],
       },
     ],
   },
@@ -897,12 +897,12 @@ export const PRODUCTS = [
     name: "Mochi Game Over",
     category: "Infantil",
     price: 26000,
-    image: "/products/mochi-gameover-1.png",
+    image: "/products/mochi-gameover-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
-        images: ["/products/mochi-gameover-1.png"],
+        images: ["/products/mochi-gameover-1.webp"],
       },
     ],
   },
@@ -911,12 +911,12 @@ export const PRODUCTS = [
     name: "Mochi Helado",
     category: "Infantil",
     price: 26000,
-    image: "/products/mochi-helado-1.png",
+    image: "/products/mochi-helado-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/mochi-helado-1.png"],
+        images: ["/products/mochi-helado-1.webp"],
       },
     ],
   },
@@ -925,12 +925,12 @@ export const PRODUCTS = [
     name: "Mochi Gatito",
     category: "Infantil",
     price: 30000,
-    image: "/products/mochi-gatito-1.png",
+    image: "/products/mochi-gatito-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/mochi-gatito-1.png"],
+        images: ["/products/mochi-gatito-1.webp"],
       },
     ],
   },
@@ -939,15 +939,15 @@ export const PRODUCTS = [
     name: "Cartuchera Triple",
     category: "Infantil",
     price: 24000,
-    image: "/products/cartuchera-triple-1.png",
+    image: "/products/cartuchera-triple-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
         images: [
-          "/products/cartuchera-triple-1.png",
-          "/products/cartuchera-triple-2.png",
-          "/products/cartuchera-triple-3.png",
+          "/products/cartuchera-triple-1.webp",
+          "/products/cartuchera-triple-2.webp",
+          "/products/cartuchera-triple-3.webp",
         ],
       },
     ],
@@ -957,16 +957,16 @@ export const PRODUCTS = [
     name: "Cartuchera Bandolera Chimola",
     category: "Infantil",
     price: 37000,
-    image: "/products/cartuchera-bandolera-chimola-1.png",
+    image: "/products/cartuchera-bandolera-chimola-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
         images: [
-          "/products/cartuchera-bandolera-chimola-1.png",
-          "/products/cartuchera-bandolera-chimola-2.png",
-          "/products/cartuchera-bandolera-chimola-3.png",
-          "/products/cartuchera-bandolera-chimola-4.png",
+          "/products/cartuchera-bandolera-chimola-1.webp",
+          "/products/cartuchera-bandolera-chimola-2.webp",
+          "/products/cartuchera-bandolera-chimola-3.webp",
+          "/products/cartuchera-bandolera-chimola-4.webp",
         ],
       },
     ],
@@ -976,14 +976,14 @@ export const PRODUCTS = [
     name: "Cartuchera Pony Rígida",
     category: "Infantil",
     price: 22000,
-    image: "/products/cartuchera-pony-rigida-1.png",
+    image: "/products/cartuchera-pony-rigida-1.webp",
     colors: [
       {
         name: "Verde",
         hex: "#5fc9b8",
         images: [
-          "/products/cartuchera-pony-rigida-1.png",
-          "/products/cartuchera-pony-rigida-2.png",
+          "/products/cartuchera-pony-rigida-1.webp",
+          "/products/cartuchera-pony-rigida-2.webp",
         ],
       },
     ],
@@ -993,14 +993,14 @@ export const PRODUCTS = [
     name: "Lunchera Trendy",
     category: "Infantil",
     price: 32000,
-    image: "/products/lunchera-trendy-1.png",
+    image: "/products/lunchera-trendy-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
         images: [
-          "/products/lunchera-trendy-1.png",
-          "/products/lunchera-trendy-2.png",
+          "/products/lunchera-trendy-1.webp",
+          "/products/lunchera-trendy-2.webp",
         ],
       },
     ],
@@ -1010,12 +1010,12 @@ export const PRODUCTS = [
     name: "Mochila Jardín Minnie",
     category: "Infantil",
     price: 38000,
-    image: "/products/mochila-jardin-minnie-1.png",
+    image: "/products/mochila-jardin-minnie-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
-        images: ["/products/mochila-jardin-minnie-1.png"],
+        images: ["/products/mochila-jardin-minnie-1.webp"],
       },
     ],
   },
@@ -1024,15 +1024,15 @@ export const PRODUCTS = [
     name: "Mochila Boca Juniors",
     category: "Infantil",
     price: 44000,
-    image: "/products/mochila-boca-juniors-1.png",
+    image: "/products/mochila-boca-juniors-1.webp",
     colors: [
       {
         name: "Azul y Amarillo",
         hex: HEX.Azul,
         images: [
-          "/products/mochila-boca-juniors-1.png",
-          "/products/mochila-boca-juniors-2.png",
-          "/products/mochila-boca-juniors-3.png",
+          "/products/mochila-boca-juniors-1.webp",
+          "/products/mochila-boca-juniors-2.webp",
+          "/products/mochila-boca-juniors-3.webp",
         ],
       },
     ],
@@ -1042,15 +1042,15 @@ export const PRODUCTS = [
     name: "Mochila Racing Club",
     category: "Infantil",
     price: 44000,
-    image: "/products/mochila-racing-club-1.png",
+    image: "/products/mochila-racing-club-1.webp",
     colors: [
       {
         name: "Azul y Celeste",
         hex: HEX.Azul,
         images: [
-          "/products/mochila-racing-club-1.png",
-          "/products/mochila-racing-club-2.png",
-          "/products/mochila-racing-club-3.png",
+          "/products/mochila-racing-club-1.webp",
+          "/products/mochila-racing-club-2.webp",
+          "/products/mochila-racing-club-3.webp",
         ],
       },
     ],
@@ -1060,12 +1060,12 @@ export const PRODUCTS = [
     name: "Billetera Chica Trendy",
     category: "Billetera de mujer",
     price: 12000,
-    image: "/products/billetera-chica-trendy-celeste-1.png",
+    image: "/products/billetera-chica-trendy-celeste-1.webp",
     colors: [
       {
         name: "Celeste",
         hex: "#7fd1cf",
-        images: ["/products/billetera-chica-trendy-celeste-1.png"],
+        images: ["/products/billetera-chica-trendy-celeste-1.webp"],
       },
     ],
   },
@@ -1074,12 +1074,12 @@ export const PRODUCTS = [
     name: "Billetera Chica Trendy Cuadros",
     category: "Billetera de mujer",
     price: 12000,
-    image: "/products/billetera-chica-trendy-cuadros-verde-1.png",
+    image: "/products/billetera-chica-trendy-cuadros-verde-1.webp",
     colors: [
       {
         name: "Verde Oscuro",
         hex: HEX.Oliva,
-        images: ["/products/billetera-chica-trendy-cuadros-verde-1.png"],
+        images: ["/products/billetera-chica-trendy-cuadros-verde-1.webp"],
       },
     ],
   },
@@ -1088,12 +1088,12 @@ export const PRODUCTS = [
     name: "Billetera Chica Leblu",
     category: "Billetera de mujer",
     price: 12000,
-    image: "/products/billetera-chica-leblu-marron-1.png",
+    image: "/products/billetera-chica-leblu-marron-1.webp",
     colors: [
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-leblu-marron-1.png"],
+        images: ["/products/billetera-chica-leblu-marron-1.webp"],
       },
     ],
   },
@@ -1102,12 +1102,12 @@ export const PRODUCTS = [
     name: "Billetera Chica Trendy Parche",
     category: "Billetera de mujer",
     price: 12000,
-    image: "/products/billetera-chica-trendy-parche-suela-1.png",
+    image: "/products/billetera-chica-trendy-parche-suela-1.webp",
     colors: [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-trendy-parche-suela-1.png"],
+        images: ["/products/billetera-chica-trendy-parche-suela-1.webp"],
       },
     ],
   },
@@ -1116,12 +1116,12 @@ export const PRODUCTS = [
     name: "Billetera Chica Trendy Love",
     category: "Billetera de mujer",
     price: 12000,
-    image: "/products/billetera-chica-trendy-love-suela-1.png",
+    image: "/products/billetera-chica-trendy-love-suela-1.webp",
     colors: [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-trendy-love-suela-1.png"],
+        images: ["/products/billetera-chica-trendy-love-suela-1.webp"],
       },
     ],
   },
@@ -1130,17 +1130,17 @@ export const PRODUCTS = [
     name: "Billetera Chica Trendy Canelón",
     category: "Billetera de mujer",
     price: 12000,
-    image: "/products/billetera-chica-trendy-canelon-negra-1.png",
+    image: "/products/billetera-chica-trendy-canelon-negra-1.webp",
     colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-chica-trendy-canelon-negra-1.png"],
+        images: ["/products/billetera-chica-trendy-canelon-negra-1.webp"],
       },
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-trendy-canelon-suela-1.png"],
+        images: ["/products/billetera-chica-trendy-canelon-suela-1.webp"],
       },
     ],
   },
@@ -1149,17 +1149,17 @@ export const PRODUCTS = [
     name: "Billetera Chica Amayra",
     category: "Billetera de mujer",
     price: 14000,
-    image: "/products/billetera-chica-amayra-marron-1.png",
+    image: "/products/billetera-chica-amayra-marron-1.webp",
     colors: [
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-amayra-marron-1.png"],
+        images: ["/products/billetera-chica-amayra-marron-1.webp"],
       },
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-chica-amayra-negra-1.png"],
+        images: ["/products/billetera-chica-amayra-negra-1.webp"],
       },
     ],
   },
@@ -1168,17 +1168,17 @@ export const PRODUCTS = [
     name: "Billetera Cuadrada Amayra",
     category: "Billetera de mujer",
     price: 14000,
-    image: "/products/billetera-cuadrada-amayra-negra-1.png",
+    image: "/products/billetera-cuadrada-amayra-negra-1.webp",
     colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-cuadrada-amayra-negra-1.png"],
+        images: ["/products/billetera-cuadrada-amayra-negra-1.webp"],
       },
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-cuadrada-amayra-marron-1.png"],
+        images: ["/products/billetera-cuadrada-amayra-marron-1.webp"],
       },
     ],
   },
@@ -1187,12 +1187,12 @@ export const PRODUCTS = [
     name: "Billetera Botón Amayra",
     category: "Billetera de mujer",
     price: 17000,
-    image: "/products/billetera-boton-amayra-gris-1.png",
+    image: "/products/billetera-boton-amayra-gris-1.webp",
     colors: [
       {
         name: "Gris Oscuro",
         hex: HEX.Gris,
-        images: ["/products/billetera-boton-amayra-gris-1.png"],
+        images: ["/products/billetera-boton-amayra-gris-1.webp"],
       },
     ],
   },
@@ -1201,14 +1201,14 @@ export const PRODUCTS = [
     name: "Billetera Chica Mango",
     category: "Billetera de mujer",
     price: 16000,
-    image: "/products/billetera-chica-mango-negro-1.png",
+    image: "/products/billetera-chica-mango-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/billetera-chica-mango-negro-1.png",
-          "/products/billetera-chica-mango-negro-2.png",
+          "/products/billetera-chica-mango-negro-1.webp",
+          "/products/billetera-chica-mango-negro-2.webp",
         ],
       },
     ],
@@ -1218,12 +1218,12 @@ export const PRODUCTS = [
     name: "Tarjetero",
     category: "Billetera de mujer",
     price: 1200,
-    image: "/products/tarjetero-negro-1.png",
+    image: "/products/tarjetero-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
-        images: ["/products/tarjetero-negro-1.png"],
+        images: ["/products/tarjetero-negro-1.webp"],
       },
     ],
   },
@@ -1232,12 +1232,12 @@ export const PRODUCTS = [
     name: "Billetera Simple Punteada",
     category: "Billetera de mujer",
     price: 17000,
-    image: "/products/billetera-simple-punteada-suela-1.png",
+    image: "/products/billetera-simple-punteada-suela-1.webp",
     colors: [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-simple-punteada-suela-1.png"],
+        images: ["/products/billetera-simple-punteada-suela-1.webp"],
       },
     ],
   },
@@ -1246,12 +1246,12 @@ export const PRODUCTS = [
     name: "Billetera Simple Cuadrada",
     category: "Billetera de mujer",
     price: 17000,
-    image: "/products/billetera-simple-cuadrada-marron-1.png",
+    image: "/products/billetera-simple-cuadrada-marron-1.webp",
     colors: [
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-simple-cuadrada-marron-1.png"],
+        images: ["/products/billetera-simple-cuadrada-marron-1.webp"],
       },
     ],
   },
@@ -1260,12 +1260,12 @@ export const PRODUCTS = [
     name: "Billetera Simple Bolsillo",
     category: "Billetera de mujer",
     price: 17000,
-    image: "/products/billetera-simple-bolsillo-negra-1.png",
+    image: "/products/billetera-simple-bolsillo-negra-1.webp",
     colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-simple-bolsillo-negra-1.png"],
+        images: ["/products/billetera-simple-bolsillo-negra-1.webp"],
       },
     ],
   },
@@ -1274,12 +1274,12 @@ export const PRODUCTS = [
     name: "Billetera Simple Gama",
     category: "Billetera de mujer",
     price: 17000,
-    image: "/products/billetera-simple-gama-negra-1.png",
+    image: "/products/billetera-simple-gama-negra-1.webp",
     colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-simple-gama-negra-1.png"],
+        images: ["/products/billetera-simple-gama-negra-1.webp"],
       },
     ],
   },
@@ -1288,25 +1288,25 @@ export const PRODUCTS = [
     name: "Billetera Simple BCY",
     category: "Billetera de mujer",
     price: 17000,
-    image: "/products/billetera-simple-bcy-rosa-1.png",
+    image: "/products/billetera-simple-bcy-rosa-1.webp",
     colors: [
       {
         name: "Rosa",
         hex: HEX.Rosa,
         images: [
-          "/products/billetera-simple-bcy-rosa-1.png",
-          "/products/billetera-simple-bcy-rosa-2.png",
+          "/products/billetera-simple-bcy-rosa-1.webp",
+          "/products/billetera-simple-bcy-rosa-2.webp",
         ],
       },
       {
         name: "Crema",
         hex: HEX.Crema,
-        images: ["/products/billetera-simple-bcy-crema-1.png"],
+        images: ["/products/billetera-simple-bcy-crema-1.webp"],
       },
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-simple-bcy-negra-1.png"],
+        images: ["/products/billetera-simple-bcy-negra-1.webp"],
       },
     ],
   },
@@ -1315,16 +1315,16 @@ export const PRODUCTS = [
     name: "Bolso Yoga",
     category: "Bolsos",
     price: 30000,
-    image: "/products/bolso-yoga-negro-1.png",
+    image: "/products/bolso-yoga-negro-1.webp",
     description: "Viene con compartimento para zapatillas.",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/bolso-yoga-negro-1.png",
-          "/products/bolso-yoga-negro-2.png",
-          "/products/bolso-yoga-negro-3.png",
+          "/products/bolso-yoga-negro-1.webp",
+          "/products/bolso-yoga-negro-2.webp",
+          "/products/bolso-yoga-negro-3.webp",
         ],
       },
     ],
@@ -1334,15 +1334,15 @@ export const PRODUCTS = [
     name: "Bolso Totem",
     category: "Bolsos",
     price: 27000,
-    image: "/products/bolso-totem-negro-1.png",
+    image: "/products/bolso-totem-negro-1.webp",
     colors: [
       {
         name: "Negro",
         hex: HEX.Negro,
         images: [
-          "/products/bolso-totem-negro-1.png",
-          "/products/bolso-totem-negro-2.png",
-          "/products/bolso-totem-negro-3.png",
+          "/products/bolso-totem-negro-1.webp",
+          "/products/bolso-totem-negro-2.webp",
+          "/products/bolso-totem-negro-3.webp",
         ],
       },
     ],
