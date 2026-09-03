@@ -89,6 +89,22 @@ class ProductCreate(BaseModel):
     colors: List[ProductColor] = Field(default_factory=list)
 
 
+class Coupon(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    code: str
+    percent: float
+    active: bool = False
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class CouponCreate(BaseModel):
+    code: str
+    percent: float
+    active: bool = False
+
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
@@ -174,6 +190,77 @@ async def delete_product(product_id: str, x_admin_password: Optional[str] = Head
     result = await db.products.delete_one({"id": product_id})
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
+    return {"ok": True}
+
+
+@api_router.get("/coupons/active")
+async def get_active_coupon():
+    """Endpoint público: devuelve el cupón activo (si hay uno) para mostrarlo en el carrito."""
+    coupon = await db.coupons.find_one({"active": True}, {"_id": 0})
+    if not coupon:
+        return None
+    return coupon
+
+
+@api_router.get("/coupons", response_model=List[Coupon])
+async def list_coupons(x_admin_password: Optional[str] = Header(default=None)):
+    check_admin(x_admin_password)
+    coupons = await db.coupons.find({}, {"_id": 0}).sort("created_at", -1).to_list(200)
+    return coupons
+
+
+@api_router.post("/coupons", response_model=Coupon)
+async def create_coupon(payload: CouponCreate, x_admin_password: Optional[str] = Header(default=None)):
+    check_admin(x_admin_password)
+
+    code = payload.code.strip().upper()
+    if not code:
+        raise HTTPException(status_code=400, detail="El código no puede estar vacío")
+    if await db.coupons.find_one({"code": code}, {"_id": 0}):
+        raise HTTPException(status_code=400, detail="Ya existe un cupón con ese código")
+
+    if payload.active:
+        await db.coupons.update_many({}, {"$set": {"active": False}})
+
+    coupon = Coupon(code=code, percent=payload.percent, active=payload.active)
+    doc = coupon.model_dump()
+    doc["created_at"] = doc["created_at"].isoformat()
+    await db.coupons.insert_one(doc)
+    return coupon
+
+
+@api_router.put("/coupons/{coupon_id}", response_model=Coupon)
+async def update_coupon(coupon_id: str, payload: CouponCreate, x_admin_password: Optional[str] = Header(default=None)):
+    check_admin(x_admin_password)
+
+    existing = await db.coupons.find_one({"id": coupon_id}, {"_id": 0})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Cupón no encontrado")
+
+    code = payload.code.strip().upper()
+    duplicate = await db.coupons.find_one({"code": code, "id": {"$ne": coupon_id}}, {"_id": 0})
+    if duplicate:
+        raise HTTPException(status_code=400, detail="Ya existe un cupón con ese código")
+
+    if payload.active:
+        await db.coupons.update_many({"id": {"$ne": coupon_id}}, {"$set": {"active": False}})
+
+    update_fields = {
+        "code": code,
+        "percent": payload.percent,
+        "active": payload.active,
+    }
+    await db.coupons.update_one({"id": coupon_id}, {"$set": update_fields})
+    updated = await db.coupons.find_one({"id": coupon_id}, {"_id": 0})
+    return updated
+
+
+@api_router.delete("/coupons/{coupon_id}")
+async def delete_coupon(coupon_id: str, x_admin_password: Optional[str] = Header(default=None)):
+    check_admin(x_admin_password)
+    result = await db.coupons.delete_one({"id": coupon_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Cupón no encontrado")
     return {"ok": True}
 
 
