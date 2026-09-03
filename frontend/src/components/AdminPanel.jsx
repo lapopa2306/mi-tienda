@@ -3,6 +3,7 @@ import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectTrigger,
@@ -20,6 +21,7 @@ import {
   ChevronRight,
   X,
   Pencil,
+  Tag,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -91,6 +93,158 @@ export default function AdminPanel() {
 
   if (!unlocked) return <PasswordGate onOk={() => setUnlocked(true)} />;
   return <ProductForm onAuthFail={() => setUnlocked(false)} />;
+}
+
+function CouponsSection({ authHeaders, onAuthFail }) {
+  const [coupons, setCoupons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [code, setCode] = useState("");
+  const [percent, setPercent] = useState("");
+  const [saving, setSaving] = useState(false);
+
+  const handleAuthError = (err) => {
+    if (err?.response?.status === 401) {
+      toast.error("La contraseña ya no es válida, ingresá de nuevo");
+      sessionStorage.removeItem("admin_pass");
+      onAuthFail();
+      return true;
+    }
+    return false;
+  };
+
+  const loadCoupons = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${API}/coupons`, { headers: authHeaders });
+      setCoupons(data);
+    } catch (err) {
+      if (!handleAuthError(err)) toast.error("No se pudieron cargar los cupones");
+    } finally {
+      setLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    loadCoupons();
+  }, [loadCoupons]);
+
+  const createCoupon = async () => {
+    if (!code.trim()) return toast.error("Poné un código para el cupón");
+    if (!percent || Number(percent) <= 0 || Number(percent) > 90)
+      return toast.error("Poné un porcentaje válido (1 a 90)");
+
+    setSaving(true);
+    try {
+      await axios.post(
+        `${API}/coupons`,
+        { code: code.trim(), percent: Number(percent), active: coupons.length === 0 },
+        { headers: authHeaders },
+      );
+      toast.success("Cupón creado");
+      setCode("");
+      setPercent("");
+      loadCoupons();
+    } catch (err) {
+      if (!handleAuthError(err))
+        toast.error(err?.response?.data?.detail || "No se pudo crear el cupón");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const toggleActive = async (coupon) => {
+    try {
+      await axios.put(
+        `${API}/coupons/${coupon.id}`,
+        { code: coupon.code, percent: coupon.percent, active: !coupon.active },
+        { headers: authHeaders },
+      );
+      loadCoupons();
+    } catch (err) {
+      if (!handleAuthError(err)) toast.error("No se pudo actualizar el cupón");
+    }
+  };
+
+  const removeCoupon = async (id) => {
+    if (!window.confirm("¿Eliminar este cupón?")) return;
+    try {
+      await axios.delete(`${API}/coupons/${id}`, { headers: authHeaders });
+      toast.success("Cupón eliminado");
+      setCoupons((cs) => cs.filter((c) => c.id !== id));
+    } catch (err) {
+      if (!handleAuthError(err)) toast.error("No se pudo eliminar el cupón");
+    }
+  };
+
+  return (
+    <div className="border border-ink/15 rounded-2xl p-6 space-y-5">
+      <div>
+        <h2 className="font-medium flex items-center gap-2">
+          <Tag className="h-4 w-4" /> Cupones de descuento
+        </h2>
+        <p className="text-sm text-ink/60 mt-1">
+          Solo puede haber un cupón activo a la vez. El activo se muestra automáticamente
+          en el carrito de la página y se aplica al total — no hace falta que el cliente
+          escriba ningún código.
+        </p>
+      </div>
+
+      <div className="grid sm:grid-cols-[1fr_140px_auto] gap-3 items-end">
+        <div className="space-y-1.5">
+          <label className="text-xs text-ink/60">Código</label>
+          <Input
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="Ej: VERANO10"
+          />
+        </div>
+        <div className="space-y-1.5">
+          <label className="text-xs text-ink/60">% off</label>
+          <Input
+            type="number"
+            value={percent}
+            onChange={(e) => setPercent(e.target.value)}
+            placeholder="Ej: 10"
+          />
+        </div>
+        <Button type="button" onClick={createCoupon} disabled={saving}>
+          {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
+        </Button>
+      </div>
+
+      {loading ? (
+        <p className="text-sm text-ink/50">Cargando...</p>
+      ) : coupons.length === 0 ? (
+        <p className="text-sm text-ink/50">Todavía no creaste ningún cupón.</p>
+      ) : (
+        <ul className="divide-y divide-ink/10">
+          {coupons.map((c) => (
+            <li key={c.id} className="flex items-center gap-3 py-3">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium">
+                  {c.code} <span className="text-ink/50 font-normal">— {c.percent}% off</span>
+                </p>
+                <p className="text-xs text-ink/50">
+                  {c.active ? "Activo — visible en el carrito ahora" : "Inactivo"}
+                </p>
+              </div>
+              <Switch checked={c.active} onCheckedChange={() => toggleActive(c)} />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => removeCoupon(c.id)}
+                aria-label="Eliminar cupón"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 }
 
 function ProductForm({ onAuthFail }) {
@@ -544,11 +698,11 @@ function ProductForm({ onAuthFail }) {
             </ul>
           )}
         </div>
+
+        <CouponsSection authHeaders={authHeaders} onAuthFail={onAuthFail} />
       </div>
     </div>
   );
 }
-
-
 
 
