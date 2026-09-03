@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { toast } from "sonner";
 import { SITE } from "@/data/site";
 
 const CartContext = createContext(null);
 const fmt = (n) => n.toLocaleString("es-AR");
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState(() => {
@@ -15,6 +17,14 @@ export function CartProvider({ children }) {
     }
   });
   const [open, setOpen] = useState(false);
+  const [coupon, setCoupon] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${API}/coupons/active`)
+      .then(({ data }) => setCoupon(data || null))
+      .catch(() => setCoupon(null));
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("oc-cart", JSON.stringify(items));
@@ -72,6 +82,8 @@ export function CartProvider({ children }) {
 
   const count = items.reduce((a, i) => a + i.qty, 0);
   const total = items.reduce((a, i) => a + i.qty * i.price, 0);
+  const discount = coupon ? Math.round((total * coupon.percent) / 100) : 0;
+  const discountedTotal = total - discount;
 
   const waUrl = useMemo(() => {
     const lines = items.map(
@@ -83,10 +95,13 @@ export function CartProvider({ children }) {
       "",
       ...lines,
       "",
-      `Total estimado: $${fmt(total)}`,
+      `Subtotal: $${fmt(total)}`,
+      ...(coupon
+        ? [`Cupón ${coupon.code} (${coupon.percent}% off): -$${fmt(discount)}`, `Total con descuento: $${fmt(discountedTotal)}`]
+        : [`Total estimado: $${fmt(total)}`]),
     ].join("\n");
     return `https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent(msg)}`;
-  }, [items, total]);
+  }, [items, total, coupon, discount, discountedTotal]);
 
   const value = {
     items,
@@ -99,6 +114,9 @@ export function CartProvider({ children }) {
     setOpen,
     count,
     total,
+    coupon,
+    discount,
+    discountedTotal,
     waUrl,
   };
 
