@@ -73,7 +73,11 @@ export default function CartDrawer() {
               </div>
             ) : (
               <>
-                <div className="flex-1 overflow-y-auto px-8 py-6">
+                <div
+                  data-lenis-prevent
+                  className="flex-1 overflow-y-auto overscroll-contain px-8 py-6"
+                  style={{ WebkitOverflowScrolling: "touch" }}
+                >
                   <ul className="space-y-8">
                     {items.map((i) => (
                       <li key={i.key} data-testid={`cart-item-${i.key}`} className="flex gap-5">
@@ -175,3 +179,5 @@ export default function CartDrawer() {
     </AnimatePresence>
   );
 }
+
+
