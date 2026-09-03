@@ -7,7 +7,7 @@ export const SITE = {
   whatsapp2Display: "+54 9 11 4937-6760",
   instagram: "https://www.instagram.com/offcoursearg/",
   address: "Soreda 6180, Wilde",
-  heroImage: "/products/hero-mochila.jpg",
+  heroImage: "/products/hero-mochila.webp",
   heroAlt: "Mochila negra Off Course",
   manifestoImage: "/site/nosotros-mochila-amayra.png",
   manifestoAlt: "Mochila Amayra en exhibición",
