@@ -240,6 +240,30 @@ export default function Catalog() {
     [dynamicProducts],
   );
 
+  // Si entran por un link compartido (?producto=id), abrimos ese producto
+  useEffect(() => {
+    if (!allProducts.length) return;
+    const params = new URLSearchParams(window.location.search);
+    const sharedId = params.get("producto");
+    if (!sharedId) return;
+    const found = allProducts.find((p) => p.id === sharedId);
+    if (found) setSelected(found);
+  }, [allProducts]);
+
+  const closeModal = () => {
+    setSelected(null);
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("producto")) {
+      params.delete("producto");
+      const rest = params.toString();
+      window.history.replaceState(
+        {},
+        "",
+        window.location.pathname + (rest ? `?${rest}` : "") + window.location.hash,
+      );
+    }
+  };
+
   useEffect(() => {
     if (showOnlyFavorites) setActive("Todo");
   }, [showOnlyFavorites]);
@@ -421,7 +445,7 @@ export default function Catalog() {
           </motion.div>
         )}
       </div>
-      <ProductModal product={selected} onClose={() => setSelected(null)} />
+      <ProductModal product={selected} onClose={closeModal} />
     </section>
   );
 }
