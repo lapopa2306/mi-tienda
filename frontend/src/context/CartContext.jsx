@@ -82,7 +82,16 @@ export function CartProvider({ children }) {
 
   const count = items.reduce((a, i) => a + i.qty, 0);
   const total = items.reduce((a, i) => a + i.qty * i.price, 0);
-  const discount = coupon ? Math.round((total * coupon.percent) / 100) : 0;
+
+  const applicableTotal = useMemo(() => {
+    if (!coupon) return 0;
+    if (!coupon.categories || coupon.categories.length === 0) return total;
+    return items
+      .filter((i) => coupon.categories.includes(i.category))
+      .reduce((a, i) => a + i.qty * i.price, 0);
+  }, [coupon, items, total]);
+
+  const discount = coupon ? Math.round((applicableTotal * coupon.percent) / 100) : 0;
   const discountedTotal = total - discount;
 
   const waUrl = useMemo(() => {
@@ -96,8 +105,15 @@ export function CartProvider({ children }) {
       ...lines,
       "",
       `Subtotal: $${fmt(total)}`,
-      ...(coupon
-        ? [`Cupón ${coupon.code} (${coupon.percent}% off): -$${fmt(discount)}`, `Total con descuento: $${fmt(discountedTotal)}`]
+      ...(coupon && discount > 0
+        ? [
+            `Cupón ${coupon.code} (${coupon.percent}% off${
+              coupon.categories && coupon.categories.length
+                ? ` en ${coupon.categories.join(", ")}`
+                : ""
+            }): -$${fmt(discount)}`,
+            `Total con descuento: $${fmt(discountedTotal)}`,
+          ]
         : [`Total estimado: $${fmt(total)}`]),
     ].join("\n");
     return `https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent(msg)}`;
@@ -126,4 +142,7 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
+
+
+
 
