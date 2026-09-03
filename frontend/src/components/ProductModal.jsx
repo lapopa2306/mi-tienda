@@ -153,7 +153,7 @@ export default function ProductModal({ product, onClose }) {
               </p>
               <p
                 data-testid="product-modal-cash-discount"
-                className="mt-1 font-mono text-xs uppercase tracking-[0.08em] text-ink/55"
+                className="mt-2 inline-block w-fit rounded-sm bg-blush/60 px-2 py-1 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-blush-deep"
               >
                 10% off en efectivo o transferencia: ${" "}
                 {fmt(Math.round(product.price * 0.9))}
@@ -214,4 +214,6 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
+
+
 
