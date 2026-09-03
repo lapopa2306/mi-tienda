@@ -205,7 +205,7 @@ function ProductCard({ p, onOpen, qtyOf }) {
           </p>
           <p
             data-testid={`cash-discount-${p.id}`}
-            className="mt-0.5 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.08em] text-ink/55"
+            className="mt-1 inline-block whitespace-nowrap rounded-sm bg-blush/60 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-blush-deep"
           >
             $ {fmt(Math.round(p.price * 0.9))} efectivo / transf.
           </p>
@@ -425,4 +425,6 @@ export default function Catalog() {
     </section>
   );
 }
+
+
 
