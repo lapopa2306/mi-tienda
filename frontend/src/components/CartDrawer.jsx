@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, Minus, Plus, ShoppingBag, X } from "lucide-react";
+import { MessageCircle, Minus, Plus, ShoppingBag, Sparkles, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { scrollToHash } from "@/lib/scroll";
 import { EASE } from "@/components/Reveal";
@@ -8,8 +8,20 @@ import { EASE } from "@/components/Reveal";
 const fmt = (n) => n.toLocaleString("es-AR");
 
 export default function CartDrawer() {
-  const { open, setOpen, items, setQty, remove, clear, total, count, waUrl } =
-    useCart();
+  const {
+    open,
+    setOpen,
+    items,
+    setQty,
+    remove,
+    clear,
+    total,
+    count,
+    waUrl,
+    coupon,
+    discount,
+    discountedTotal,
+  } = useCart();
 
   useEffect(() => {
     if (!window.__lenis) return;
@@ -141,14 +153,51 @@ export default function CartDrawer() {
                 </div>
 
                 <div className="border-t border-ink/10 px-8 py-6">
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
-                      Total estimado
-                    </span>
-                    <span data-testid="cart-total" className="font-serif text-2xl font-light">
-                      $ {fmt(total)}
-                    </span>
-                  </div>
+                  {coupon && (
+                    <div
+                      data-testid="cart-coupon-banner"
+                      className="mb-5 flex items-center gap-2.5 rounded-xl bg-blush/40 px-4 py-3"
+                    >
+                      <Sparkles size={16} className="shrink-0 text-ink/70" />
+                      <p className="text-xs leading-snug text-ink/80">
+                        Cupón <span className="font-semibold">{coupon.code}</span> aplicado
+                        — <span className="font-semibold">{coupon.percent}% off</span>
+                      </p>
+                    </div>
+                  )}
+
+                  {coupon ? (
+                    <div className="mb-2 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                          Subtotal
+                        </span>
+                        <span className="font-mono text-sm text-ink/50 line-through">
+                          $ {fmt(total)}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                          Total con descuento
+                        </span>
+                        <span
+                          data-testid="cart-total"
+                          className="font-serif text-2xl font-light"
+                        >
+                          $ {fmt(discountedTotal)}
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                        Total estimado
+                      </span>
+                      <span data-testid="cart-total" className="font-serif text-2xl font-light">
+                        $ {fmt(total)}
+                      </span>
+                    </div>
+                  )}
                   <p className="mb-5 text-xs font-light text-ink/50">
                     El pedido se envía por WhatsApp y coordinamos pago y entrega
                     juntos.
@@ -179,5 +228,6 @@ export default function CartDrawer() {
     </AnimatePresence>
   );
 }
+
 
 
