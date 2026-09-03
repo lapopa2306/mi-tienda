@@ -96,6 +96,7 @@ class Coupon(BaseModel):
     code: str
     percent: float
     active: bool = False
+    categories: List[str] = Field(default_factory=list)  # vacío = aplica a toda la tienda
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -103,6 +104,7 @@ class CouponCreate(BaseModel):
     code: str
     percent: float
     active: bool = False
+    categories: List[str] = Field(default_factory=list)
 
 
 # Add your routes to the router instead of directly to app
@@ -222,7 +224,7 @@ async def create_coupon(payload: CouponCreate, x_admin_password: Optional[str] =
     if payload.active:
         await db.coupons.update_many({}, {"$set": {"active": False}})
 
-    coupon = Coupon(code=code, percent=payload.percent, active=payload.active)
+    coupon = Coupon(code=code, percent=payload.percent, active=payload.active, categories=payload.categories)
     doc = coupon.model_dump()
     doc["created_at"] = doc["created_at"].isoformat()
     await db.coupons.insert_one(doc)
@@ -249,6 +251,7 @@ async def update_coupon(coupon_id: str, payload: CouponCreate, x_admin_password:
         "code": code,
         "percent": payload.percent,
         "active": payload.active,
+        "categories": payload.categories,
     }
     await db.coupons.update_one({"id": coupon_id}, {"$set": update_fields})
     updated = await db.coupons.find_one({"id": coupon_id}, {"_id": 0})
