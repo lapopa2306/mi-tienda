@@ -1,4 +1,4 @@
- const U = (id) =>
+const U = (id) =>
   `https://images.unsplash.com/${id}?q=80&w=1200&auto=format&fit=crop`;
 const P = (id) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`;
@@ -611,24 +611,6 @@ export const PRODUCTS = [
           "/products/mochila-everlast-gris-1.png",
           "/products/mochila-everlast-gris-2.png",
           "/products/mochila-everlast-gris-3.png",
-        ],
-      },
-    ],
-  },
-  {
-    id: "mochila-a",
-    name: "Mochila A.",
-    category: "Mochilas",
-    price: 42000,
-    image: "/products/mochila-a-negro-1.png",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/mochila-a-negro-1.png",
-          "/products/mochila-a-negro-2.png",
-          "/products/mochila-a-negro-3.png",
         ],
       },
     ],
