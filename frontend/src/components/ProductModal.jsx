@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Copy, Plus, Share2, X } from "lucide-react";
+import { toast } from "sonner";
 import { useCart } from "@/context/CartContext";
+import { whatsappShareLink } from "@/data/site";
 import { EASE } from "@/components/Reveal";
 
 const fmt = (n) => n.toLocaleString("es-AR");
@@ -30,6 +32,19 @@ export default function ProductModal({ product, onClose }) {
   const color = product?.colors?.[colorIdx];
   const images = color?.images || (product ? [product.image] : []);
   const mainImage = images[imgIdx] || images[0];
+
+  const productUrl = product
+    ? `${window.location.origin}${window.location.pathname}?producto=${product.id}`
+    : "";
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(productUrl);
+      toast.success("Link copiado");
+    } catch {
+      toast.error("No se pudo copiar el link");
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -207,6 +222,37 @@ export default function ProductModal({ product, onClose }) {
               <p className="mt-4 text-center text-xs font-light text-ink/45">
                 Podés ajustar cantidades desde el pedido.
               </p>
+
+              <div className="mt-6 flex items-center gap-3 border-t border-ink/10 pt-6">
+                <p className="mr-1 flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45">
+                  <Share2 size={13} />
+                  Compartir
+                </p>
+                <button
+                  data-testid="product-modal-share-copy"
+                  onClick={handleCopyLink}
+                  aria-label="Copiar link del producto"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors duration-300 hover:border-ink/40 hover:text-ink"
+                >
+                  <Copy size={15} />
+                </button>
+                <a
+                  data-testid="product-modal-share-whatsapp"
+                  href={whatsappShareLink(
+                    `Hola! Mirá este producto de Off Course: ${product.name} — $ ${fmt(
+                      product.price,
+                    )}\n${productUrl}`,
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Compartir por WhatsApp"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors duration-300 hover:border-[#25D366]/50 hover:text-[#25D366]"
+                >
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm5.8 14.15c-.24.68-1.4 1.3-1.93 1.35-.5.05-.98.24-3.28-.73-2.78-1.17-4.55-3.99-4.69-4.18-.14-.19-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.53-.34.71-.34.18 0 .35.002.5.01.16.008.38-.06.6.46.24.57.79 1.98.86 2.12.07.14.11.31.02.5-.09.19-.13.31-.27.47-.13.16-.28.36-.4.48-.13.13-.27.27-.12.53.15.27.68 1.12 1.46 1.82 1 .89 1.85 1.17 2.11 1.3.27.13.42.11.58-.07.16-.18.68-.79.86-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.27.13.44.2.51.31.07.11.07.63-.17 1.31z" />
+                  </svg>
+                </a>
+              </div>
             </div>
           </motion.div>
         </>
@@ -214,6 +260,7 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
+
 
 
 
