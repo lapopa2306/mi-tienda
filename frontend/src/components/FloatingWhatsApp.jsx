@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import { WHATSAPP_HELLO } from "@/data/site";
+import { whatsappShareLink } from "@/data/site";
 
 export default function FloatingWhatsApp() {
   return (
     <motion.a
-      href={WHATSAPP_HELLO}
+      href={whatsappShareLink("Hola Off Course! Quiero hacer una consulta.")}
       target="_blank"
       rel="noopener noreferrer"
       data-testid="floating-whatsapp-button"
