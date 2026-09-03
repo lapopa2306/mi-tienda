@@ -160,13 +160,18 @@ export default function CartDrawer() {
                     >
                       <Sparkles size={16} className="shrink-0 text-ink/70" />
                       <p className="text-xs leading-snug text-ink/80">
-                        Cupón <span className="font-semibold">{coupon.code}</span> aplicado
-                        — <span className="font-semibold">{coupon.percent}% off</span>
+                        Cupón <span className="font-semibold">{coupon.code}</span> —{" "}
+                        <span className="font-semibold">{coupon.percent}% off</span>{" "}
+                        {coupon.categories && coupon.categories.length
+                          ? `en ${coupon.categories.join(", ")}`
+                          : "en toda la tienda"}
+                        {discount === 0 &&
+                          " (sumá un producto de esa categoría para aprovecharlo)"}
                       </p>
                     </div>
                   )}
 
-                  {coupon ? (
+                  {coupon && discount > 0 ? (
                     <div className="mb-2 space-y-1.5">
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
@@ -187,6 +192,12 @@ export default function CartDrawer() {
                           $ {fmt(discountedTotal)}
                         </span>
                       </div>
+                      {coupon.categories && coupon.categories.length > 0 && (
+                        <p className="pt-0.5 text-[11px] font-light text-ink/45">
+                          El {coupon.percent}% se descontó solo sobre los productos de{" "}
+                          {coupon.categories.join(", ")} — no sobre todo el pedido.
+                        </p>
+                      )}
                     </div>
                   ) : (
                     <div className="mb-2 flex items-center justify-between">
@@ -228,6 +239,5 @@ export default function CartDrawer() {
     </AnimatePresence>
   );
 }
-
 
 
