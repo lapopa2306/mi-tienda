@@ -100,7 +100,13 @@ function CouponsSection({ authHeaders, onAuthFail }) {
   const [loading, setLoading] = useState(true);
   const [code, setCode] = useState("");
   const [percent, setPercent] = useState("");
+  const [categories, setCategories] = useState([]); // [] = toda la tienda
   const [saving, setSaving] = useState(false);
+
+  const toggleCategory = (cat) =>
+    setCategories((cs) =>
+      cs.includes(cat) ? cs.filter((c) => c !== cat) : [...cs, cat],
+    );
 
   const handleAuthError = (err) => {
     if (err?.response?.status === 401) {
@@ -138,12 +144,18 @@ function CouponsSection({ authHeaders, onAuthFail }) {
     try {
       await axios.post(
         `${API}/coupons`,
-        { code: code.trim(), percent: Number(percent), active: coupons.length === 0 },
+        {
+          code: code.trim(),
+          percent: Number(percent),
+          active: coupons.length === 0,
+          categories,
+        },
         { headers: authHeaders },
       );
       toast.success("Cupón creado");
       setCode("");
       setPercent("");
+      setCategories([]);
       loadCoupons();
     } catch (err) {
       if (!handleAuthError(err))
@@ -157,7 +169,12 @@ function CouponsSection({ authHeaders, onAuthFail }) {
     try {
       await axios.put(
         `${API}/coupons/${coupon.id}`,
-        { code: coupon.code, percent: coupon.percent, active: !coupon.active },
+        {
+          code: coupon.code,
+          percent: coupon.percent,
+          active: !coupon.active,
+          categories: coupon.categories || [],
+        },
         { headers: authHeaders },
       );
       loadCoupons();
@@ -213,6 +230,31 @@ function CouponsSection({ authHeaders, onAuthFail }) {
         </Button>
       </div>
 
+      <div className="space-y-1.5">
+        <label className="text-xs text-ink/60">
+          ¿Dónde aplica? Dejá todo sin marcar para que valga en toda la tienda.
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {CATEGORIES.map((cat) => {
+            const on = categories.includes(cat);
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => toggleCategory(cat)}
+                className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                  on
+                    ? "border-ink bg-ink text-paper"
+                    : "border-ink/20 text-ink/60 hover:border-ink/40"
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {loading ? (
         <p className="text-sm text-ink/50">Cargando...</p>
       ) : coupons.length === 0 ? (
@@ -227,6 +269,10 @@ function CouponsSection({ authHeaders, onAuthFail }) {
                 </p>
                 <p className="text-xs text-ink/50">
                   {c.active ? "Activo — visible en el carrito ahora" : "Inactivo"}
+                  {" · "}
+                  {c.categories && c.categories.length
+                    ? `Solo en: ${c.categories.join(", ")}`
+                    : "Toda la tienda"}
                 </p>
               </div>
               <Switch checked={c.active} onCheckedChange={() => toggleActive(c)} />
@@ -704,5 +750,7 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
+
 
 
