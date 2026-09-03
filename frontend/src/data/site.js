@@ -19,3 +19,8 @@ export const WHATSAPP_URL = `https://wa.me/${SITE.whatsapp}`;
 export const WHATSAPP_HELLO = `${WHATSAPP_URL}?text=${encodeURIComponent(
   "Hola Off Course! Quiero hacer una consulta."
 )}`;
+
+// Número usado para el botón flotante y para "compartir por WhatsApp"
+export const WHATSAPP_SHARE_URL = `https://wa.me/${SITE.whatsapp2}`;
+export const whatsappShareLink = (text) =>
+  `${WHATSAPP_SHARE_URL}?text=${encodeURIComponent(text)}`;
