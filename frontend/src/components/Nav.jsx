@@ -19,7 +19,7 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
+    <header className="border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between px-6 sm:px-12 lg:px-24">
         <a
           href="#top"
