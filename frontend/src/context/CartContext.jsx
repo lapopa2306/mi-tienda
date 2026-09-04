@@ -83,15 +83,20 @@ export function CartProvider({ children }) {
   const count = items.reduce((a, i) => a + i.qty, 0);
   const total = items.reduce((a, i) => a + i.qty * i.price, 0);
 
-  const applicableTotal = useMemo(() => {
-    if (!coupon) return 0;
-    if (!coupon.categories || coupon.categories.length === 0) return total;
-    return items
-      .filter((i) => coupon.categories.includes(i.category))
-      .reduce((a, i) => a + i.qty * i.price, 0);
-  }, [coupon, items, total]);
+  const isExpired = coupon?.expires_at ? new Date(coupon.expires_at) <= new Date() : false;
+  const effectiveCoupon = isExpired ? null : coupon;
 
-  const discount = coupon ? Math.round((applicableTotal * coupon.percent) / 100) : 0;
+  const applicableTotal = useMemo(() => {
+    if (!effectiveCoupon) return 0;
+    if (!effectiveCoupon.categories || effectiveCoupon.categories.length === 0) return total;
+    return items
+      .filter((i) => effectiveCoupon.categories.includes(i.category))
+      .reduce((a, i) => a + i.qty * i.price, 0);
+  }, [effectiveCoupon, items, total]);
+
+  const discount = effectiveCoupon
+    ? Math.round((applicableTotal * effectiveCoupon.percent) / 100)
+    : 0;
   const discountedTotal = total - discount;
 
   const waUrl = useMemo(() => {
@@ -106,11 +111,11 @@ export function CartProvider({ children }) {
       ...lines,
       "",
       `Subtotal: $${fmt(total)}`,
-      ...(coupon && discount > 0
+      ...(effectiveCoupon && discount > 0
         ? [
-            `Cupón ${coupon.code} (${coupon.percent}% off${
-              coupon.categories && coupon.categories.length
-                ? ` en ${coupon.categories.join(", ")}`
+            `Cupón ${effectiveCoupon.code} (${effectiveCoupon.percent}% off${
+              effectiveCoupon.categories && effectiveCoupon.categories.length
+                ? ` en ${effectiveCoupon.categories.join(", ")}`
                 : ""
             }): -$${fmt(discount)}`,
             `Total con descuento: $${fmt(discountedTotal)}`,
@@ -118,7 +123,7 @@ export function CartProvider({ children }) {
         : [`Total estimado: $${fmt(total)}`]),
     ].join("\n");
     return `https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent(msg)}`;
-  }, [items, total, coupon, discount, discountedTotal]);
+  }, [items, total, effectiveCoupon, discount, discountedTotal]);
 
   const value = {
     items,
@@ -131,7 +136,7 @@ export function CartProvider({ children }) {
     setOpen,
     count,
     total,
-    coupon,
+    coupon: effectiveCoupon,
     discount,
     discountedTotal,
     waUrl,
@@ -143,6 +148,7 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
+
 
 
 
