@@ -97,6 +97,7 @@ class Coupon(BaseModel):
     percent: float
     active: bool = False
     categories: List[str] = Field(default_factory=list)  # vacío = aplica a toda la tienda
+    expires_at: Optional[datetime] = None  # null = sin fecha límite
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -105,6 +106,7 @@ class CouponCreate(BaseModel):
     percent: float
     active: bool = False
     categories: List[str] = Field(default_factory=list)
+    expires_at: Optional[datetime] = None
 
 
 # Add your routes to the router instead of directly to app
@@ -197,10 +199,21 @@ async def delete_product(product_id: str, x_admin_password: Optional[str] = Head
 
 @api_router.get("/coupons/active")
 async def get_active_coupon():
-    """Endpoint público: devuelve el cupón activo (si hay uno) para mostrarlo en el carrito."""
+    """Endpoint público: devuelve el cupón activo (si hay uno y no venció) para el carrito."""
     coupon = await db.coupons.find_one({"active": True}, {"_id": 0})
     if not coupon:
         return None
+
+    expires_at = coupon.get("expires_at")
+    if expires_at:
+        expires_dt = expires_at if isinstance(expires_at, datetime) else datetime.fromisoformat(expires_at)
+        if expires_dt.tzinfo is None:
+            expires_dt = expires_dt.replace(tzinfo=timezone.utc)
+        if expires_dt <= datetime.now(timezone.utc):
+            # Venció: lo desactivamos solo para que no siga aplicando
+            await db.coupons.update_one({"id": coupon["id"]}, {"$set": {"active": False}})
+            return None
+
     return coupon
 
 
@@ -224,9 +237,17 @@ async def create_coupon(payload: CouponCreate, x_admin_password: Optional[str] =
     if payload.active:
         await db.coupons.update_many({}, {"$set": {"active": False}})
 
-    coupon = Coupon(code=code, percent=payload.percent, active=payload.active, categories=payload.categories)
+    coupon = Coupon(
+        code=code,
+        percent=payload.percent,
+        active=payload.active,
+        categories=payload.categories,
+        expires_at=payload.expires_at,
+    )
     doc = coupon.model_dump()
     doc["created_at"] = doc["created_at"].isoformat()
+    if doc.get("expires_at"):
+        doc["expires_at"] = doc["expires_at"].isoformat()
     await db.coupons.insert_one(doc)
     return coupon
 
@@ -252,6 +273,7 @@ async def update_coupon(coupon_id: str, payload: CouponCreate, x_admin_password:
         "percent": payload.percent,
         "active": payload.active,
         "categories": payload.categories,
+        "expires_at": payload.expires_at.isoformat() if payload.expires_at else None,
     }
     await db.coupons.update_one({"id": coupon_id}, {"$set": update_fields})
     updated = await db.coupons.find_one({"id": coupon_id}, {"_id": 0})
