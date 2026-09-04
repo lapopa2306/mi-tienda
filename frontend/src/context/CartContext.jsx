@@ -95,10 +95,11 @@ export function CartProvider({ children }) {
   const discountedTotal = total - discount;
 
   const waUrl = useMemo(() => {
-    const lines = items.map(
-      (i) =>
-        `• ${i.qty} × ${i.name}${i.color ? ` (${i.color})` : ""} — $${fmt(i.price * i.qty)}`
-    );
+    const origin = window.location.origin + window.location.pathname;
+    const lines = items.flatMap((i) => [
+      `• ${i.qty} × ${i.name}${i.color ? ` (${i.color})` : ""} — $${fmt(i.price * i.qty)}`,
+      `  ${origin}?producto=${i.id}`,
+    ]);
     const msg = [
       "Hola Off Course! Quiero hacer este pedido:",
       "",
