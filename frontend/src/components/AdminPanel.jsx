@@ -102,6 +102,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
   const [percent, setPercent] = useState("");
   const [categories, setCategories] = useState([]); // [] = toda la tienda
   const [expiresAt, setExpiresAt] = useState(""); // valor crudo del input datetime-local
+  const [minAmount, setMinAmount] = useState(""); // opcional — compra mínima para que aplique
   const [saving, setSaving] = useState(false);
 
   const toggleCategory = (cat) =>
@@ -142,6 +143,8 @@ function CouponsSection({ authHeaders, onAuthFail }) {
       return toast.error("Poné un porcentaje válido (1 a 90)");
     if (expiresAt && new Date(expiresAt) <= new Date())
       return toast.error("La fecha de fin tiene que ser en el futuro");
+    if (minAmount && Number(minAmount) <= 0)
+      return toast.error("La compra mínima tiene que ser mayor a 0");
 
     setSaving(true);
     try {
@@ -153,6 +156,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
           active: coupons.length === 0,
           categories,
           expires_at: expiresAt ? new Date(expiresAt).toISOString() : null,
+          min_amount: minAmount ? Number(minAmount) : null,
         },
         { headers: authHeaders },
       );
@@ -161,6 +165,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
       setPercent("");
       setCategories([]);
       setExpiresAt("");
+      setMinAmount("");
       loadCoupons();
     } catch (err) {
       if (!handleAuthError(err))
@@ -180,6 +185,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
           active: !coupon.active,
           categories: coupon.categories || [],
           expires_at: coupon.expires_at || null,
+          min_amount: coupon.min_amount || null,
         },
         { headers: authHeaders },
       );
@@ -261,15 +267,29 @@ function CouponsSection({ authHeaders, onAuthFail }) {
         </div>
       </div>
 
-      <div className="space-y-1.5">
-        <label className="text-xs text-ink/60">
-          Fecha y hora de fin (opcional — si la dejás vacía, no vence solo)
-        </label>
-        <Input
-          type="datetime-local"
-          value={expiresAt}
-          onChange={(e) => setExpiresAt(e.target.value)}
-        />
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div className="space-y-1.5">
+          <label className="text-xs text-ink/60">
+            Fecha y hora de fin (opcional — si la dejás vacía, no vence solo)
+          </label>
+          <Input
+            type="datetime-local"
+            value={expiresAt}
+            onChange={(e) => setExpiresAt(e.target.value)}
+          />
+        </div>
+        <div className="space-y-1.5">
+          <label className="text-xs text-ink/60">
+            Compra mínima (opcional — si la dejás vacía, aplica sin importar el monto)
+          </label>
+          <Input
+            type="number"
+            min="0"
+            value={minAmount}
+            onChange={(e) => setMinAmount(e.target.value)}
+            placeholder="Ej: 20000"
+          />
+        </div>
       </div>
 
       {loading ? (
@@ -299,6 +319,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
                         minute: "2-digit",
                       })}`
                     : "Sin fecha límite"}
+                  {c.min_amount ? ` · Mínimo: $${Number(c.min_amount).toLocaleString("es-AR")}` : ""}
                 </p>
               </div>
               <Switch checked={c.active} onCheckedChange={() => toggleActive(c)} />
@@ -776,7 +797,4 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
-
-
-
 
