@@ -21,6 +21,8 @@ export default function CartDrawer() {
     coupon,
     discount,
     discountedTotal,
+    meetsMinAmount,
+    amountToMin,
   } = useCart();
 
   useEffect(() => {
@@ -165,9 +167,21 @@ export default function CartDrawer() {
                         {coupon.categories && coupon.categories.length
                           ? `en ${coupon.categories.join(", ")}`
                           : "en toda la tienda"}
-                        {discount === 0 &&
+                        {meetsMinAmount &&
+                          discount === 0 &&
                           " (sumá un producto de esa categoría para aprovecharlo)"}
                       </p>
+                    </div>
+                  )}
+
+                  {coupon && !meetsMinAmount && (
+                    <div
+                      data-testid="cart-min-amount-notice"
+                      className="mb-5 rounded-xl bg-smoke px-4 py-3 text-xs text-ink/70"
+                    >
+                      Te faltan{" "}
+                      <span className="font-semibold">$ {fmt(amountToMin)}</span> para
+                      aprovechar el cupón {coupon.code}.
                     </div>
                   )}
 
@@ -239,5 +253,8 @@ export default function CartDrawer() {
     </AnimatePresence>
   );
 }
+
+
+
 
 
