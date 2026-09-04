@@ -1,162 +1,257 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import axios from "axios";
-import { toast } from "sonner";
-import { SITE } from "@/data/site";
+import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MessageCircle, Minus, Plus, ShoppingBag, Sparkles, X } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { scrollToHash } from "@/lib/scroll";
+import { EASE } from "@/components/Reveal";
 
-const CartContext = createContext(null);
 const fmt = (n) => n.toLocaleString("es-AR");
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
-export function CartProvider({ children }) {
-  const [items, setItems] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("oc-cart")) || [];
-      return saved.map((i) => (i.key ? i : { ...i, key: i.id, color: null }));
-    } catch {
-      return [];
-    }
-  });
-  const [open, setOpen] = useState(false);
-  const [coupon, setCoupon] = useState(null);
-
-  useEffect(() => {
-    axios
-      .get(`${API}/coupons/active`)
-      .then(({ data }) => setCoupon(data || null))
-      .catch(() => setCoupon(null));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("oc-cart", JSON.stringify(items));
-  }, [items]);
-
-  const add = (p, colorName) => {
-    const color = p.colors
-      ? p.colors.find((c) => c.name === colorName) || p.colors[0]
-      : null;
-    const key = color ? `${p.id}__${color.name}` : p.id;
-    setItems((prev) => {
-      const found = prev.find((i) => i.key === key);
-      return found
-        ? prev.map((i) => (i.key === key ? { ...i, qty: i.qty + 1 } : i))
-        : [
-            ...prev,
-            {
-              key,
-              id: p.id,
-              name: p.name,
-              category: p.category,
-              price: p.price,
-              image: color?.images?.[0] || p.image,
-              color: color?.name || null,
-              qty: 1,
-            },
-          ];
-    });
-    toast.success("Agregado a tu pedido", {
-      description: color ? `${p.name} — ${color.name}` : p.name,
-    });
-  };
-
-  const setQty = (key, qty) =>
-    setItems((prev) =>
-      qty <= 0
-        ? prev.filter((i) => i.key !== key)
-        : prev.map((i) => (i.key === key ? { ...i, qty } : i))
-    );
-
-  const decrement = (productId) => {
-    setItems((prev) => {
-      const match = [...prev].reverse().find((i) => i.id === productId);
-      if (!match) return prev;
-      return match.qty <= 1
-        ? prev.filter((i) => i.key !== match.key)
-        : prev.map((i) =>
-            i.key === match.key ? { ...i, qty: i.qty - 1 } : i
-          );
-    });
-  };
-
-  const remove = (key) => setItems((prev) => prev.filter((i) => i.key !== key));
-  const clear = () => setItems([]);
-
-  const count = items.reduce((a, i) => a + i.qty, 0);
-  const total = items.reduce((a, i) => a + i.qty * i.price, 0);
-
-  const isExpired = coupon?.expires_at ? new Date(coupon.expires_at) <= new Date() : false;
-  const effectiveCoupon = isExpired ? null : coupon;
-
-  const meetsMinAmount = effectiveCoupon?.min_amount
-    ? total >= effectiveCoupon.min_amount
-    : true;
-
-  const amountToMin = effectiveCoupon?.min_amount
-    ? Math.max(effectiveCoupon.min_amount - total, 0)
-    : 0;
-
-  const applicableTotal = useMemo(() => {
-    if (!effectiveCoupon || !meetsMinAmount) return 0;
-    if (!effectiveCoupon.categories || effectiveCoupon.categories.length === 0) return total;
-    return items
-      .filter((i) => effectiveCoupon.categories.includes(i.category))
-      .reduce((a, i) => a + i.qty * i.price, 0);
-  }, [effectiveCoupon, meetsMinAmount, items, total]);
-
-  const discount = effectiveCoupon
-    ? Math.round((applicableTotal * effectiveCoupon.percent) / 100)
-    : 0;
-  const discountedTotal = total - discount;
-
-  const waUrl = useMemo(() => {
-    const origin = window.location.origin + window.location.pathname;
-    const lines = items.flatMap((i) => [
-      `• ${i.qty} × ${i.name}${i.color ? ` (${i.color})` : ""} — $${fmt(i.price * i.qty)}`,
-      `  ${origin}?producto=${i.id}`,
-    ]);
-    const msg = [
-      "Hola Off Course! Quiero hacer este pedido:",
-      "",
-      ...lines,
-      "",
-      `Subtotal: $${fmt(total)}`,
-      ...(effectiveCoupon && discount > 0
-        ? [
-            `Cupón ${effectiveCoupon.code} (${effectiveCoupon.percent}% off${
-              effectiveCoupon.categories && effectiveCoupon.categories.length
-                ? ` en ${effectiveCoupon.categories.join(", ")}`
-                : ""
-            }): -$${fmt(discount)}`,
-            `Total con descuento: $${fmt(discountedTotal)}`,
-          ]
-        : [`Total estimado: $${fmt(total)}`]),
-    ].join("\n");
-    return `https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent(msg)}`;
-  }, [items, total, effectiveCoupon, discount, discountedTotal]);
-
-  const value = {
-    items,
-    add,
-    setQty,
-    decrement,
-    remove,
-    clear,
+export default function CartDrawer() {
+  const {
     open,
     setOpen,
-    count,
+    items,
+    setQty,
+    remove,
+    clear,
     total,
-    coupon: effectiveCoupon,
+    count,
+    waUrl,
+    coupon,
     discount,
     discountedTotal,
     meetsMinAmount,
     amountToMin,
-    waUrl,
-  };
+  } = useCart();
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
+  useEffect(() => {
+    if (!window.__lenis) return;
+    open ? window.__lenis.stop() : window.__lenis.start();
+  }, [open]);
 
-export function useCart() {
-  return useContext(CartContext);
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          <motion.div
+            data-testid="cart-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-[90] bg-ink/40 backdrop-blur-sm"
+          />
+          <motion.aside
+            data-testid="cart-drawer"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.55, ease: EASE }}
+            className="fixed right-0 top-0 z-[95] flex h-full w-full max-w-md flex-col bg-paper"
+          >
+            <div className="flex items-center justify-between border-b border-ink/10 px-8 py-6">
+              <h2 className="font-serif text-2xl font-light">
+                Tu pedido{" "}
+                <span className="font-mono text-sm text-ink/50">({count})</span>
+              </h2>
+              <button
+                data-testid="cart-close-button"
+                onClick={() => setOpen(false)}
+                aria-label="Cerrar pedido"
+                className="rounded-full border border-ink/15 p-2 transition-colors duration-300 hover:bg-ink hover:text-paper"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {items.length === 0 ? (
+              <div
+                data-testid="cart-empty-state"
+                className="flex flex-1 flex-col items-center justify-center gap-6 px-8 text-center"
+              >
+                <ShoppingBag size={40} strokeWidth={1} className="text-ink/30" />
+                <p className="font-serif text-2xl font-light italic text-ink/60">
+                  Tu pedido está vacío
+                </p>
+                <button
+                  data-testid="cart-browse-button"
+                  onClick={(e) => {
+                    setOpen(false);
+                    scrollToHash(e, "#catalogo");
+                  }}
+                  className="rounded-full bg-ink px-8 py-3.5 text-sm text-paper transition-colors duration-300 hover:bg-ink/85"
+                >
+                  Ver catálogo
+                </button>
+              </div>
+            ) : (
+              <>
+                <div
+                  data-lenis-prevent
+                  className="flex-1 overflow-y-auto overscroll-contain px-8 py-6"
+                  style={{ WebkitOverflowScrolling: "touch" }}
+                >
+                  <ul className="space-y-8">
+                    {items.map((i) => (
+                      <li key={i.key} data-testid={`cart-item-${i.key}`} className="flex gap-5">
+                        <div className="aspect-[3/4] w-20 shrink-0 overflow-hidden bg-smoke">
+                          <img
+                            src={i.image}
+                            alt={i.name}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-1 flex-col">
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <h3 className="font-serif text-lg font-light leading-tight">
+                                {i.name}
+                              </h3>
+                              <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/45">
+                                {i.category}
+                                {i.color ? ` · ${i.color}` : ""}
+                              </p>
+                            </div>
+                            <button
+                              data-testid={`remove-item-${i.key}`}
+                              onClick={() => remove(i.key)}
+                              aria-label={`Quitar ${i.name}`}
+                              className="text-ink/40 transition-colors duration-300 hover:text-ink"
+                            >
+                              <X size={15} />
+                            </button>
+                          </div>
+                          <div className="mt-auto flex items-center justify-between pt-3">
+                            <div className="flex items-center gap-3 rounded-full border border-ink/15 px-3 py-1.5">
+                              <button
+                                data-testid={`qty-decrease-${i.key}`}
+                                onClick={() => setQty(i.key, i.qty - 1)}
+                                aria-label="Restar unidad"
+                                className="text-ink/60 transition-colors duration-200 hover:text-ink"
+                              >
+                                <Minus size={13} />
+                              </button>
+                              <span className="w-4 text-center font-mono text-sm">
+                                {i.qty}
+                              </span>
+                              <button
+                                data-testid={`qty-increase-${i.key}`}
+                                onClick={() => setQty(i.key, i.qty + 1)}
+                                aria-label="Sumar unidad"
+                                className="text-ink/60 transition-colors duration-200 hover:text-ink"
+                              >
+                                <Plus size={13} />
+                              </button>
+                            </div>
+                            <p className="font-mono text-sm text-ink/80">
+                              $ {fmt(i.price * i.qty)}
+                            </p>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="border-t border-ink/10 px-8 py-6">
+                  {coupon && (
+                    <div
+                      data-testid="cart-coupon-banner"
+                      className="mb-5 flex items-center gap-2.5 rounded-xl bg-blush/40 px-4 py-3"
+                    >
+                      <Sparkles size={16} className="shrink-0 text-ink/70" />
+                      <p className="text-xs leading-snug text-ink/80">
+                        Cupón <span className="font-semibold">{coupon.code}</span> —{" "}
+                        <span className="font-semibold">{coupon.percent}% off</span>{" "}
+                        {coupon.categories && coupon.categories.length
+                          ? `en ${coupon.categories.join(", ")}`
+                          : "en toda la tienda"}
+                        {meetsMinAmount &&
+                          discount === 0 &&
+                          " (sumá un producto de esa categoría para aprovecharlo)"}
+                      </p>
+                    </div>
+                  )}
+
+                  {coupon && !meetsMinAmount && (
+                    <div
+                      data-testid="cart-min-amount-notice"
+                      className="mb-5 rounded-xl bg-smoke px-4 py-3 text-xs text-ink/70"
+                    >
+                      Te faltan{" "}
+                      <span className="font-semibold">$ {fmt(amountToMin)}</span> para
+                      aprovechar el cupón {coupon.code}.
+                    </div>
+                  )}
+
+                  {coupon && discount > 0 ? (
+                    <div className="mb-2 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                          Subtotal
+                        </span>
+                        <span className="font-mono text-sm text-ink/50 line-through">
+                          $ {fmt(total)}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                          Total con descuento
+                        </span>
+                        <span
+                          data-testid="cart-total"
+                          className="font-serif text-2xl font-light"
+                        >
+                          $ {fmt(discountedTotal)}
+                        </span>
+                      </div>
+                      {coupon.categories && coupon.categories.length > 0 && (
+                        <p className="pt-0.5 text-[11px] font-light text-ink/45">
+                          El {coupon.percent}% se descontó solo sobre los productos de{" "}
+                          {coupon.categories.join(", ")} — no sobre todo el pedido.
+                        </p>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                        Total estimado
+                      </span>
+                      <span data-testid="cart-total" className="font-serif text-2xl font-light">
+                        $ {fmt(total)}
+                      </span>
+                    </div>
+                  )}
+                  <p className="mb-5 text-xs font-light text-ink/50">
+                    El pedido se envía por WhatsApp y coordinamos pago y entrega
+                    juntos.
+                  </p>
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid="whatsapp-checkout-button"
+                    className="flex w-full items-center justify-center gap-3 rounded-full bg-ink py-4 text-sm text-paper transition-colors duration-300 hover:bg-blush hover:text-ink"
+                  >
+                    <MessageCircle size={16} />
+                    Enviar pedido por WhatsApp
+                  </a>
+                  <button
+                    data-testid="cart-clear-button"
+                    onClick={clear}
+                    className="mt-4 w-full text-center text-xs text-ink/45 underline underline-offset-4 transition-colors duration-300 hover:text-ink"
+                  >
+                    Vaciar pedido
+                  </button>
+                </div>
+              </>
+            )}
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
 }
 
 
