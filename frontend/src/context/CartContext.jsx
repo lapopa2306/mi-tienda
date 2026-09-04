@@ -86,13 +86,21 @@ export function CartProvider({ children }) {
   const isExpired = coupon?.expires_at ? new Date(coupon.expires_at) <= new Date() : false;
   const effectiveCoupon = isExpired ? null : coupon;
 
+  const meetsMinAmount = effectiveCoupon?.min_amount
+    ? total >= effectiveCoupon.min_amount
+    : true;
+
+  const amountToMin = effectiveCoupon?.min_amount
+    ? Math.max(effectiveCoupon.min_amount - total, 0)
+    : 0;
+
   const applicableTotal = useMemo(() => {
-    if (!effectiveCoupon) return 0;
+    if (!effectiveCoupon || !meetsMinAmount) return 0;
     if (!effectiveCoupon.categories || effectiveCoupon.categories.length === 0) return total;
     return items
       .filter((i) => effectiveCoupon.categories.includes(i.category))
       .reduce((a, i) => a + i.qty * i.price, 0);
-  }, [effectiveCoupon, items, total]);
+  }, [effectiveCoupon, meetsMinAmount, items, total]);
 
   const discount = effectiveCoupon
     ? Math.round((applicableTotal * effectiveCoupon.percent) / 100)
@@ -139,6 +147,8 @@ export function CartProvider({ children }) {
     coupon: effectiveCoupon,
     discount,
     discountedTotal,
+    meetsMinAmount,
+    amountToMin,
     waUrl,
   };
 
@@ -148,7 +158,6 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
-
 
 
 
