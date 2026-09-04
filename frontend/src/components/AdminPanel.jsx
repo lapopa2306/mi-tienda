@@ -347,6 +347,7 @@ function ProductForm({ onAuthFail }) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [colors, setColors] = useState([emptyColor()]);
+  const [isNew, setIsNew] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [products, setProducts] = useState([]);
   const [loadingList, setLoadingList] = useState(true);
@@ -418,6 +419,7 @@ function ProductForm({ onAuthFail }) {
     setPrice("");
     setDescription("");
     setColors([emptyColor()]);
+    setIsNew(false);
   };
 
   const startEdit = (p) => {
@@ -426,6 +428,7 @@ function ProductForm({ onAuthFail }) {
     setCategory(p.category || CATEGORIES[0]);
     setPrice(p.price != null ? String(p.price) : "");
     setDescription(p.description || "");
+    setIsNew(!!p.is_new);
     setColors(
       p.colors && p.colors.length
         ? p.colors.map((c) => ({
@@ -498,6 +501,7 @@ function ProductForm({ onAuthFail }) {
         price: Number(price),
         description: description.trim() || null,
         colors: colorsPayload,
+        is_new: isNew,
       };
 
       // 2. Creamos o actualizamos el producto según corresponda
@@ -596,6 +600,16 @@ function ProductForm({ onAuthFail }) {
               placeholder="Ej: Mide 18x33, fabricada en cordura."
               rows={2}
             />
+          </div>
+
+          <div className="flex items-center justify-between rounded-xl border border-ink/10 bg-ink/[0.02] px-4 py-3">
+            <div>
+              <label className="text-sm font-medium">Nuevo ingreso</label>
+              <p className="text-xs text-ink/50">
+                Lo muestra en la sección "Nuevos ingresos" antes del catálogo.
+              </p>
+            </div>
+            <Switch checked={isNew} onCheckedChange={setIsNew} />
           </div>
 
           <div className="space-y-3">
@@ -763,7 +777,14 @@ function ProductForm({ onAuthFail }) {
                     />
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">{p.name}</p>
+                    <p className="text-sm font-medium truncate flex items-center gap-2">
+                      {p.name}
+                      {p.is_new && (
+                        <span className="shrink-0 rounded-full bg-blush px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-ink">
+                          Nuevo
+                        </span>
+                      )}
+                    </p>
                     <p className="text-xs text-ink/50">
                       {p.category} · $ {Number(p.price).toLocaleString("es-AR")}
                     </p>
@@ -797,4 +818,6 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
+
 
