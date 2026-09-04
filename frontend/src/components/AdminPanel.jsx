@@ -101,6 +101,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
   const [code, setCode] = useState("");
   const [percent, setPercent] = useState("");
   const [categories, setCategories] = useState([]); // [] = toda la tienda
+  const [expiresAt, setExpiresAt] = useState(""); // valor crudo del input datetime-local
   const [saving, setSaving] = useState(false);
 
   const toggleCategory = (cat) =>
@@ -139,6 +140,8 @@ function CouponsSection({ authHeaders, onAuthFail }) {
     if (!code.trim()) return toast.error("Poné un código para el cupón");
     if (!percent || Number(percent) <= 0 || Number(percent) > 90)
       return toast.error("Poné un porcentaje válido (1 a 90)");
+    if (expiresAt && new Date(expiresAt) <= new Date())
+      return toast.error("La fecha de fin tiene que ser en el futuro");
 
     setSaving(true);
     try {
@@ -149,6 +152,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
           percent: Number(percent),
           active: coupons.length === 0,
           categories,
+          expires_at: expiresAt ? new Date(expiresAt).toISOString() : null,
         },
         { headers: authHeaders },
       );
@@ -156,6 +160,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
       setCode("");
       setPercent("");
       setCategories([]);
+      setExpiresAt("");
       loadCoupons();
     } catch (err) {
       if (!handleAuthError(err))
@@ -174,6 +179,7 @@ function CouponsSection({ authHeaders, onAuthFail }) {
           percent: coupon.percent,
           active: !coupon.active,
           categories: coupon.categories || [],
+          expires_at: coupon.expires_at || null,
         },
         { headers: authHeaders },
       );
@@ -255,6 +261,17 @@ function CouponsSection({ authHeaders, onAuthFail }) {
         </div>
       </div>
 
+      <div className="space-y-1.5">
+        <label className="text-xs text-ink/60">
+          Fecha y hora de fin (opcional — si la dejás vacía, no vence solo)
+        </label>
+        <Input
+          type="datetime-local"
+          value={expiresAt}
+          onChange={(e) => setExpiresAt(e.target.value)}
+        />
+      </div>
+
       {loading ? (
         <p className="text-sm text-ink/50">Cargando...</p>
       ) : coupons.length === 0 ? (
@@ -273,6 +290,15 @@ function CouponsSection({ authHeaders, onAuthFail }) {
                   {c.categories && c.categories.length
                     ? `Solo en: ${c.categories.join(", ")}`
                     : "Toda la tienda"}
+                  {" · "}
+                  {c.expires_at
+                    ? `Termina: ${new Date(c.expires_at).toLocaleString("es-AR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}`
+                    : "Sin fecha límite"}
                 </p>
               </div>
               <Switch checked={c.active} onCheckedChange={() => toggleActive(c)} />
