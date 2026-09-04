@@ -50,11 +50,11 @@ export default function CouponCountdownBar() {
         className="overflow-hidden bg-ink text-paper"
       >
         <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-center gap-x-4 gap-y-1 px-6 py-3 text-center">
-          <span className="flex items-center gap-1.5 font-mono text-[12px] uppercase tracking-[0.16em] sm:text-sm">
+          <span className="flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] sm:text-sm">
             <Sparkles size={15} className="text-blush" />
             {coupon.code} — {coupon.percent}% off {scope}
           </span>
-          <span className="font-mono text-[12px] tabular-nums tracking-[0.08em] text-paper/75 sm:text-sm">
+          <span className="font-mono text-[11px] tabular-nums tracking-[0.08em] text-paper/75 sm:text-sm">
             Termina en{" "}
             {remaining.days > 0 && `${remaining.days}d `}
             {pad(remaining.hours)}h {pad(remaining.minutes)}m {pad(remaining.seconds)}s
@@ -64,6 +64,8 @@ export default function CouponCountdownBar() {
     </AnimatePresence>
   );
 }
+
+
 
 
 
