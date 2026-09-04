@@ -241,7 +241,10 @@ export default function Catalog() {
   );
 
   const newArrivals = useMemo(
-    () => allProducts.filter((p) => p.is_new),
+    () =>
+      allProducts.filter(
+        (p) => p.is_new && (!p.new_until || new Date(p.new_until) > new Date()),
+      ),
     [allProducts],
   );
 
@@ -324,7 +327,7 @@ export default function Catalog() {
                 ingreso{newArrivals.length === 1 ? "" : "s"}
               </span>
             </h2>
-            <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-12">
+            <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8">
               {newArrivals.map((p) => (
                 <ProductCard key={p.id} p={p} onOpen={setSelected} qtyOf={qtyOf} />
               ))}
@@ -477,6 +480,5 @@ export default function Catalog() {
     </section>
   );
 }
-
 
 
