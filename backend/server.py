@@ -98,6 +98,7 @@ class Coupon(BaseModel):
     active: bool = False
     categories: List[str] = Field(default_factory=list)  # vacío = aplica a toda la tienda
     expires_at: Optional[datetime] = None  # null = sin fecha límite
+    min_amount: Optional[float] = None  # null = sin mínimo de compra
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -107,6 +108,7 @@ class CouponCreate(BaseModel):
     active: bool = False
     categories: List[str] = Field(default_factory=list)
     expires_at: Optional[datetime] = None
+    min_amount: Optional[float] = None
 
 
 # Add your routes to the router instead of directly to app
@@ -243,6 +245,7 @@ async def create_coupon(payload: CouponCreate, x_admin_password: Optional[str] =
         active=payload.active,
         categories=payload.categories,
         expires_at=payload.expires_at,
+        min_amount=payload.min_amount,
     )
     doc = coupon.model_dump()
     doc["created_at"] = doc["created_at"].isoformat()
@@ -274,6 +277,7 @@ async def update_coupon(coupon_id: str, payload: CouponCreate, x_admin_password:
         "active": payload.active,
         "categories": payload.categories,
         "expires_at": payload.expires_at.isoformat() if payload.expires_at else None,
+        "min_amount": payload.min_amount,
     }
     await db.coupons.update_one({"id": coupon_id}, {"$set": update_fields})
     updated = await db.coupons.find_one({"id": coupon_id}, {"_id": 0})
