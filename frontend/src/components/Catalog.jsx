@@ -240,6 +240,11 @@ export default function Catalog() {
     [dynamicProducts],
   );
 
+  const newArrivals = useMemo(
+    () => allProducts.filter((p) => p.is_new),
+    [allProducts],
+  );
+
   // Si entran por un link compartido (?producto=id), abrimos ese producto
   useEffect(() => {
     if (!allProducts.length) return;
@@ -304,6 +309,29 @@ export default function Catalog() {
       className="py-24 sm:py-32 lg:py-40"
     >
       <div className="mx-auto max-w-screen-2xl px-6 sm:px-12 lg:px-24">
+        {newArrivals.length > 0 && (
+          <Reveal className="mb-20 sm:mb-28">
+            <p
+              data-testid="new-arrivals-section"
+              className="mb-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-ink/50"
+            >
+              <span className="h-2 w-2 rounded-full bg-blush" />
+              Recién llegado
+            </p>
+            <h2 className="font-serif text-4xl font-light leading-none tracking-tight sm:text-6xl">
+              {newArrivals.length === 1 ? "Nuevo" : "Nuevos"}{" "}
+              <span className="italic">
+                ingreso{newArrivals.length === 1 ? "" : "s"}
+              </span>
+            </h2>
+            <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 md:grid-cols-3 lg:gap-x-12">
+              {newArrivals.map((p) => (
+                <ProductCard key={p.id} p={p} onOpen={setSelected} qtyOf={qtyOf} />
+              ))}
+            </div>
+          </Reveal>
+        )}
+
         <Reveal>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <div>
