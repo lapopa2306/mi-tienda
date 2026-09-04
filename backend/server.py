@@ -78,6 +78,7 @@ class Product(BaseModel):
     image: str
     description: Optional[str] = None
     colors: List[ProductColor] = Field(default_factory=list)
+    is_new: bool = False
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -87,6 +88,7 @@ class ProductCreate(BaseModel):
     price: float
     description: Optional[str] = None
     colors: List[ProductColor] = Field(default_factory=list)
+    is_new: bool = False
 
 
 class Coupon(BaseModel):
@@ -154,6 +156,7 @@ async def create_product(payload: ProductCreate, x_admin_password: Optional[str]
         image=first_image,
         description=payload.description,
         colors=payload.colors,
+        is_new=payload.is_new,
     )
 
     doc = product.model_dump()
@@ -183,6 +186,7 @@ async def update_product(product_id: str, payload: ProductCreate, x_admin_passwo
         "image": first_image,
         "description": payload.description,
         "colors": [c.model_dump() for c in payload.colors],
+        "is_new": payload.is_new,
     }
 
     await db.products.update_one({"id": product_id}, {"$set": update_fields})
