@@ -33,6 +33,17 @@ const uid = () =>
 
 const emptyColor = () => ({ name: "", hex: "#211e1c", images: [] });
 
+// Convierte un ISO string (lo que manda el backend) al formato que espera
+// un <input type="datetime-local">.
+function toLocalInputValue(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(
+    d.getHours(),
+  )}:${pad(d.getMinutes())}`;
+}
+
 function getPassword() {
   return sessionStorage.getItem("admin_pass") || "";
 }
@@ -348,6 +359,7 @@ function ProductForm({ onAuthFail }) {
   const [description, setDescription] = useState("");
   const [colors, setColors] = useState([emptyColor()]);
   const [isNew, setIsNew] = useState(false);
+  const [newUntil, setNewUntil] = useState(""); // fecha de fin del "nuevo ingreso"
   const [publishing, setPublishing] = useState(false);
   const [products, setProducts] = useState([]);
   const [loadingList, setLoadingList] = useState(true);
@@ -420,6 +432,7 @@ function ProductForm({ onAuthFail }) {
     setDescription("");
     setColors([emptyColor()]);
     setIsNew(false);
+    setNewUntil("");
   };
 
   const startEdit = (p) => {
@@ -429,6 +442,7 @@ function ProductForm({ onAuthFail }) {
     setPrice(p.price != null ? String(p.price) : "");
     setDescription(p.description || "");
     setIsNew(!!p.is_new);
+    setNewUntil(toLocalInputValue(p.new_until));
     setColors(
       p.colors && p.colors.length
         ? p.colors.map((c) => ({
@@ -462,6 +476,8 @@ function ProductForm({ onAuthFail }) {
       return toast.error("Cada color necesita un nombre");
     if (colors.every((c) => c.images.length === 0))
       return toast.error("Subí al menos una foto");
+    if (isNew && newUntil && new Date(newUntil) <= new Date())
+      return toast.error("La fecha de fin del \"nuevo ingreso\" tiene que ser en el futuro");
 
     const normalized = name.trim().toLowerCase();
     const isDuplicate = [...products, ...PRODUCTS].some(
@@ -502,6 +518,7 @@ function ProductForm({ onAuthFail }) {
         description: description.trim() || null,
         colors: colorsPayload,
         is_new: isNew,
+        new_until: isNew && newUntil ? new Date(newUntil).toISOString() : null,
       };
 
       // 2. Creamos o actualizamos el producto según corresponda
@@ -602,14 +619,29 @@ function ProductForm({ onAuthFail }) {
             />
           </div>
 
-          <div className="flex items-center justify-between rounded-xl border border-ink/10 bg-ink/[0.02] px-4 py-3">
-            <div>
-              <label className="text-sm font-medium">Nuevo ingreso</label>
-              <p className="text-xs text-ink/50">
-                Lo muestra en la sección "Nuevos ingresos" antes del catálogo.
-              </p>
+          <div className="rounded-xl border border-ink/10 bg-ink/[0.02] px-4 py-3 space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <label className="text-sm font-medium">Nuevo ingreso</label>
+                <p className="text-xs text-ink/50">
+                  Lo muestra en la sección "Nuevos ingresos" antes del catálogo.
+                </p>
+              </div>
+              <Switch checked={isNew} onCheckedChange={setIsNew} />
             </div>
-            <Switch checked={isNew} onCheckedChange={setIsNew} />
+            {isNew && (
+              <div className="space-y-1.5 pt-1">
+                <label className="text-xs text-ink/60">
+                  Fecha y hora de fin (opcional — si la dejás vacía, no sale solo de
+                  "Nuevos ingresos")
+                </label>
+                <Input
+                  type="datetime-local"
+                  value={newUntil}
+                  onChange={(e) => setNewUntil(e.target.value)}
+                />
+              </div>
+            )}
           </div>
 
           <div className="space-y-3">
@@ -818,6 +850,9 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
+
+
 
 
 
