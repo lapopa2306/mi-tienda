@@ -327,9 +327,16 @@ export default function Catalog() {
                 ingreso{newArrivals.length === 1 ? "" : "s"}
               </span>
             </h2>
-            <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8">
+            <div
+              className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 -mx-6 px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8"
+            >
               {newArrivals.map((p) => (
-                <ProductCard key={p.id} p={p} onOpen={setSelected} qtyOf={qtyOf} />
+                <div
+                  key={p.id}
+                  className="w-[72vw] shrink-0 snap-start sm:w-auto sm:shrink"
+                >
+                  <ProductCard p={p} onOpen={setSelected} qtyOf={qtyOf} />
+                </div>
               ))}
             </div>
           </Reveal>
@@ -480,5 +487,6 @@ export default function Catalog() {
     </section>
   );
 }
+
 
 
