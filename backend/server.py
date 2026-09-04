@@ -79,6 +79,7 @@ class Product(BaseModel):
     description: Optional[str] = None
     colors: List[ProductColor] = Field(default_factory=list)
     is_new: bool = False
+    new_until: Optional[datetime] = None  # null = "nuevo" no vence solo
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -89,6 +90,7 @@ class ProductCreate(BaseModel):
     description: Optional[str] = None
     colors: List[ProductColor] = Field(default_factory=list)
     is_new: bool = False
+    new_until: Optional[datetime] = None
 
 
 class Coupon(BaseModel):
@@ -125,9 +127,27 @@ async def verify_admin(x_admin_password: Optional[str] = Header(default=None)):
     return {"ok": True}
 
 
+async def expire_new_flags(products: list) -> list:
+    """Si un producto tiene fecha de fin de 'nuevo ingreso' vencida, le sacamos
+    el flag solo (sin que la dueña tenga que hacerlo a mano)."""
+    now = datetime.now(timezone.utc)
+    for p in products:
+        if not p.get("is_new") or not p.get("new_until"):
+            continue
+        new_until = p["new_until"]
+        new_until_dt = new_until if isinstance(new_until, datetime) else datetime.fromisoformat(new_until)
+        if new_until_dt.tzinfo is None:
+            new_until_dt = new_until_dt.replace(tzinfo=timezone.utc)
+        if new_until_dt <= now:
+            await db.products.update_one({"id": p["id"]}, {"$set": {"is_new": False}})
+            p["is_new"] = False
+    return products
+
+
 @api_router.get("/products", response_model=List[Product])
 async def list_products():
     products = await db.products.find({}, {"_id": 0}).sort("created_at", -1).to_list(2000)
+    products = await expire_new_flags(products)
     return products
 
 
@@ -157,10 +177,13 @@ async def create_product(payload: ProductCreate, x_admin_password: Optional[str]
         description=payload.description,
         colors=payload.colors,
         is_new=payload.is_new,
+        new_until=payload.new_until,
     )
 
     doc = product.model_dump()
     doc["created_at"] = doc["created_at"].isoformat()
+    if doc.get("new_until"):
+        doc["new_until"] = doc["new_until"].isoformat()
     await db.products.insert_one(doc)
     return product
 
@@ -187,6 +210,7 @@ async def update_product(product_id: str, payload: ProductCreate, x_admin_passwo
         "description": payload.description,
         "colors": [c.model_dump() for c in payload.colors],
         "is_new": payload.is_new,
+        "new_until": payload.new_until.isoformat() if payload.new_until else None,
     }
 
     await db.products.update_one({"id": product_id}, {"$set": update_fields})
