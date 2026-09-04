@@ -5,6 +5,7 @@ import "@/App.css";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import Nav from "@/components/Nav";
+import CouponCountdownBar from "@/components/CouponCountdownBar";
 import Hero from "@/components/Hero";
 import MarqueeStrip from "@/components/MarqueeStrip";
 import Catalog from "@/components/Catalog";
@@ -36,6 +37,7 @@ function Store() {
     <CartProvider>
       <WishlistProvider>
         <div className="App bg-paper text-ink min-h-screen">
+          <CouponCountdownBar />
           <Nav />
           <main>
             <Hero />
