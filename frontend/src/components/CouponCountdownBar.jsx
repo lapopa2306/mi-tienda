@@ -32,7 +32,9 @@ export default function CouponCountdownBar() {
     return () => clearInterval(id);
   }, [coupon?.expires_at]);
 
-  if (!coupon || !coupon.expires_at || !remaining) return null;
+  // La barra se muestra si hay cupón activo y tiene fecha de fin y/o monto mínimo.
+  if (!coupon || (!coupon.expires_at && !coupon.min_amount)) return null;
+  if (coupon.expires_at && !remaining) return null;
 
   const scope =
     coupon.categories && coupon.categories.length
@@ -54,11 +56,18 @@ export default function CouponCountdownBar() {
             <Sparkles size={15} className="text-blush" />
             {coupon.code} — {coupon.percent}% off {scope}
           </span>
-          <span className="font-mono text-[11px] tabular-nums tracking-[0.08em] text-paper/75 sm:text-sm">
-            Termina en{" "}
-            {remaining.days > 0 && `${remaining.days}d `}
-            {pad(remaining.hours)}h {pad(remaining.minutes)}m {pad(remaining.seconds)}s
-          </span>
+          {coupon.min_amount && (
+            <span className="font-mono text-[11px] tracking-[0.08em] text-paper/75 sm:text-sm">
+              Válido en compras desde $ {Number(coupon.min_amount).toLocaleString("es-AR")}
+            </span>
+          )}
+          {remaining && (
+            <span className="font-mono text-[11px] tabular-nums tracking-[0.08em] text-paper/75 sm:text-sm">
+              Termina en{" "}
+              {remaining.days > 0 && `${remaining.days}d `}
+              {pad(remaining.hours)}h {pad(remaining.minutes)}m {pad(remaining.seconds)}s
+            </span>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
