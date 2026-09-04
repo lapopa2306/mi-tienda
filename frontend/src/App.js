@@ -37,8 +37,10 @@ function Store() {
     <CartProvider>
       <WishlistProvider>
         <div className="App bg-paper text-ink min-h-screen">
-          <CouponCountdownBar />
-          <Nav />
+          <div className="fixed inset-x-0 top-0 z-50">
+            <CouponCountdownBar />
+            <Nav />
+          </div>
           <main>
             <Hero />
             <MarqueeStrip />
