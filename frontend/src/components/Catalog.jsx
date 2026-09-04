@@ -16,6 +16,7 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import ProductModal from "@/components/ProductModal";
 import Reveal, { EASE } from "@/components/Reveal";
+import { scrollToHash } from "@/lib/scroll";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -305,6 +306,12 @@ export default function Catalog() {
     return bySearch;
   }, [active, query, sort, showOnlyFavorites, favorites, allProducts]);
 
+  const pickCategory = (cat) => {
+    setActive(cat);
+    setShowOnlyFavorites(false);
+    scrollToHash(null, "#filtros-categoria");
+  };
+
   return (
     <section
       id="catalogo"
@@ -410,7 +417,7 @@ export default function Catalog() {
         </Reveal>
 
         <Reveal delay={0.1} className="mt-8">
-          <div className="flex flex-wrap gap-3">
+          <div id="filtros-categoria" className="flex flex-wrap gap-3 scroll-mt-24">
             <button
               data-testid="category-filter-favoritos"
               onClick={() => setShowOnlyFavorites((v) => !v)}
@@ -481,6 +488,31 @@ export default function Catalog() {
               ))}
             </AnimatePresence>
           </motion.div>
+        )}
+
+        {filtered.length > 0 && (
+          <Reveal className="mt-24 border-t border-ink/10 pt-12 text-center">
+            <p className="mb-4 flex items-center justify-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-ink/50">
+              <span className="h-2 w-2 rounded-full bg-blush" />
+              ¿Buscás otra categoría?
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {["Todo", ...CATEGORIES].map((cat) => (
+                <button
+                  key={cat}
+                  data-testid={`category-filter-bottom-${slug(cat)}`}
+                  onClick={() => pickCategory(cat)}
+                  className={`rounded-full border px-5 py-2 text-sm transition-colors duration-300 ${
+                    active === cat && !showOnlyFavorites
+                      ? "border-ink bg-blush/60 text-ink"
+                      : "border-ink/15 text-ink/60 hover:border-ink/40 hover:text-ink"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </Reveal>
         )}
       </div>
       <ProductModal product={selected} onClose={closeModal} />
