@@ -247,7 +247,7 @@ export default function Catalog() {
   }, []);
 
   const allProducts = useMemo(
-    () => [...dynamicProducts, ...PRODUCTS],
+    () => [...dynamicProducts, ...PRODUCTS].filter((p) => !p.hidden),
     [dynamicProducts],
   );
 
