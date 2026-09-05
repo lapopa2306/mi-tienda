@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +22,8 @@ import {
   X,
   Pencil,
   Tag,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -363,6 +365,16 @@ function ProductForm({ onAuthFail }) {
   const [publishing, setPublishing] = useState(false);
   const [products, setProducts] = useState([]);
   const [loadingList, setLoadingList] = useState(true);
+  const [showHidden, setShowHidden] = useState(false);
+
+  const visibleProducts = useMemo(
+    () => products.filter((p) => !p.hidden),
+    [products],
+  );
+  const hiddenProducts = useMemo(
+    () => products.filter((p) => p.hidden),
+    [products],
+  );
 
   const authHeaders = { "X-Admin-Password": getPassword() };
 
@@ -553,6 +565,20 @@ function ProductForm({ onAuthFail }) {
       if (editingId === id) reset();
     } catch (err) {
       if (!handleAuthError(err)) toast.error("No se pudo eliminar");
+    }
+  };
+
+  const toggleHidden = async (id, hidden) => {
+    try {
+      await axios.patch(
+        `${API}/products/${id}/visibility`,
+        { hidden },
+        { headers: authHeaders },
+      );
+      toast.success(hidden ? "Producto ocultado" : "Producto visible de nuevo");
+      setProducts((ps) => ps.map((p) => (p.id === id ? { ...p, hidden } : p)));
+    } catch (err) {
+      if (!handleAuthError(err)) toast.error("No se pudo actualizar");
     }
   };
 
@@ -793,55 +819,146 @@ function ProductForm({ onAuthFail }) {
               Todavía no publicaste ningún producto desde acá.
             </p>
           ) : (
-            <ul className="divide-y divide-ink/10">
-              {products.map((p) => (
-                <li
-                  key={p.id}
-                  className={`flex items-center gap-3 py-3 ${
-                    editingId === p.id ? "bg-ink/[0.03] -mx-2 px-2 rounded-lg" : ""
-                  }`}
-                >
-                  {p.image && (
-                    <img
-                      src={p.image}
-                      alt=""
-                      className="h-12 w-12 object-cover rounded-md border border-ink/10 shrink-0"
-                    />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate flex items-center gap-2">
-                      {p.name}
-                      {p.is_new && (
-                        <span className="shrink-0 rounded-full bg-blush px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-ink">
-                          Nuevo
-                        </span>
+            <>
+              {visibleProducts.length === 0 ? (
+                <p className="text-sm text-ink/50">
+                  No tenés productos visibles ahora mismo.
+                </p>
+              ) : (
+                <ul className="divide-y divide-ink/10">
+                  {visibleProducts.map((p) => (
+                    <li
+                      key={p.id}
+                      className={`flex items-center gap-3 py-3 ${
+                        editingId === p.id ? "bg-ink/[0.03] -mx-2 px-2 rounded-lg" : ""
+                      }`}
+                    >
+                      {p.image && (
+                        <img
+                          src={p.image}
+                          alt=""
+                          className="h-12 w-12 object-cover rounded-md border border-ink/10 shrink-0"
+                        />
                       )}
-                    </p>
-                    <p className="text-xs text-ink/50">
-                      {p.category} · $ {Number(p.price).toLocaleString("es-AR")}
-                    </p>
-                  </div>
-                  <Button
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate flex items-center gap-2">
+                          {p.name}
+                          {p.is_new && (
+                            <span className="shrink-0 rounded-full bg-blush px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-ink">
+                              Nuevo
+                            </span>
+                          )}
+                        </p>
+                        <p className="text-xs text-ink/50">
+                          {p.category} · $ {Number(p.price).toLocaleString("es-AR")}
+                        </p>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => startEdit(p)}
+                        aria-label="Editar producto"
+                      >
+                        <Pencil className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => toggleHidden(p.id, true)}
+                        aria-label="Ocultar producto"
+                        title="Ocultar del catálogo"
+                      >
+                        <EyeOff className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => removeProduct(p.id)}
+                        aria-label="Eliminar producto"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {hiddenProducts.length > 0 && (
+                <div className="pt-2 border-t border-ink/10">
+                  <button
                     type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => startEdit(p)}
-                    aria-label="Editar producto"
+                    onClick={() => setShowHidden((v) => !v)}
+                    className="flex w-full items-center justify-between py-3 text-left"
                   >
-                    <Pencil className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => removeProduct(p.id)}
-                    aria-label="Eliminar producto"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </li>
-              ))}
-            </ul>
+                    <span className="text-sm font-medium text-ink/70">
+                      Ocultos ({hiddenProducts.length})
+                    </span>
+                    <ChevronRight
+                      className={`h-4 w-4 text-ink/40 transition-transform duration-200 ${
+                        showHidden ? "rotate-90" : ""
+                      }`}
+                    />
+                  </button>
+                  {showHidden && (
+                    <ul className="divide-y divide-ink/10">
+                      {hiddenProducts.map((p) => (
+                        <li
+                          key={p.id}
+                          className={`flex items-center gap-3 py-3 opacity-60 ${
+                            editingId === p.id ? "bg-ink/[0.03] -mx-2 px-2 rounded-lg" : ""
+                          }`}
+                        >
+                          {p.image && (
+                            <img
+                              src={p.image}
+                              alt=""
+                              className="h-12 w-12 object-cover rounded-md border border-ink/10 shrink-0"
+                            />
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium truncate">{p.name}</p>
+                            <p className="text-xs text-ink/50">
+                              {p.category} · $ {Number(p.price).toLocaleString("es-AR")}
+                            </p>
+                          </div>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => startEdit(p)}
+                            aria-label="Editar producto"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => toggleHidden(p.id, false)}
+                            aria-label="Mostrar producto de nuevo"
+                            title="Volver a mostrar en el catálogo"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => removeProduct(p.id)}
+                            aria-label="Eliminar producto"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </>
           )}
         </div>
 
@@ -850,6 +967,7 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
 
 
 
