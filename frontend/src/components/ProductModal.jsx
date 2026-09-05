@@ -12,10 +12,12 @@ export default function ProductModal({ product, onClose }) {
   const { add } = useCart();
   const [colorIdx, setColorIdx] = useState(0);
   const [imgIdx, setImgIdx] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
 
   useEffect(() => {
     setColorIdx(0);
     setImgIdx(0);
+    setLightbox(false);
   }, [product]);
 
   useEffect(() => {
@@ -24,10 +26,14 @@ export default function ProductModal({ product, onClose }) {
   }, [product]);
 
   useEffect(() => {
-    const onKey = (e) => e.key === "Escape" && onClose();
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      if (lightbox) setLightbox(false);
+      else onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, lightbox]);
 
   const color = product?.colors?.[colorIdx];
   const images = color?.images || (product ? [product.image] : []);
@@ -88,7 +94,8 @@ export default function ProductModal({ product, onClose }) {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.35 }}
-                    className="h-full w-full object-cover"
+                    onClick={() => setLightbox(true)}
+                    className="h-full w-full cursor-zoom-in object-cover"
                   />
                 </AnimatePresence>
                 {images.length > 1 && (
@@ -255,6 +262,74 @@ export default function ProductModal({ product, onClose }) {
               </div>
             </div>
           </motion.div>
+
+          {lightbox && (
+            <motion.div
+              data-testid="product-modal-lightbox"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setLightbox(false)}
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 p-4"
+            >
+              <button
+                data-testid="product-modal-lightbox-close"
+                onClick={() => setLightbox(false)}
+                aria-label="Cerrar vista de pantalla completa"
+                className="absolute right-4 top-4 z-10 rounded-full bg-paper/10 p-2.5 text-paper backdrop-blur-md transition-colors duration-300 hover:bg-paper/20"
+              >
+                <X size={20} />
+              </button>
+
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={mainImage}
+                  src={mainImage}
+                  alt={`${product.name} — ${color?.name || ""}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="max-h-[90vh] max-w-[90vw] object-contain"
+                />
+              </AnimatePresence>
+
+              {images.length > 1 && (
+                <>
+                  <button
+                    data-testid="product-modal-lightbox-prev"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setImgIdx((imgIdx - 1 + images.length) % images.length);
+                    }}
+                    aria-label="Foto anterior"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-paper/10 p-3 text-paper backdrop-blur-md transition-colors duration-300 hover:bg-paper/20 sm:left-6"
+                  >
+                    <ChevronLeft size={22} />
+                  </button>
+                  <button
+                    data-testid="product-modal-lightbox-next"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setImgIdx((imgIdx + 1) % images.length);
+                    }}
+                    aria-label="Foto siguiente"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-paper/10 p-3 text-paper backdrop-blur-md transition-colors duration-300 hover:bg-paper/20 sm:right-6"
+                  >
+                    <ChevronRight size={22} />
+                  </button>
+                  <span
+                    data-testid="product-modal-lightbox-counter"
+                    className="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-paper/10 px-3 py-1 font-mono text-[11px] text-paper backdrop-blur-md"
+                  >
+                    {imgIdx + 1} / {images.length}
+                  </span>
+                </>
+              )}
+            </motion.div>
+          )}
         </>
       )}
     </AnimatePresence>
