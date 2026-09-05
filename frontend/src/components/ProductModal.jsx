@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Copy, Plus, Share2, X } from "lucide-react";
 import { toast } from "sonner";
@@ -13,12 +13,19 @@ export default function ProductModal({ product, onClose }) {
   const [colorIdx, setColorIdx] = useState(0);
   const [imgIdx, setImgIdx] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
+  const lightboxRef = useRef(null);
 
   useEffect(() => {
     setColorIdx(0);
     setImgIdx(0);
     setLightbox(false);
+    setZoomed(false);
   }, [product]);
+
+  useEffect(() => {
+    setZoomed(false);
+  }, [imgIdx, lightbox]);
 
   useEffect(() => {
     if (!window.__lenis) return;
@@ -282,21 +289,37 @@ export default function ProductModal({ product, onClose }) {
                 <X size={20} />
               </button>
 
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={mainImage}
-                  src={mainImage}
-                  alt={`${product.name} — ${color?.name || ""}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={(e) => e.stopPropagation()}
-                  className="max-h-[90vh] max-w-[90vw] object-contain"
-                />
-              </AnimatePresence>
+              <div
+                ref={lightboxRef}
+                className="relative flex h-full w-full items-center justify-center overflow-hidden"
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`${mainImage}-${zoomed}`}
+                    src={mainImage}
+                    alt={`${product.name} — ${color?.name || ""}`}
+                    drag={zoomed}
+                    dragConstraints={lightboxRef}
+                    dragElastic={0.15}
+                    dragMomentum={false}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setZoomed((z) => !z);
+                    }}
+                    className={`max-h-[90vh] max-w-[90vw] object-contain transition-transform duration-300 ${
+                      zoomed
+                        ? "scale-[2.2] cursor-grab active:cursor-grabbing"
+                        : "scale-100 cursor-zoom-in"
+                    }`}
+                  />
+                </AnimatePresence>
+              </div>
 
-              {images.length > 1 && (
+              {images.length > 1 && !zoomed && (
                 <>
                   <button
                     data-testid="product-modal-lightbox-prev"
