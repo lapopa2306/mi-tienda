@@ -84,7 +84,7 @@ export default function ProductModal({ product, onClose }) {
               data-testid="product-modal-close"
               onClick={onClose}
               aria-label="Cerrar detalle"
-              className="absolute right-4 top-4 z-10 rounded-full bg-paper/90 p-2.5 text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper"
+              className="absolute right-4 top-[max(1.5rem,env(safe-area-inset-top))] z-10 rounded-full bg-paper/90 p-2.5 text-ink backdrop-blur-md transition-colors duration-300 hover:bg-ink hover:text-paper sm:top-4"
             >
               <X size={16} />
             </button>
@@ -284,7 +284,7 @@ export default function ProductModal({ product, onClose }) {
                 data-testid="product-modal-lightbox-close"
                 onClick={() => setLightbox(false)}
                 aria-label="Cerrar vista de pantalla completa"
-                className="absolute right-4 top-4 z-10 rounded-full bg-paper/10 p-2.5 text-paper backdrop-blur-md transition-colors duration-300 hover:bg-paper/20"
+                className="absolute right-4 top-[max(1.5rem,env(safe-area-inset-top))] z-10 rounded-full bg-paper/10 p-2.5 text-paper backdrop-blur-md transition-colors duration-300 hover:bg-paper/20"
               >
                 <X size={20} />
               </button>
@@ -358,6 +358,7 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
+
 
 
 
