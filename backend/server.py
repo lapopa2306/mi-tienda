@@ -80,6 +80,7 @@ class Product(BaseModel):
     colors: List[ProductColor] = Field(default_factory=list)
     is_new: bool = False
     new_until: Optional[datetime] = None  # null = "nuevo" no vence solo
+    hidden: bool = False  # true = oculto del catálogo público, solo visible en admin
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -91,6 +92,7 @@ class ProductCreate(BaseModel):
     colors: List[ProductColor] = Field(default_factory=list)
     is_new: bool = False
     new_until: Optional[datetime] = None
+    hidden: bool = False
 
 
 class Coupon(BaseModel):
@@ -178,6 +180,7 @@ async def create_product(payload: ProductCreate, x_admin_password: Optional[str]
         colors=payload.colors,
         is_new=payload.is_new,
         new_until=payload.new_until,
+        hidden=payload.hidden,
     )
 
     doc = product.model_dump()
@@ -211,9 +214,29 @@ async def update_product(product_id: str, payload: ProductCreate, x_admin_passwo
         "colors": [c.model_dump() for c in payload.colors],
         "is_new": payload.is_new,
         "new_until": payload.new_until.isoformat() if payload.new_until else None,
+        "hidden": payload.hidden,
     }
 
     await db.products.update_one({"id": product_id}, {"$set": update_fields})
+    updated = await db.products.find_one({"id": product_id}, {"_id": 0})
+    return updated
+
+
+class ProductVisibility(BaseModel):
+    hidden: bool
+
+
+@api_router.patch("/products/{product_id}/visibility", response_model=Product)
+async def set_product_visibility(
+    product_id: str,
+    payload: ProductVisibility,
+    x_admin_password: Optional[str] = Header(default=None),
+):
+    check_admin(x_admin_password)
+    existing = await db.products.find_one({"id": product_id}, {"_id": 0})
+    if not existing:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    await db.products.update_one({"id": product_id}, {"$set": {"hidden": payload.hidden}})
     updated = await db.products.find_one({"id": product_id}, {"_id": 0})
     return updated
 
