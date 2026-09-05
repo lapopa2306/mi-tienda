@@ -22,6 +22,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const fmt = (n) => n.toLocaleString("es-AR");
 const slug = (s) => s.toLowerCase().replace(/\s+/g, "-");
+const isNewProduct = (p) =>
+  Boolean(p.is_new && (!p.new_until || new Date(p.new_until) > new Date()));
 
 function ProductCard({ p, onOpen, qtyOf }) {
   const { add, decrement } = useCart();
@@ -58,6 +60,14 @@ function ProductCard({ p, onOpen, qtyOf }) {
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
+        {isNewProduct(p) && (
+          <span
+            data-testid={`new-badge-${p.id}`}
+            className="absolute left-2 top-2 rounded-sm bg-blush/90 px-2 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-blush-deep backdrop-blur-sm"
+          >
+            Nuevo
+          </span>
+        )}
         {images.length > 1 && (
           <>
             <button
@@ -242,10 +252,7 @@ export default function Catalog() {
   );
 
   const newArrivals = useMemo(
-    () =>
-      allProducts.filter(
-        (p) => p.is_new && (!p.new_until || new Date(p.new_until) > new Date()),
-      ),
+    () => allProducts.filter(isNewProduct),
     [allProducts],
   );
 
@@ -303,6 +310,13 @@ export default function Catalog() {
       return [...bySearch].sort((a, b) => a.price - b.price);
     if (sort === "precio-desc")
       return [...bySearch].sort((a, b) => b.price - a.price);
+    // En la vista "Todo" sin filtros activos, evitamos que los productos ya
+    // mostrados en "Nuevos ingresos" se repitan arriba de todo del catálogo.
+    if (active === "Todo" && sort === "relevancia") {
+      const older = bySearch.filter((p) => !isNewProduct(p));
+      const newer = bySearch.filter(isNewProduct);
+      return [...older, ...newer];
+    }
     return bySearch;
   }, [active, query, sort, showOnlyFavorites, favorites, allProducts]);
 
@@ -321,30 +335,32 @@ export default function Catalog() {
       <div className="mx-auto max-w-screen-2xl px-6 sm:px-12 lg:px-24">
         {newArrivals.length > 0 && (
           <Reveal className="mb-20 sm:mb-28">
-            <p
-              data-testid="new-arrivals-section"
-              className="mb-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-ink/50"
-            >
-              <span className="h-2 w-2 rounded-full bg-blush" />
-              Recién llegado
-            </p>
-            <h2 className="font-serif text-4xl font-light leading-none tracking-tight sm:text-6xl">
-              {newArrivals.length === 1 ? "Nuevo" : "Nuevos"}{" "}
-              <span className="italic">
-                ingreso{newArrivals.length === 1 ? "" : "s"}
-              </span>
-            </h2>
-            <div
-              className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 -mx-6 px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8"
-            >
-              {newArrivals.map((p) => (
-                <div
-                  key={p.id}
-                  className="w-[72vw] shrink-0 snap-start sm:w-auto sm:shrink"
-                >
-                  <ProductCard p={p} onOpen={setSelected} qtyOf={qtyOf} />
-                </div>
-              ))}
+            <div className="rounded-2xl bg-blush/15 px-6 py-12 sm:px-10 sm:py-16">
+              <p
+                data-testid="new-arrivals-section"
+                className="mb-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-ink/50"
+              >
+                <span className="h-2 w-2 rounded-full bg-blush" />
+                Recién llegado
+              </p>
+              <h2 className="font-serif text-4xl font-light leading-none tracking-tight sm:text-6xl">
+                {newArrivals.length === 1 ? "Nuevo" : "Nuevos"}{" "}
+                <span className="italic">
+                  ingreso{newArrivals.length === 1 ? "" : "s"}
+                </span>
+              </h2>
+              <div
+                className="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 -mx-6 px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-x-6 sm:gap-y-12 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8"
+              >
+                {newArrivals.map((p) => (
+                  <div
+                    key={p.id}
+                    className="w-[72vw] shrink-0 snap-start sm:w-auto sm:shrink"
+                  >
+                    <ProductCard p={p} onOpen={setSelected} qtyOf={qtyOf} />
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         )}
