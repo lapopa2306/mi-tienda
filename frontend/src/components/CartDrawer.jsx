@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, Minus, Plus, ShoppingBag, Sparkles, X } from "lucide-react";
+import { CreditCard, MapPin, MessageCircle, Minus, Plus, ShoppingBag, Sparkles, Truck, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { scrollToHash } from "@/lib/scroll";
 import { EASE } from "@/components/Reveal";
@@ -250,6 +250,30 @@ export default function CartDrawer() {
                     El pedido se envía por WhatsApp y coordinamos pago y entrega
                     juntos.
                   </p>
+                  <div
+                    data-testid="cart-trust-signals"
+                    className="mb-5 space-y-2 border-t border-ink/10 pt-4"
+                  >
+                    <div className="flex items-start gap-2.5">
+                      <Truck size={14} className="mt-0.5 shrink-0 text-ink/45" />
+                      <p className="text-xs font-light leading-relaxed text-ink/60">
+                        Envío a todo el país
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <MapPin size={14} className="mt-0.5 shrink-0 text-ink/45" />
+                      <p className="text-xs font-light leading-relaxed text-ink/60">
+                        Retiros en Wilde
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <CreditCard size={14} className="mt-0.5 shrink-0 text-ink/45" />
+                      <p className="text-xs font-light leading-relaxed text-ink/60">
+                        Efectivo, transferencia y 3 cuotas sin interés con todas
+                        las tarjetas
+                      </p>
+                    </div>
+                  </div>
                   <a
                     href={waUrl}
                     target="_blank"
@@ -276,7 +300,6 @@ export default function CartDrawer() {
     </AnimatePresence>
   );
 }
-
 
 
 
