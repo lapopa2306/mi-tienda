@@ -78,7 +78,7 @@ export default function ProductModal({ product, onClose }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="fixed inset-x-0 bottom-0 top-auto z-[85] mx-auto flex max-h-[92vh] w-full max-w-5xl flex-col overflow-y-auto bg-paper sm:inset-0 sm:m-auto sm:h-fit sm:flex-row sm:overflow-visible"
+            className="fixed inset-0 z-[85] mx-auto flex h-[100dvh] w-full max-w-5xl flex-col overflow-y-auto bg-paper sm:inset-0 sm:m-auto sm:h-fit sm:max-h-[92vh] sm:flex-row sm:overflow-visible"
           >
             <button
               data-testid="product-modal-close"
@@ -358,6 +358,9 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
+
+
+
 
 
 
