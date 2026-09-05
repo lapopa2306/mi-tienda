@@ -177,11 +177,34 @@ export default function CartDrawer() {
                   {coupon && !meetsMinAmount && (
                     <div
                       data-testid="cart-min-amount-notice"
-                      className="mb-5 rounded-xl bg-smoke px-4 py-3 text-xs text-ink/70"
+                      className="mb-5 rounded-xl bg-smoke px-4 py-3"
                     >
-                      Te faltan{" "}
-                      <span className="font-semibold">$ {fmt(amountToMin)}</span> para
-                      aprovechar el cupón {coupon.code}.
+                      <p className="text-xs text-ink/70">
+                        Te faltan{" "}
+                        <span className="font-semibold">$ {fmt(amountToMin)}</span>{" "}
+                        para aprovechar el cupón {coupon.code}.
+                      </p>
+                      <div
+                        className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-ink/10"
+                        role="progressbar"
+                        aria-valuenow={Math.round(
+                          Math.min((total / coupon.min_amount) * 100, 100),
+                        )}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      >
+                        <motion.div
+                          className="h-full rounded-full bg-blush-deep"
+                          initial={{ width: 0 }}
+                          animate={{
+                            width: `${Math.min(
+                              (total / coupon.min_amount) * 100,
+                              100,
+                            )}%`,
+                          }}
+                          transition={{ duration: 0.4, ease: EASE }}
+                        />
+                      </div>
                     </div>
                   )}
 
