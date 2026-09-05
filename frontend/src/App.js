@@ -14,6 +14,7 @@ import InfoStrip from "@/components/InfoStrip";
 import Footer from "@/components/Footer";
 import CartDrawer from "@/components/CartDrawer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import ScrollToTop from "@/components/ScrollToTop";
 import AdminPanel from "@/components/AdminPanel";
 
 function Store() {
@@ -51,6 +52,7 @@ function Store() {
           <Footer />
           <CartDrawer />
           <FloatingWhatsApp />
+          <ScrollToTop />
           <div aria-hidden className="noise-overlay" />
           <Toaster
             position="bottom-center"
