@@ -303,17 +303,17 @@ export default function ProductModal({ product, onClose }) {
                     dragElastic={0.15}
                     dragMomentum={false}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                    animate={{ opacity: 1, scale: zoomed ? 2.2 : 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                     onClick={(e) => {
                       e.stopPropagation();
                       setZoomed((z) => !z);
                     }}
-                    className={`max-h-[90vh] max-w-[90vw] object-contain transition-transform duration-300 ${
+                    className={`max-h-[90vh] max-w-[90vw] object-contain ${
                       zoomed
-                        ? "scale-[2.2] cursor-grab active:cursor-grabbing"
-                        : "scale-100 cursor-zoom-in"
+                        ? "cursor-grab active:cursor-grabbing"
+                        : "cursor-zoom-in"
                     }`}
                   />
                 </AnimatePresence>
@@ -358,6 +358,7 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
+
 
 
 
