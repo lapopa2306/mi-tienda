@@ -16,6 +16,7 @@ export const CATEGORIES = [
   "Cartucheras",
   "Morrales",
   "Infantil",
+  "Futbol",
 ];
 
 const HEX = {
@@ -408,7 +409,7 @@ export const PRODUCTS = [
   {
     id: "morral-independiente",
     name: "Morral Independiente",
-    category: "Morrales",
+    category: "Futbol",
     price: 38000,
     image: "/products/morral-independiente-1.webp",
     colors: [
@@ -425,7 +426,7 @@ export const PRODUCTS = [
   {
     id: "morral-boca-juniors",
     name: "Morral Boca Juniors",
-    category: "Morrales",
+    category: "Futbol",
     price: 38000,
     image: "/products/morral-boca-juniors-1.webp",
     colors: [
@@ -442,7 +443,7 @@ export const PRODUCTS = [
   {
     id: "morral-racing-club",
     name: "Morral Racing Club",
-    category: "Morrales",
+    category: "Futbol",
     price: 38000,
     image: "/products/morral-racing-club-1.webp",
     colors: [
@@ -459,7 +460,7 @@ export const PRODUCTS = [
   {
     id: "morral-river-plate",
     name: "Morral River Plate",
-    category: "Morrales",
+    category: "Futbol",
     price: 38000,
     image: "/products/morral-river-plate-1.webp",
     colors: [
@@ -728,7 +729,7 @@ export const PRODUCTS = [
   {
     id: "cartuchera-river-plate",
     name: "Cartuchera River Plate",
-    category: "Cartucheras",
+    category: "Futbol",
     price: 20000,
     image: "/products/cartuchera-river-plate-1.webp",
     colors: [
@@ -746,7 +747,7 @@ export const PRODUCTS = [
   {
     id: "cartuchera-independiente",
     name: "Cartuchera Independiente",
-    category: "Cartucheras",
+    category: "Futbol",
     price: 20000,
     image: "/products/cartuchera-independiente.webp",
     colors: [
@@ -760,7 +761,7 @@ export const PRODUCTS = [
   {
     id: "cartuchera-boca-juniors",
     name: "Cartuchera Boca Juniors",
-    category: "Cartucheras",
+    category: "Futbol",
     price: 20000,
     image: "/products/cartuchera-boca-juniors.webp",
     colors: [
@@ -774,7 +775,7 @@ export const PRODUCTS = [
   {
     id: "cartuchera-racing-club",
     name: "Cartuchera Racing Club",
-    category: "Cartucheras",
+    category: "Futbol",
     price: 20000,
     image: "/products/cartuchera-racing-1.webp",
     colors: [
@@ -1022,7 +1023,7 @@ export const PRODUCTS = [
   {
     id: "mochila-boca-juniors",
     name: "Mochila Boca Juniors",
-    category: "Infantil",
+    category: "Futbol",
     price: 44000,
     image: "/products/mochila-boca-juniors-1.webp",
     colors: [
@@ -1040,7 +1041,7 @@ export const PRODUCTS = [
   {
     id: "mochila-racing-club",
     name: "Mochila Racing Club",
-    category: "Infantil",
+    category: "Futbol",
     price: 44000,
     image: "/products/mochila-racing-club-1.webp",
     colors: [
