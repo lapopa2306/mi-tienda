@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { scrollToHash } from "@/lib/scroll";
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -12,21 +13,13 @@ export default function ScrollToTop() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleClick = () => {
-    if (window.__lenis) {
-      window.__lenis.scrollTo(0, { duration: 1.1 });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   return (
     <AnimatePresence>
       {visible && (
         <motion.button
           data-testid="scroll-to-top-button"
-          onClick={handleClick}
-          aria-label="Volver arriba"
+          onClick={() => scrollToHash(null, "#catalogo")}
+          aria-label="Volver al catálogo"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
@@ -41,4 +34,5 @@ export default function ScrollToTop() {
     </AnimatePresence>
   );
 }
+
 
