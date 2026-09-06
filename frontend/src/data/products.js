@@ -656,8 +656,8 @@ export const PRODUCTS = [
   },
   {
     id: "bandolera-bcy",
-    name: "Bandolera BCY",
-    category: "Bandoleras",
+    name: "Portacelular BCY",
+    category: "Portacelulares",
     price: 19000,
     image: "/products/bandolera-bcy-negro-1.webp",
     colors: [
