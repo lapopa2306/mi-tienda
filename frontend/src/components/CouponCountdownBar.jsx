@@ -68,11 +68,17 @@ export default function CouponCountdownBar() {
               {pad(remaining.hours)}h {pad(remaining.minutes)}m {pad(remaining.seconds)}s
             </span>
           )}
+          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-paper/60 sm:text-xs">
+            (No válido en tarj. de crédito)
+          </span>
         </div>
       </motion.div>
     </AnimatePresence>
   );
 }
+
+
+
 
 
 
