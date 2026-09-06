@@ -1271,20 +1271,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "billetera-simple-gama",
-    name: "Billetera Simple Gama",
-    category: "Billetera de mujer",
-    price: 17000,
-    image: "/products/billetera-simple-gama-negra-1.webp",
-    colors: [
-      {
-        name: "Negra",
-        hex: HEX.Negro,
-        images: ["/products/billetera-simple-gama-negra-1.webp"],
-      },
-    ],
-  },
-  {
     id: "billetera-simple-bcy",
     name: "Billetera Simple BCY",
     category: "Billetera de mujer",
