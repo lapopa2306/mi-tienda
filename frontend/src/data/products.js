@@ -94,6 +94,7 @@ export const PRODUCTS = [
         images: [
           "/products/billetera-doble-trendy-marron-1.webp",
           "/products/billetera-doble-trendy-marron-2.webp",
+          "/products/billetera-doble-trendy-marron-3.webp",
         ],
       },
     ],
@@ -111,6 +112,7 @@ export const PRODUCTS = [
         images: [
           "/products/billetera-cierre-doble-trendy-negra-1.webp",
           "/products/billetera-cierre-doble-trendy-negra-2.webp",
+          "/products/billetera-cierre-doble-trendy-negra-3.webp",
         ],
       },
     ],
@@ -127,6 +129,7 @@ export const PRODUCTS = [
         hex: HEX.Negro,
         images: [
           "/products/billetera-simple-ona-saenz-negra-1.webp",
+          "/products/billetera-simple-ona-saenz-negra-2.webp",
         ],
       },
     ],
@@ -1058,7 +1061,10 @@ export const PRODUCTS = [
       {
         name: "Celeste",
         hex: "#7fd1cf",
-        images: ["/products/billetera-chica-trendy-celeste-1.webp"],
+        images: [
+          "/products/billetera-chica-trendy-celeste-1.webp",
+          "/products/billetera-chica-trendy-celeste-2.webp",
+        ],
       },
     ],
   },
@@ -1072,7 +1078,10 @@ export const PRODUCTS = [
       {
         name: "Verde Oscuro",
         hex: HEX.Oliva,
-        images: ["/products/billetera-chica-trendy-cuadros-verde-1.webp"],
+        images: [
+          "/products/billetera-chica-trendy-cuadros-verde-1.webp",
+          "/products/billetera-chica-trendy-cuadros-verde-2.webp",
+        ],
       },
     ],
   },
@@ -1086,7 +1095,10 @@ export const PRODUCTS = [
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-leblu-marron-1.webp"],
+        images: [
+          "/products/billetera-chica-leblu-marron-1.webp",
+          "/products/billetera-chica-leblu-marron-2.webp",
+        ],
       },
     ],
   },
