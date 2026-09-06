@@ -170,6 +170,7 @@ export default function CartDrawer() {
                         {meetsMinAmount &&
                           discount === 0 &&
                           " (sumá un producto de esa categoría para aprovecharlo)"}
+                        . Válido en tarjeta de débito, efectivo y transferencia.
                       </p>
                     </div>
                   )}
@@ -276,12 +277,4 @@ export default function CartDrawer() {
     </AnimatePresence>
   );
 }
-
-
-
-
-
-
-
-
 
