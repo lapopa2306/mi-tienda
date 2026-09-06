@@ -305,7 +305,10 @@ export const PRODUCTS = [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/rinonera-oreiro-suela.webp"],
+        images: [
+          "/products/rinonera-oreiro-suela.webp",
+          "/products/rinonera-oreiro-suela-2.webp",
+        ],
       },
     ],
   },
@@ -320,7 +323,11 @@ export const PRODUCTS = [
       {
         name: "Crema",
         hex: HEX.Crema,
-        images: ["/products/rinonera-trendy-flecha-crema.webp"],
+        images: [
+          "/products/rinonera-trendy-flecha-crema.webp",
+          "/products/rinonera-trendy-flecha-crema-2.webp",
+          "/products/rinonera-trendy-flecha-crema-3.webp",
+        ],
       },
     ],
   },
