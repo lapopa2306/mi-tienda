@@ -366,14 +366,24 @@ function ProductForm({ onAuthFail }) {
   const [products, setProducts] = useState([]);
   const [loadingList, setLoadingList] = useState(true);
   const [showHidden, setShowHidden] = useState(false);
+  const [listFilter, setListFilter] = useState("Todas");
+
+  const matchesFilter = useCallback(
+    (p) => {
+      if (listFilter === "Todas") return true;
+      if (listFilter === "Nuevos") return Boolean(p.is_new);
+      return p.category === listFilter;
+    },
+    [listFilter],
+  );
 
   const visibleProducts = useMemo(
-    () => products.filter((p) => !p.hidden),
-    [products],
+    () => products.filter((p) => !p.hidden && matchesFilter(p)),
+    [products, matchesFilter],
   );
   const hiddenProducts = useMemo(
-    () => products.filter((p) => p.hidden),
-    [products],
+    () => products.filter((p) => p.hidden && matchesFilter(p)),
+    [products, matchesFilter],
   );
 
   const authHeaders = { "X-Admin-Password": getPassword() };
@@ -808,10 +818,28 @@ function ProductForm({ onAuthFail }) {
         </div>
 
         <div className="border border-ink/15 rounded-2xl p-6 space-y-4">
-          <h2 className="font-medium">
-            Productos cargados desde el panel{" "}
-            {!loadingList && <span className="text-ink/40">({products.length})</span>}
-          </h2>
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <h2 className="font-medium">
+              Productos cargados desde el panel{" "}
+              {!loadingList && <span className="text-ink/40">({products.length})</span>}
+            </h2>
+            {!loadingList && products.length > 0 && (
+              <Select value={listFilter} onValueChange={setListFilter}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Todas">Todas las categorías</SelectItem>
+                  <SelectItem value="Nuevos">Nuevos</SelectItem>
+                  {CATEGORIES.map((c) => (
+                    <SelectItem key={c} value={c}>
+                      {c}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          </div>
           {loadingList ? (
             <p className="text-sm text-ink/50">Cargando...</p>
           ) : products.length === 0 ? (
@@ -822,7 +850,9 @@ function ProductForm({ onAuthFail }) {
             <>
               {visibleProducts.length === 0 ? (
                 <p className="text-sm text-ink/50">
-                  No tenés productos visibles ahora mismo.
+                  {listFilter === "Todas"
+                    ? "No tenés productos visibles ahora mismo."
+                    : "No hay productos visibles para este filtro."}
                 </p>
               ) : (
                 <ul className="divide-y divide-ink/10">
@@ -967,6 +997,8 @@ function ProductForm({ onAuthFail }) {
     </div>
   );
 }
+
+
 
 
 
