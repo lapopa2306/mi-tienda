@@ -127,7 +127,6 @@ export const PRODUCTS = [
         hex: HEX.Negro,
         images: [
           "/products/billetera-simple-ona-saenz-negra-1.webp",
-          "/products/billetera-simple-ona-saenz-negra-2.webp",
         ],
       },
     ],
