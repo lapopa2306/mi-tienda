@@ -175,6 +175,11 @@ export default function ProductModal({ product, onClose }) {
               >
                 {product.name}
               </h3>
+              {color?.name && (
+                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
+                  {color.name}
+                </p>
+              )}
               {couponAppliesTo(coupon, product.category) ? (
                 <div
                   data-testid="product-modal-price"
