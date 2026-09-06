@@ -7,9 +7,16 @@ import { whatsappShareLink } from "@/data/site";
 import { EASE } from "@/components/Reveal";
 
 const fmt = (n) => n.toLocaleString("es-AR");
+const couponAppliesTo = (coupon, category) =>
+  Boolean(
+    coupon &&
+      (!coupon.categories ||
+        coupon.categories.length === 0 ||
+        coupon.categories.includes(category)),
+  );
 
 export default function ProductModal({ product, onClose }) {
-  const { add } = useCart();
+  const { add, coupon } = useCart();
   const [colorIdx, setColorIdx] = useState(0);
   const [imgIdx, setImgIdx] = useState(0);
   const [lightbox, setLightbox] = useState(false);
@@ -168,25 +175,48 @@ export default function ProductModal({ product, onClose }) {
               >
                 {product.name}
               </h3>
-              <p
-                data-testid="product-modal-price"
-                className="mt-3 font-mono text-lg text-ink/80"
-              >
-                $ {fmt(product.price)}
-              </p>
+              {couponAppliesTo(coupon, product.category) ? (
+                <div
+                  data-testid="product-modal-price"
+                  className="mt-3 flex items-baseline gap-2"
+                >
+                  <p className="font-mono text-sm text-ink/40 line-through">
+                    $ {fmt(product.price)}
+                  </p>
+                  <p className="font-mono text-lg text-blush-deep">
+                    $ {fmt(Math.round(product.price * (1 - coupon.percent / 100)))}
+                  </p>
+                </div>
+              ) : (
+                <p
+                  data-testid="product-modal-price"
+                  className="mt-3 font-mono text-lg text-ink/80"
+                >
+                  $ {fmt(product.price)}
+                </p>
+              )}
               <p
                 data-testid="product-modal-installments"
                 className="mt-1 font-mono text-xs uppercase tracking-[0.08em] text-blush-deep"
               >
                 3 cuotas sin interés de $ {fmt(Math.round(product.price / 3))}
               </p>
-              <p
-                data-testid="product-modal-cash-discount"
-                className="mt-2 inline-block w-fit rounded-sm bg-blush/60 px-2 py-1 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-blush-deep"
-              >
-                10% off en efectivo o transferencia: ${" "}
-                {fmt(Math.round(product.price * 0.9))}
-              </p>
+              {couponAppliesTo(coupon, product.category) ? (
+                <p
+                  data-testid="product-modal-cash-discount"
+                  className="mt-2 inline-block w-fit rounded-sm bg-blush/60 px-2 py-1 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-blush-deep"
+                >
+                  Precio con cupón {coupon.code} aplicado
+                </p>
+              ) : (
+                <p
+                  data-testid="product-modal-cash-discount"
+                  className="mt-2 inline-block w-fit rounded-sm bg-blush/60 px-2 py-1 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-blush-deep"
+                >
+                  10% off en efectivo o transferencia: ${" "}
+                  {fmt(Math.round(product.price * 0.9))}
+                </p>
+              )}
 
               {product.description && (
                 <p
@@ -358,12 +388,4 @@ export default function ProductModal({ product, onClose }) {
     </AnimatePresence>
   );
 }
-
-
-
-
-
-
-
-
 
