@@ -262,11 +262,6 @@ export const PRODUCTS = [
           "/products/neceser-triple-amayra-negro-2.webp",
         ],
       },
-      {
-        name: "Verde agua",
-        hex: "#c3d6cf",
-        images: ["/products/neceser-triple-amayra-verde-agua.webp"],
-      },
     ],
   },
   {
@@ -738,7 +733,6 @@ export const PRODUCTS = [
         images: [
           "/products/cartuchera-river-plate-1.webp",
           "/products/cartuchera-river-plate-2.webp",
-          "/products/cartuchera-river-plate-3.webp",
         ],
       },
     ],
@@ -783,7 +777,6 @@ export const PRODUCTS = [
         hex: HEX.Azul,
         images: [
           "/products/cartuchera-racing-1.webp",
-          "/products/cartuchera-racing-2.webp",
         ],
       },
     ],
@@ -1292,7 +1285,7 @@ export const PRODUCTS = [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-simple-bcy-negra-1.webp"],
+        images: ["/products/billetera-simple-bcy-negra-2.webp"],
       },
     ],
   },
