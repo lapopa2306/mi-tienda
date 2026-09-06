@@ -1112,7 +1112,10 @@ export const PRODUCTS = [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-trendy-parche-suela-1.webp"],
+        images: [
+          "/products/billetera-chica-trendy-parche-suela-1.webp",
+          "/products/billetera-chica-trendy-parche-suela-2.webp",
+        ],
       },
     ],
   },
@@ -1126,7 +1129,10 @@ export const PRODUCTS = [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-trendy-love-suela-1.webp"],
+        images: [
+          "/products/billetera-chica-trendy-love-suela-1.webp",
+          "/products/billetera-chica-trendy-love-suela-2.webp",
+        ],
       },
     ],
   },
@@ -1140,7 +1146,10 @@ export const PRODUCTS = [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-chica-trendy-canelon-negra-1.webp"],
+        images: [
+          "/products/billetera-chica-trendy-canelon-negra-1.webp",
+          "/products/billetera-chica-trendy-canelon-negra-2.webp",
+        ],
       },
       {
         name: "Suela",
@@ -1159,7 +1168,10 @@ export const PRODUCTS = [
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-chica-amayra-marron-1.webp"],
+        images: [
+          "/products/billetera-chica-amayra-marron-1.webp",
+          "/products/billetera-chica-amayra-marron-2.webp",
+        ],
       },
       {
         name: "Negra",
@@ -1178,7 +1190,11 @@ export const PRODUCTS = [
       {
         name: "Negra",
         hex: HEX.Negro,
-        images: ["/products/billetera-cuadrada-amayra-negra-1.webp"],
+        images: [
+          "/products/billetera-cuadrada-amayra-negra-1.webp",
+          "/products/billetera-cuadrada-amayra-negra-2.webp",
+          "/products/billetera-cuadrada-amayra-negra-3.webp",
+        ],
       },
       {
         name: "Marrón",
@@ -1197,7 +1213,11 @@ export const PRODUCTS = [
       {
         name: "Gris Oscuro",
         hex: HEX.Gris,
-        images: ["/products/billetera-boton-amayra-gris-1.webp"],
+        images: [
+          "/products/billetera-boton-amayra-gris-1.webp",
+          "/products/billetera-boton-amayra-gris-2.webp",
+          "/products/billetera-boton-amayra-gris-3.webp",
+        ],
       },
     ],
   },
@@ -1242,7 +1262,10 @@ export const PRODUCTS = [
       {
         name: "Suela",
         hex: HEX.Suela,
-        images: ["/products/billetera-simple-punteada-suela-1.webp"],
+        images: [
+          "/products/billetera-simple-punteada-suela-1.webp",
+          "/products/billetera-simple-punteada-suela-2.webp",
+        ],
       },
     ],
   },
@@ -1256,17 +1279,11 @@ export const PRODUCTS = [
       {
         name: "Marrón",
         hex: HEX.Suela,
-        images: ["/products/billetera-simple-cuadrada-marron-1.webp"],
+        images: [
+          "/products/billetera-simple-cuadrada-marron-1.webp",
+          "/products/billetera-simple-cuadrada-marron-2.webp",
+        ],
       },
-    ],
-  },
-  {
-    id: "billetera-simple-bolsillo",
-    name: "Billetera Simple Bolsillo",
-    category: "Billetera de mujer",
-    price: 17000,
-    image: "/products/billetera-simple-bolsillo-negra-1.webp",
-    colors: [
       {
         name: "Negra",
         hex: HEX.Negro,
