@@ -84,7 +84,7 @@ function ProductCard({ p, onOpen, qtyOf }) {
                 goPhoto(-1);
               }}
               aria-label="Foto anterior"
-              className="absolute left-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-paper/80 text-ink opacity-0 backdrop-blur-md transition-opacity duration-300 hover:bg-paper group-hover:opacity-100"
+              className="absolute left-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-paper/80 text-ink backdrop-blur-md transition-opacity duration-300 hover:bg-paper"
             >
               <ChevronLeft size={14} />
             </button>
@@ -95,7 +95,7 @@ function ProductCard({ p, onOpen, qtyOf }) {
                 goPhoto(1);
               }}
               aria-label="Foto siguiente"
-              className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-paper/80 text-ink opacity-0 backdrop-blur-md transition-opacity duration-300 hover:bg-paper group-hover:opacity-100"
+              className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-paper/80 text-ink backdrop-blur-md transition-opacity duration-300 hover:bg-paper"
             >
               <ChevronRight size={14} />
             </button>
@@ -562,6 +562,7 @@ export default function Catalog() {
     </section>
   );
 }
+
 
 
 
