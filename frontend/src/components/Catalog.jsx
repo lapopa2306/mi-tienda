@@ -24,9 +24,16 @@ const fmt = (n) => n.toLocaleString("es-AR");
 const slug = (s) => s.toLowerCase().replace(/\s+/g, "-");
 const isNewProduct = (p) =>
   Boolean(p.is_new && (!p.new_until || new Date(p.new_until) > new Date()));
+const couponAppliesTo = (coupon, category) =>
+  Boolean(
+    coupon &&
+      (!coupon.categories ||
+        coupon.categories.length === 0 ||
+        coupon.categories.includes(category)),
+  );
 
 function ProductCard({ p, onOpen, qtyOf }) {
-  const { add, decrement } = useCart();
+  const { add, decrement, coupon } = useCart();
   const { isFavorite, toggle } = useWishlist();
   const [colorIdx, setColorIdx] = useState(0);
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -205,21 +212,41 @@ function ProductCard({ p, onOpen, qtyOf }) {
           </p>
         </div>
         <div className="text-right">
-          <p className="whitespace-nowrap pt-1 font-mono text-sm text-ink/80">
-            $ {fmt(p.price)}
-          </p>
+          {couponAppliesTo(coupon, p.category) ? (
+            <div className="flex items-baseline justify-end gap-1.5">
+              <p className="whitespace-nowrap font-mono text-xs text-ink/40 line-through">
+                $ {fmt(p.price)}
+              </p>
+              <p className="whitespace-nowrap pt-1 font-mono text-sm text-blush-deep">
+                $ {fmt(Math.round(p.price * (1 - coupon.percent / 100)))}
+              </p>
+            </div>
+          ) : (
+            <p className="whitespace-nowrap pt-1 font-mono text-sm text-ink/80">
+              $ {fmt(p.price)}
+            </p>
+          )}
           <p
             data-testid={`installments-${p.id}`}
             className="mt-1 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.08em] text-blush-deep"
           >
             3 cuotas de $ {fmt(Math.round(p.price / 3))}
           </p>
-          <p
-            data-testid={`cash-discount-${p.id}`}
-            className="mt-1 inline-block whitespace-nowrap rounded-sm bg-blush/60 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-blush-deep"
-          >
-            $ {fmt(Math.round(p.price * 0.9))} efectivo / transf.
-          </p>
+          {couponAppliesTo(coupon, p.category) ? (
+            <p
+              data-testid={`coupon-price-${p.id}`}
+              className="mt-1 inline-block whitespace-nowrap rounded-sm bg-blush/60 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-blush-deep"
+            >
+              Con cupón {coupon.code}
+            </p>
+          ) : (
+            <p
+              data-testid={`cash-discount-${p.id}`}
+              className="mt-1 inline-block whitespace-nowrap rounded-sm bg-blush/60 px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-blush-deep"
+            >
+              $ {fmt(Math.round(p.price * 0.9))} efectivo / transf.
+            </p>
+          )}
         </div>
       </div>
     </motion.article>
@@ -535,6 +562,7 @@ export default function Catalog() {
     </section>
   );
 }
+
 
 
 
