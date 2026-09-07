@@ -175,10 +175,32 @@ export default function ProductModal({ product, onClose }) {
               >
                 {product.name}
               </h3>
-              {color?.name && (
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/50">
-                  {color.name}
-                </p>
+              {product.colors?.length > 0 && (
+                <div className="mt-3">
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-ink/45">
+                    Color — {color?.name}
+                  </p>
+                  <div className="flex gap-3">
+                    {product.colors.map((c, i) => (
+                      <button
+                        key={c.name}
+                        data-testid={`product-modal-color-${c.name.toLowerCase()}`}
+                        onClick={() => {
+                          setColorIdx(i);
+                          setImgIdx(0);
+                        }}
+                        aria-label={`Color ${c.name}`}
+                        title={c.name}
+                        className={`h-9 w-9 rounded-full border transition-transform duration-300 ${
+                          i === colorIdx
+                            ? "scale-110 border-ink ring-2 ring-ink/20 ring-offset-2 ring-offset-paper"
+                            : "border-ink/20 hover:scale-105"
+                        }`}
+                        style={{ backgroundColor: c.hex }}
+                      />
+                    ))}
+                  </div>
+                </div>
               )}
               {couponAppliesTo(coupon, product.category) ? (
                 <div
@@ -230,34 +252,6 @@ export default function ProductModal({ product, onClose }) {
                 >
                   {product.description}
                 </p>
-              )}
-
-              {product.colors?.length > 0 && (
-                <div className="mt-8">
-                  <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-ink/45">
-                    Color — {color?.name}
-                  </p>
-                  <div className="flex gap-3">
-                    {product.colors.map((c, i) => (
-                      <button
-                        key={c.name}
-                        data-testid={`product-modal-color-${c.name.toLowerCase()}`}
-                        onClick={() => {
-                          setColorIdx(i);
-                          setImgIdx(0);
-                        }}
-                        aria-label={`Color ${c.name}`}
-                        title={c.name}
-                        className={`h-9 w-9 rounded-full border transition-transform duration-300 ${
-                          i === colorIdx
-                            ? "scale-110 border-ink ring-2 ring-ink/20 ring-offset-2 ring-offset-paper"
-                            : "border-ink/20 hover:scale-105"
-                        }`}
-                        style={{ backgroundColor: c.hex }}
-                      />
-                    ))}
-                  </div>
-                </div>
               )}
 
               <button
