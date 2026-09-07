@@ -513,24 +513,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "mochila-urbana-hombre",
-    name: "Mochila Urbana Hombre",
-    category: "Mochilas",
-    price: 46000,
-    image: "/products/mochila-urbana-hombre-negro-1.webp",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/mochila-urbana-hombre-negro-1.webp",
-          "/products/mochila-urbana-hombre-negro-2.webp",
-          "/products/mochila-urbana-hombre-negro-3.webp",
-        ],
-      },
-    ],
-  },
-  {
     id: "mochila-pu-trendy",
     name: "Mochila PU Trendy",
     category: "Mochilas",
@@ -562,24 +544,6 @@ export const PRODUCTS = [
           "/products/mochila-bolso-negro-1.webp",
           "/products/mochila-bolso-negro-2.webp",
           "/products/mochila-bolso-negro-3.webp",
-        ],
-      },
-    ],
-  },
-  {
-    id: "mochila-urbana-travel-tech",
-    name: "Mochila Urbana Travel Tech",
-    category: "Mochilas",
-    price: 49000,
-    image: "/products/mochila-urbana-travel-tech-negro-1.webp",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/mochila-urbana-travel-tech-negro-1.webp",
-          "/products/mochila-urbana-travel-tech-negro-2.webp",
-          "/products/mochila-urbana-travel-tech-negro-3.webp",
         ],
       },
     ],
