@@ -23,6 +23,9 @@ export default function CartDrawer() {
     discountedTotal,
     meetsMinAmount,
     amountToMin,
+    shipping,
+    meetsFreeShipping,
+    amountToFreeShipping,
   } = useCart();
 
   useEffect(() => {
@@ -200,6 +203,50 @@ export default function CartDrawer() {
                           animate={{
                             width: `${Math.min(
                               (total / coupon.min_amount) * 100,
+                              100,
+                            )}%`,
+                          }}
+                          transition={{ duration: 0.4, ease: EASE }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {shipping?.enabled && shipping.threshold > 0 && (
+                    <div
+                      data-testid="cart-free-shipping-notice"
+                      className="mb-5 rounded-xl bg-smoke px-4 py-3"
+                    >
+                      <p className="text-xs text-ink/70">
+                        {meetsFreeShipping ? (
+                          <span className="font-semibold text-blush-deep">
+                            ¡Llegaste al envío gratis!
+                          </span>
+                        ) : (
+                          <>
+                            Te faltan{" "}
+                            <span className="font-semibold">
+                              $ {fmt(amountToFreeShipping)}
+                            </span>{" "}
+                            para el envío gratis.
+                          </>
+                        )}
+                      </p>
+                      <div
+                        className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-ink/10"
+                        role="progressbar"
+                        aria-valuenow={Math.round(
+                          Math.min((total / shipping.threshold) * 100, 100),
+                        )}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      >
+                        <motion.div
+                          className="h-full rounded-full bg-blush-deep"
+                          initial={{ width: 0 }}
+                          animate={{
+                            width: `${Math.min(
+                              (total / shipping.threshold) * 100,
                               100,
                             )}%`,
                           }}
