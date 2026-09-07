@@ -18,12 +18,17 @@ export function CartProvider({ children }) {
   });
   const [open, setOpen] = useState(false);
   const [coupon, setCoupon] = useState(null);
+  const [shipping, setShipping] = useState({ enabled: false, threshold: 0 });
 
   useEffect(() => {
     axios
       .get(`${API}/coupons/active`)
       .then(({ data }) => setCoupon(data || null))
       .catch(() => setCoupon(null));
+    axios
+      .get(`${API}/shipping-settings`)
+      .then(({ data }) => setShipping(data || { enabled: false, threshold: 0 }))
+      .catch(() => setShipping({ enabled: false, threshold: 0 }));
   }, []);
 
   useEffect(() => {
@@ -107,6 +112,11 @@ export function CartProvider({ children }) {
     : 0;
   const discountedTotal = total - discount;
 
+  const meetsFreeShipping = shipping.enabled ? total >= shipping.threshold : false;
+  const amountToFreeShipping = shipping.enabled
+    ? Math.max(shipping.threshold - total, 0)
+    : 0;
+
   const waUrl = useMemo(() => {
     const origin = window.location.origin + window.location.pathname;
     const lines = items.flatMap((i) => [
@@ -129,9 +139,10 @@ export function CartProvider({ children }) {
             `Total con descuento: $${fmt(discountedTotal)}`,
           ]
         : [`Total estimado: $${fmt(total)}`]),
+      ...(meetsFreeShipping ? ["¡Envío gratis!"] : []),
     ].join("\n");
     return `https://wa.me/${SITE.whatsapp2}?text=${encodeURIComponent(msg)}`;
-  }, [items, total, effectiveCoupon, discount, discountedTotal]);
+  }, [items, total, effectiveCoupon, discount, discountedTotal, meetsFreeShipping]);
 
   const value = {
     items,
@@ -149,6 +160,9 @@ export function CartProvider({ children }) {
     discountedTotal,
     meetsMinAmount,
     amountToMin,
+    shipping,
+    meetsFreeShipping,
+    amountToFreeShipping,
     waUrl,
   };
 
@@ -158,8 +172,5 @@ export function CartProvider({ children }) {
 export function useCart() {
   return useContext(CartContext);
 }
-
-
-
 
 
