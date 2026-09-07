@@ -24,6 +24,7 @@ import {
   Tag,
   Eye,
   EyeOff,
+  Truck,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -106,6 +107,91 @@ export default function AdminPanel() {
 
   if (!unlocked) return <PasswordGate onOk={() => setUnlocked(true)} />;
   return <ProductForm onAuthFail={() => setUnlocked(false)} />;
+}
+
+function ShippingSettingsSection({ authHeaders, onAuthFail }) {
+  const [enabled, setEnabled] = useState(false);
+  const [threshold, setThreshold] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+
+  const handleAuthError = (err) => {
+    if (err?.response?.status === 401) {
+      toast.error("La contraseña ya no es válida, ingresá de nuevo");
+      sessionStorage.removeItem("admin_pass");
+      onAuthFail();
+      return true;
+    }
+    return false;
+  };
+
+  useEffect(() => {
+    axios
+      .get(`${API}/shipping-settings`)
+      .then(({ data }) => {
+        setEnabled(Boolean(data?.enabled));
+        setThreshold(data?.threshold ? String(data.threshold) : "");
+      })
+      .catch(() => toast.error("No se pudo cargar la config de envío gratis"))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const save = async () => {
+    if (enabled && (!threshold || Number(threshold) <= 0)) {
+      return toast.error("Poné un monto válido para el envío gratis");
+    }
+    setSaving(true);
+    try {
+      await axios.put(
+        `${API}/shipping-settings`,
+        { enabled, threshold: threshold ? Number(threshold) : 0 },
+        { headers: authHeaders },
+      );
+      toast.success("Configuración de envío guardada");
+    } catch (err) {
+      if (!handleAuthError(err)) toast.error("No se pudo guardar");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="border border-ink/15 rounded-2xl p-6 space-y-5">
+      <div>
+        <h2 className="font-medium flex items-center gap-2">
+          <Truck className="h-4 w-4" /> Envío gratis
+        </h2>
+        <p className="text-sm text-ink/60 mt-1">
+          Si lo activás, se muestra un cartel en la página y una barra de progreso en el
+          carrito hasta llegar al monto que pongas acá.
+        </p>
+      </div>
+
+      {loading ? (
+        <p className="text-sm text-ink/50">Cargando...</p>
+      ) : (
+        <div className="flex flex-wrap items-end gap-4">
+          <div className="flex items-center gap-2.5">
+            <Switch checked={enabled} onCheckedChange={setEnabled} />
+            <span className="text-sm">Activado</span>
+          </div>
+          <div className="space-y-1.5">
+            <label className="text-xs text-ink/60">Monto mínimo</label>
+            <Input
+              type="number"
+              value={threshold}
+              onChange={(e) => setThreshold(e.target.value)}
+              placeholder="Ej: 80000"
+              className="w-40"
+            />
+          </div>
+          <Button type="button" onClick={save} disabled={saving}>
+            {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : "Guardar"}
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 }
 
 function CouponsSection({ authHeaders, onAuthFail }) {
@@ -992,17 +1078,10 @@ function ProductForm({ onAuthFail }) {
           )}
         </div>
 
+        <ShippingSettingsSection authHeaders={authHeaders} onAuthFail={onAuthFail} />
         <CouponsSection authHeaders={authHeaders} onAuthFail={onAuthFail} />
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
 
