@@ -117,6 +117,13 @@ class CouponCreate(BaseModel):
     min_amount: Optional[float] = None
 
 
+class ShippingSettings(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    enabled: bool = False
+    threshold: float = 0
+
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
@@ -248,6 +255,28 @@ async def delete_product(product_id: str, x_admin_password: Optional[str] = Head
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return {"ok": True}
+
+
+@api_router.get("/shipping-settings", response_model=ShippingSettings)
+async def get_shipping_settings():
+    """Endpoint público: config de envío gratis para mostrar en el sitio y el carrito."""
+    doc = await db.settings.find_one({"id": "shipping"}, {"_id": 0})
+    if not doc:
+        return ShippingSettings()
+    return ShippingSettings(enabled=doc.get("enabled", False), threshold=doc.get("threshold", 0))
+
+
+@api_router.put("/shipping-settings", response_model=ShippingSettings)
+async def update_shipping_settings(
+    payload: ShippingSettings, x_admin_password: Optional[str] = Header(default=None)
+):
+    check_admin(x_admin_password)
+    await db.settings.update_one(
+        {"id": "shipping"},
+        {"$set": {"id": "shipping", "enabled": payload.enabled, "threshold": payload.threshold}},
+        upsert=True,
+    )
+    return payload
 
 
 @api_router.get("/coupons/active")
