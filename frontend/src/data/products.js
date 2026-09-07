@@ -531,24 +531,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "mochila-bolso",
-    name: "Mochila Bolso",
-    category: "Mochilas",
-    price: 44000,
-    image: "/products/mochila-bolso-negro-1.webp",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/mochila-bolso-negro-1.webp",
-          "/products/mochila-bolso-negro-2.webp",
-          "/products/mochila-bolso-negro-3.webp",
-        ],
-      },
-    ],
-  },
-  {
     id: "mochila-deportiva-trendy",
     name: "Mochila Deportiva Trendy",
     category: "Mochilas",
