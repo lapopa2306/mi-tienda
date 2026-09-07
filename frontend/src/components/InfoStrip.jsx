@@ -5,7 +5,7 @@ const ITEMS = [
   {
   n: "01",
   title: "Envíos",
-  text: "Hacemos envíos a todo el país por Correo Argentino y Via Cargo.",
+  text: "Hacemos envíos a todo el país por Correo Argentino.",
 },
   {
     n: "02",
@@ -86,3 +86,4 @@ export default function InfoStrip() {
     </section>
   );
 }
+
