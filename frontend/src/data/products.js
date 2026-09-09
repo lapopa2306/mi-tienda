@@ -1290,22 +1290,4 @@ export const PRODUCTS = [
       },
     ],
   },
-  {
-    id: "bolso-totem",
-    name: "Bolso Totem",
-    category: "Bolsos",
-    price: 27000,
-    image: "/products/bolso-totem-negro-1.webp",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/bolso-totem-negro-1.webp",
-          "/products/bolso-totem-negro-2.webp",
-          "/products/bolso-totem-negro-3.webp",
-        ],
-      },
-    ],
-  },
 ];
