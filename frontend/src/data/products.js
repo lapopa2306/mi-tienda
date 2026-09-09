@@ -513,24 +513,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "mochila-pu-trendy",
-    name: "Mochila PU Trendy",
-    category: "Mochilas",
-    price: 58000,
-    image: "/products/mochila-pu-trendy-negro-1.webp",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/mochila-pu-trendy-negro-1.webp",
-          "/products/mochila-pu-trendy-negro-2.webp",
-          "/products/mochila-pu-trendy-negro-3.webp",
-        ],
-      },
-    ],
-  },
-  {
     id: "mochila-deportiva-trendy",
     name: "Mochila Deportiva Trendy",
     category: "Mochilas",
