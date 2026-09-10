@@ -152,23 +152,6 @@ export const PRODUCTS = [
     ],
   },
   {
-    id: "neceser-pu-amayra",
-    name: "Neceser PU Amayra",
-    category: "Neceser",
-    price: 12000,
-    image: "/products/neceser-pu-amayra-1.webp",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/neceser-pu-amayra-1.webp",
-          "/products/neceser-pu-amayra-2.webp",
-        ],
-      },
-    ],
-  },
-  {
     id: "neceser-animal-print",
     name: "Neceser Animal Print",
     category: "Neceser",
@@ -634,26 +617,6 @@ export const PRODUCTS = [
         images: [
           "/products/bolso-deportivo-1.webp",
           "/products/bolso-deportivo-2.webp",
-        ],
-      },
-    ],
-  },
-  {
-    id: "bolso-de-viaje",
-    name: "Bolso de Viaje",
-    category: "Bolsos",
-    price: 35000,
-    image: "/products/bolso-viaje-1.webp",
-    description: "Mide 26x38.",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/bolso-viaje-1.webp",
-          "/products/bolso-viaje-2.webp",
-          "/products/bolso-viaje-3.webp",
-          "/products/bolso-viaje-4.webp",
         ],
       },
     ],
