@@ -457,6 +457,7 @@ export const PRODUCTS = [
         images: [
           "/products/morral-river-plate-1.webp",
           "/products/morral-river-plate-2.webp",
+          "/products/morral-river-plate-3.webp",
         ],
       },
     ],
