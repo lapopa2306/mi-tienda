@@ -193,11 +193,6 @@ export const PRODUCTS = [
         images: ["/products/neceser-pratys-rosa.webp"],
       },
       {
-        name: "Rojo",
-        hex: "#c81d3f",
-        images: ["/products/neceser-pratys-rojo.webp"],
-      },
-      {
         name: "Verde",
         hex: "#a8b89a",
         images: ["/products/neceser-pratys-verde.webp"],
@@ -228,24 +223,6 @@ export const PRODUCTS = [
         images: [
           "/products/neceser-oreiro-negro-1.webp",
           "/products/neceser-oreiro-negro-2.webp",
-        ],
-      },
-    ],
-  },
-  {
-    id: "neceser-triple-amayra",
-    name: "Neceser Triple Amayra",
-    category: "Neceser",
-    price: 18000,
-    image: "/products/neceser-triple-amayra-negro-1.webp",
-    description: "Set de 3 neceseres, ideal para viaje.",
-    colors: [
-      {
-        name: "Negro",
-        hex: HEX.Negro,
-        images: [
-          "/products/neceser-triple-amayra-negro-1.webp",
-          "/products/neceser-triple-amayra-negro-2.webp",
         ],
       },
     ],
